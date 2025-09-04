@@ -1,0 +1,275 @@
+<!-- /components/header.html -->
+<header class="header" id="header">
+    <div class="header__top">
+        <div class="container">
+            <div class="header__top-content">
+                <div class="header__info">
+                    <a href="tel:+902123456789" class="header__info-item">
+                        <svg class="icon icon--small" aria-hidden="true">
+                            <use href="#icon-phone"></use>
+                        </svg>
+                        <span>+90 (212) 345 67 89</span>
+                    </a>
+                    <a href="mailto:info@aicoelektronik.com" class="header__info-item">
+                        <svg class="icon icon--small" aria-hidden="true">
+                            <use href="#icon-email"></use>
+                        </svg>
+                        <span>info@aicoelektronik.com</span>
+                    </a>
+                </div>
+                <div class="header__actions">
+                    <!-- Language Switcher -->
+                    <div class="language-switcher">
+                        <button class="language-switcher__toggle" aria-label="Dil Seçimi" aria-expanded="false">
+                            <img src="/images/flags/tr.svg" alt="TR" class="language-switcher__flag">
+                            <span class="language-switcher__code">TR</span>
+                            <svg class="icon icon--small" aria-hidden="true">
+                                <use href="#icon-chevron-down"></use>
+                            </svg>
+                        </button>
+                        <ul class="language-switcher__dropdown">
+                            <li><a href="/" data-lang="tr">
+                                <img src="/images/flags/tr.svg" alt="TR">
+                                <span>Türkçe</span>
+                            </a></li>
+                            <li><a href="/en/" data-lang="en">
+                                <img src="/images/flags/en.svg" alt="EN">
+                                <span>English</span>
+                            </a></li>
+                        </ul>
+                    </div>
+                    
+                    <!-- Dark Mode Toggle -->
+                    <button class="theme-toggle" id="theme-toggle" aria-label="Tema Değiştir">
+                        <svg class="theme-toggle__icon theme-toggle__icon--light" aria-hidden="true">
+                            <use href="#icon-sun"></use>
+                        </svg>
+                        <svg class="theme-toggle__icon theme-toggle__icon--dark" aria-hidden="true">
+                            <use href="#icon-moon"></use>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <nav class="header__nav" role="navigation" aria-label="Ana Menü">
+        <div class="container">
+            <div class="header__nav-content">
+                <!-- Logo -->
+                <a href="/" class="header__logo" aria-label="AICO Elektronik Ana Sayfa">
+                    <img src="/images/logo.svg" alt="AICO Elektronik" class="header__logo-img">
+                </a>
+                
+                <!-- Mobile Menu Button -->
+                <button class="header__menu-toggle" id="menu-toggle" aria-label="Menü" aria-expanded="false">
+                    <span class="hamburger">
+                        <span class="hamburger__line"></span>
+                        <span class="hamburger__line"></span>
+                        <span class="hamburger__line"></span>
+                    </span>
+                </button>
+                
+                <!-- Navigation Menu -->
+                <div class="header__menu" id="header-menu">
+                    <ul class="nav-menu">
+                        <li class="nav-menu__item">
+                            <a href="/" class="nav-menu__link nav-menu__link--active">Ana Sayfa</a>
+                        </li>
+                        
+                        <li class="nav-menu__item nav-menu__item--has-dropdown">
+                            <button class="nav-menu__link" aria-expanded="false">
+                                <span>Ürünler</span>
+                                <svg class="icon icon--small" aria-hidden="true">
+                                    <use href="#icon-chevron-down"></use>
+                                </svg>
+                            </button>
+                            <div class="nav-dropdown">
+                                <div class="nav-dropdown__grid">
+                                    <div class="nav-dropdown__column">
+                                        <h3 class="nav-dropdown__title">Yangın Sistemleri</h3>
+                                        <ul class="nav-dropdown__list">
+                                            <li><a href="/pages/urunler/yangin/adresli-yangin-algilama.html">Adresli Yangın Algılama</a></li>
+                                            <li><a href="/pages/urunler/yangin/konvansiyonel-yangin.html">Konvansiyonel Yangın</a></li>
+                                            <li><a href="/pages/urunler/yangin/duman-dedektorleri.html">Duman Dedektörleri</a></li>
+                                            <li><a href="/pages/urunler/yangin/gaz-algilama.html">Gaz Algılama</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="nav-dropdown__column">
+                                        <h3 class="nav-dropdown__title">Endüstriyel Kartlar</h3>
+                                        <ul class="nav-dropdown__list">
+                                            <li><a href="/pages/urunler/maden-kartlari.html">Maden Kartları</a></li>
+                                            <li><a href="/pages/urunler/otomasyon-kartlari.html">Otomasyon Kartları</a></li>
+                                            <li><a href="/pages/urunler/iot-kartlari.html">IoT Kartları</a></li>
+                                            <li><a href="/pages/urunler/guvenlik-sistemleri.html">Güvenlik Sistemleri</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="nav-dropdown__column">
+                                        <h3 class="nav-dropdown__title">Özel Çözümler</h3>
+                                        <ul class="nav-dropdown__list">
+                                            <li><a href="/pages/urunler/kahve-makinasi-kartlari.html">Kahve Makinası Kartları</a></li>
+                                            <li><a href="/pages/urunler/ses-analiz-kartlari.html">Ses Analiz Kartları</a></li>
+                                            <li><a href="/pages/urunler/endustriyel-kontrol.html">Endüstriyel Kontrol</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="nav-dropdown__featured">
+                                        <img src="/images/products/featured-pcb.jpg" alt="Öne Çıkan Ürün">
+                                        <h4>Yeni: AI Destekli Yangın Algılama</h4>
+                                        <p>Makine öğrenmesi ile yanlış alarm oranını %95 azaltan teknoloji</p>
+                                        <a href="/pages/urunler/index.html" class="btn btn--sm btn--primary">Tüm Ürünler</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-menu__item nav-menu__item--has-dropdown">
+                            <button class="nav-menu__link" aria-expanded="false">
+                                <span>Hizmetler</span>
+                                <svg class="icon icon--small" aria-hidden="true">
+                                    <use href="#icon-chevron-down"></use>
+                                </svg>
+                            </button>
+                            <div class="nav-dropdown nav-dropdown--compact">
+                                <ul class="nav-dropdown__list">
+                                    <li><a href="/pages/hizmetler/pcb-tasarim.html">PCB Tasarım</a></li>
+                                    <li><a href="/pages/hizmetler/proje-cizim.html">Proje Çizim</a></li>
+                                    <li><a href="/pages/hizmetler/kart-dizgi.html">Kart Dizgi</a></li>
+                                    <li><a href="/pages/hizmetler/prototipleme.html">Prototipleme</a></li>
+                                    <li><a href="/pages/hizmetler/seri-uretim.html">Seri Üretim</a></li>
+                                    <li><a href="/pages/hizmetler/test-ve-kalite.html">Test ve Kalite Kontrol</a></li>
+                                    <li><a href="/pages/hizmetler/ar-ge.html">Ar-Ge Çözümleri</a></li>
+                                    <li><a href="/pages/hizmetler/danismanlik.html">Danışmanlık</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-menu__item nav-menu__item--has-dropdown">
+                            <button class="nav-menu__link" aria-expanded="false">
+                                <span>Hesaplama</span>
+                                <svg class="icon icon--small" aria-hidden="true">
+                                    <use href="#icon-chevron-down"></use>
+                                </svg>
+                            </button>
+                            <div class="nav-dropdown nav-dropdown--compact">
+                                <ul class="nav-dropdown__list">
+                                    <li><a href="/pages/hesaplama/pcb-fiyat-hesaplama.html">
+                                        <svg class="icon icon--small"><use href="#icon-calculator"></use></svg>
+                                        PCB Fiyat Hesaplama
+                                    </a></li>
+                                    <li><a href="/pages/hesaplama/dizgi-fiyat-hesaplama.html">
+                                        <svg class="icon icon--small"><use href="#icon-cpu"></use></svg>
+                                        Dizgi Fiyat Hesaplama
+                                    </a></li>
+                                    <li><a href="/pages/hesaplama/hizli-teklif.html">
+                                        <svg class="icon icon--small"><use href="#icon-flash"></use></svg>
+                                        Hızlı Teklif
+                                    </a></li>
+                                    <li><a href="/pages/hesaplama/karsilastirma.html">
+                                        <svg class="icon icon--small"><use href="#icon-compare"></use></svg>
+                                        Karşılaştırma Aracı
+                                    </a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-menu__item">
+                            <a href="/pages/hakkimizda.html" class="nav-menu__link">Hakkımızda</a>
+                        </li>
+                        
+                        <li class="nav-menu__item nav-menu__item--has-dropdown">
+                            <button class="nav-menu__link" aria-expanded="false">
+                                <span>Destek</span>
+                                <svg class="icon icon--small" aria-hidden="true">
+                                    <use href="#icon-chevron-down"></use>
+                                </svg>
+                            </button>
+                            <div class="nav-dropdown nav-dropdown--compact">
+                                <ul class="nav-dropdown__list">
+                                    <li><a href="/pages/destek/sikca-sorulan-sorular.html">Sıkça Sorulan Sorular</a></li>
+                                    <li><a href="/pages/destek/teknik-dokuman.html">Teknik Dökümanlar</a></li>
+                                    <li><a href="/pages/destek/video-egitimler.html">Video Eğitimler</a></li>
+                                    <li><a href="/pages/destek/indirilebilir-dosyalar.html">İndirilebilir Dosyalar</a></li>
+                                    <li><a href="/pages/blog/index.html">Blog</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        
+                        <li class="nav-menu__item">
+                            <a href="/pages/iletisim.html" class="nav-menu__link">İletişim</a>
+                        </li>
+                    </ul>
+                    
+                    <!-- Header CTA Buttons -->
+                    <div class="header__cta">
+                        <a href="/pages/hesaplama/hizli-teklif.html" class="btn btn--primary btn--sm">
+                            <svg class="icon icon--small" aria-hidden="true">
+                                <use href="#icon-calculator"></use>
+                            </svg>
+                            <span>Hızlı Teklif Al</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Search Bar (Hidden by default) -->
+    <div class="header__search" id="header-search">
+        <div class="container">
+            <form class="search-form" action="/search" method="GET">
+                <input type="search" name="q" class="search-form__input" placeholder="Ürün, hizmet veya bilgi arayın..." aria-label="Arama">
+                <button type="submit" class="search-form__button" aria-label="Ara">
+                    <svg class="icon" aria-hidden="true">
+                        <use href="#icon-search"></use>
+                    </svg>
+                </button>
+            </form>
+        </div>
+    </div>
+</header>
+
+<!-- Additional SVG Icons for Header -->
+<svg style="display: none;">
+    <defs>
+        <symbol id="icon-phone" viewBox="0 0 24 24">
+            <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+        </symbol>
+        <symbol id="icon-email" viewBox="0 0 24 24">
+            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </symbol>
+        <symbol id="icon-chevron-down" viewBox="0 0 24 24">
+            <path d="M6 9l6 6 6-6"/>
+        </symbol>
+        <symbol id="icon-sun" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="5"/>
+            <path d="M12 1v6m0 6v6m9-9h-6m-6 0H3m16.36-6.36l-4.24 4.24M7.88 7.88L3.64 3.64m16.72 16.72l-4.24-4.24M7.88 16.12l-4.24 4.24"/>
+        </symbol>
+        <symbol id="icon-moon" viewBox="0 0 24 24">
+            <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/>
+        </symbol>
+        <symbol id="icon-calculator" viewBox="0 0 24 24">
+            <rect x="4" y="2" width="16" height="20" rx="2"/>
+            <rect x="8" y="6" width="8" height="4"/>
+            <rect x="8" y="14" width="2" height="2"/>
+            <rect x="8" y="18" width="2" height="2"/>
+            <rect x="12" y="14" width="2" height="2"/>
+            <rect x="12" y="18" width="2" height="2"/>
+            <path d="M16 14v4"/>
+        </symbol>
+        <symbol id="icon-search" viewBox="0 0 24 24">
+            <circle cx="11" cy="11" r="8"/>
+            <path d="m21 21-4.35-4.35"/>
+        </symbol>
+        <symbol id="icon-flash" viewBox="0 0 24 24">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+        </symbol>
+        <symbol id="icon-cpu" viewBox="0 0 24 24">
+            <rect x="4" y="4" width="16" height="16" rx="2"/>
+            <rect x="9" y="9" width="6" height="6"/>
+            <path d="M9 1v3m6 0V1m0 18v3M9 20v3M1 9h3m16 0h3M1 14h3m16 0h3"/>
+        </symbol>
+        <symbol id="icon-compare" viewBox="0 0 24 24">
+            <path d="M12 3v18m0-18l-4 4m4-4l4 4m-4 14l-4-4m4 4l4-4"/>
+        </symbol>
+    </defs>
+</svg>
