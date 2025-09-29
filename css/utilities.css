@@ -1,0 +1,738 @@
+/* /css/utilities.css */
+/* AICO Elektronik - Utility Classes */
+
+/* ==================== Display Utilities ==================== */
+
+.hidden { display: none !important; }
+.block { display: block !important; }
+.inline-block { display: inline-block !important; }
+.inline { display: inline !important; }
+.flex { display: flex !important; }
+.inline-flex { display: inline-flex !important; }
+.grid { display: grid !important; }
+.inline-grid { display: inline-grid !important; }
+
+/* Responsive Display */
+@media (min-width: 640px) {
+  .sm\:hidden { display: none !important; }
+  .sm\:block { display: block !important; }
+  .sm\:flex { display: flex !important; }
+  .sm\:grid { display: grid !important; }
+}
+
+@media (min-width: 1024px) {
+  .lg\:hidden { display: none !important; }
+  .lg\:block { display: block !important; }
+  .lg\:flex { display: flex !important; }
+  .lg\:grid { display: grid !important; }
+}
+
+/* ==================== Flexbox Utilities ==================== */
+
+.flex-row { flex-direction: row !important; }
+.flex-col { flex-direction: column !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+
+.items-start { align-items: flex-start !important; }
+.items-center { align-items: center !important; }
+.items-end { align-items: flex-end !important; }
+.items-stretch { align-items: stretch !important; }
+
+.justify-start { justify-content: flex-start !important; }
+.justify-center { justify-content: center !important; }
+.justify-end { justify-content: flex-end !important; }
+.justify-between { justify-content: space-between !important; }
+.justify-around { justify-content: space-around !important; }
+
+.flex-1 { flex: 1 1 0% !important; }
+.flex-auto { flex: 1 1 auto !important; }
+.flex-initial { flex: 0 1 auto !important; }
+.flex-none { flex: none !important; }
+
+.gap-1 { gap: var(--spacing-1) !important; }
+.gap-2 { gap: var(--spacing-2) !important; }
+.gap-3 { gap: var(--spacing-3) !important; }
+.gap-4 { gap: var(--spacing-4) !important; }
+.gap-6 { gap: var(--spacing-6) !important; }
+.gap-8 { gap: var(--spacing-8) !important; }
+
+/* ==================== Grid Utilities ==================== */
+
+.grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)) !important; }
+.grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; }
+.grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; }
+.grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)) !important; }
+.grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)) !important; }
+
+.col-span-2 { grid-column: span 2 / span 2 !important; }
+.col-span-3 { grid-column: span 3 / span 3 !important; }
+.col-span-4 { grid-column: span 4 / span 4 !important; }
+.col-span-6 { grid-column: span 6 / span 6 !important; }
+.col-span-full { grid-column: 1 / -1 !important; }
+
+/* ==================== Spacing Utilities ==================== */
+
+/* Margin */
+.m-0 { margin: 0 !important; }
+.m-auto { margin: auto !important; }
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+.my-auto { margin-top: auto !important; margin-bottom: auto !important; }
+
+.m-2 { margin: var(--spacing-2) !important; }
+.m-4 { margin: var(--spacing-4) !important; }
+.m-6 { margin: var(--spacing-6) !important; }
+.m-8 { margin: var(--spacing-8) !important; }
+
+.mt-2 { margin-top: var(--spacing-2) !important; }
+.mt-4 { margin-top: var(--spacing-4) !important; }
+.mt-6 { margin-top: var(--spacing-6) !important; }
+.mt-8 { margin-top: var(--spacing-8) !important; }
+.mt-12 { margin-top: var(--spacing-12) !important; }
+
+.mb-2 { margin-bottom: var(--spacing-2) !important; }
+.mb-4 { margin-bottom: var(--spacing-4) !important; }
+.mb-6 { margin-bottom: var(--spacing-6) !important; }
+.mb-8 { margin-bottom: var(--spacing-8) !important; }
+.mb-12 { margin-bottom: var(--spacing-12) !important; }
+
+.ml-2 { margin-left: var(--spacing-2) !important; }
+.ml-4 { margin-left: var(--spacing-4) !important; }
+.mr-2 { margin-right: var(--spacing-2) !important; }
+.mr-4 { margin-right: var(--spacing-4) !important; }
+
+/* Padding */
+.p-0 { padding: 0 !important; }
+.p-2 { padding: var(--spacing-2) !important; }
+.p-4 { padding: var(--spacing-4) !important; }
+.p-6 { padding: var(--spacing-6) !important; }
+.p-8 { padding: var(--spacing-8) !important; }
+
+.px-2 { padding-left: var(--spacing-2) !important; padding-right: var(--spacing-2) !important; }
+.px-4 { padding-left: var(--spacing-4) !important; padding-right: var(--spacing-4) !important; }
+.px-6 { padding-left: var(--spacing-6) !important; padding-right: var(--spacing-6) !important; }
+.px-8 { padding-left: var(--spacing-8) !important; padding-right: var(--spacing-8) !important; }
+
+.py-2 { padding-top: var(--spacing-2) !important; padding-bottom: var(--spacing-2) !important; }
+.py-4 { padding-top: var(--spacing-4) !important; padding-bottom: var(--spacing-4) !important; }
+.py-6 { padding-top: var(--spacing-6) !important; padding-bottom: var(--spacing-6) !important; }
+.py-8 { padding-top: var(--spacing-8) !important; padding-bottom: var(--spacing-8) !important; }
+
+/* ==================== Typography Utilities ==================== */
+
+.text-xs { font-size: var(--font-size-xs) !important; }
+.text-sm { font-size: var(--font-size-sm) !important; }
+.text-base { font-size: var(--font-size-base) !important; }
+.text-lg { font-size: var(--font-size-lg) !important; }
+.text-xl { font-size: var(--font-size-xl) !important; }
+.text-2xl { font-size: var(--font-size-2xl) !important; }
+.text-3xl { font-size: var(--font-size-3xl) !important; }
+.text-4xl { font-size: var(--font-size-4xl) !important; }
+
+.font-normal { font-weight: var(--font-weight-normal) !important; }
+.font-medium { font-weight: var(--font-weight-medium) !important; }
+.font-semibold { font-weight: var(--font-weight-semibold) !important; }
+.font-bold { font-weight: var(--font-weight-bold) !important; }
+
+.text-left { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-right { text-align: right !important; }
+
+.text-primary { color: var(--color-text-primary) !important; }
+.text-secondary { color: var(--color-text-secondary) !important; }
+.text-tertiary { color: var(--color-text-tertiary) !important; }
+.text-accent { color: var(--color-accent) !important; }
+.text-error { color: var(--color-error) !important; }
+.text-success { color: var(--color-success) !important; }
+.text-warning { color: var(--color-warning) !important; }
+
+.uppercase { text-transform: uppercase !important; }
+.lowercase { text-transform: lowercase !important; }
+.capitalize { text-transform: capitalize !important; }
+
+.truncate {
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  white-space: nowrap !important;
+}
+
+.line-clamp-2 {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 2 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+.line-clamp-3 {
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+}
+
+/* ==================== Color Utilities ==================== */
+
+.bg-primary { background-color: var(--color-bg-primary) !important; }
+.bg-secondary { background-color: var(--color-bg-secondary) !important; }
+.bg-tertiary { background-color: var(--color-bg-tertiary) !important; }
+.bg-accent { background-color: var(--color-accent) !important; }
+.bg-transparent { background-color: transparent !important; }
+
+.border-light { border-color: var(--color-border-light) !important; }
+.border-default { border-color: var(--color-border-default) !important; }
+.border-accent { border-color: var(--color-accent) !important; }
+
+/* ==================== Size Utilities ==================== */
+
+.w-full { width: 100% !important; }
+.w-auto { width: auto !important; }
+.w-screen { width: 100vw !important; }
+.w-fit { width: fit-content !important; }
+
+.h-full { height: 100% !important; }
+.h-auto { height: auto !important; }
+.h-screen { height: 100vh !important; }
+.h-fit { height: fit-content !important; }
+
+.max-w-xs { max-width: 320px !important; }
+.max-w-sm { max-width: 384px !important; }
+.max-w-md { max-width: 448px !important; }
+.max-w-lg { max-width: 512px !important; }
+.max-w-xl { max-width: 576px !important; }
+.max-w-2xl { max-width: 672px !important; }
+.max-w-full { max-width: 100% !important; }
+
+.min-h-screen { min-height: 100vh !important; }
+
+/* ==================== Position Utilities ==================== */
+
+.static { position: static !important; }
+.relative { position: relative !important; }
+.absolute { position: absolute !important; }
+.fixed { position: fixed !important; }
+.sticky { position: sticky !important; }
+
+.inset-0 { top: 0 !important; right: 0 !important; bottom: 0 !important; left: 0 !important; }
+
+.top-0 { top: 0 !important; }
+.right-0 { right: 0 !important; }
+.bottom-0 { bottom: 0 !important; }
+.left-0 { left: 0 !important; }
+
+.z-0 { z-index: 0 !important; }
+.z-10 { z-index: 10 !important; }
+.z-20 { z-index: 20 !important; }
+.z-30 { z-index: 30 !important; }
+.z-40 { z-index: 40 !important; }
+.z-50 { z-index: 50 !important; }
+
+/* ==================== Border Utilities ==================== */
+
+.border { border: 1px solid var(--color-border-default) !important; }
+.border-0 { border: 0 !important; }
+.border-2 { border-width: 2px !important; }
+
+.border-t { border-top: 1px solid var(--color-border-default) !important; }
+.border-b { border-bottom: 1px solid var(--color-border-default) !important; }
+.border-l { border-left: 1px solid var(--color-border-default) !important; }
+.border-r { border-right: 1px solid var(--color-border-default) !important; }
+
+.rounded { border-radius: var(--radius-md) !important; }
+.rounded-sm { border-radius: var(--radius-sm) !important; }
+.rounded-lg { border-radius: var(--radius-lg) !important; }
+.rounded-xl { border-radius: var(--radius-xl) !important; }
+.rounded-2xl { border-radius: var(--radius-2xl) !important; }
+.rounded-full { border-radius: var(--radius-full) !important; }
+.rounded-none { border-radius: 0 !important; }
+
+/* ==================== Shadow Utilities ==================== */
+
+.shadow-none { box-shadow: none !important; }
+.shadow-sm { box-shadow: var(--shadow-sm) !important; }
+.shadow { box-shadow: var(--shadow-md) !important; }
+.shadow-md { box-shadow: var(--shadow-md) !important; }
+.shadow-lg { box-shadow: var(--shadow-lg) !important; }
+.shadow-xl { box-shadow: var(--shadow-xl) !important; }
+
+/* ==================== Opacity Utilities ==================== */
+
+.opacity-0 { opacity: 0 !important; }
+.opacity-25 { opacity: 0.25 !important; }
+.opacity-50 { opacity: 0.5 !important; }
+.opacity-75 { opacity: 0.75 !important; }
+.opacity-100 { opacity: 1 !important; }
+
+/* ==================== Overflow Utilities ==================== */
+
+.overflow-auto { overflow: auto !important; }
+.overflow-hidden { overflow: hidden !important; }
+.overflow-visible { overflow: visible !important; }
+.overflow-scroll { overflow: scroll !important; }
+
+.overflow-x-auto { overflow-x: auto !important; }
+.overflow-y-auto { overflow-y: auto !important; }
+.overflow-x-hidden { overflow-x: hidden !important; }
+.overflow-y-hidden { overflow-y: hidden !important; }
+
+/* ==================== Pointer Events ==================== */
+
+.pointer-events-none { pointer-events: none !important; }
+.pointer-events-auto { pointer-events: auto !important; }
+
+.cursor-pointer { cursor: pointer !important; }
+.cursor-default { cursor: default !important; }
+.cursor-not-allowed { cursor: not-allowed !important; }
+
+/* ==================== User Select ==================== */
+
+.select-none { user-select: none !important; }
+.select-text { user-select: text !important; }
+.select-all { user-select: all !important; }
+
+/* ==================== Visibility ==================== */
+
+.visible { visibility: visible !important; }
+.invisible { visibility: hidden !important; }
+
+/* ==================== Transform Utilities ==================== */
+
+.transform { transform: translateZ(0) !important; }
+.transform-none { transform: none !important; }
+
+.translate-y-full { transform: translateY(100%) !important; }
+.translate-y-0 { transform: translateY(0) !important; }
+
+.scale-0 { transform: scale(0) !important; }
+.scale-95 { transform: scale(0.95) !important; }
+.scale-100 { transform: scale(1) !important; }
+.scale-105 { transform: scale(1.05) !important; }
+.scale-110 { transform: scale(1.1) !important; }
+
+.rotate-0 { transform: rotate(0deg) !important; }
+.rotate-45 { transform: rotate(45deg) !important; }
+.rotate-90 { transform: rotate(90deg) !important; }
+.rotate-180 { transform: rotate(180deg) !important; }
+
+/* ==================== Transition Utilities ==================== */
+
+.transition-none { transition: none !important; }
+.transition-all { transition: all var(--transition-base) var(--ease-in-out) !important; }
+.transition-fast { transition: all var(--transition-fast) var(--ease-in-out) !important; }
+.transition-slow { transition: all var(--transition-slow) var(--ease-in-out) !important; }
+
+.transition-colors { 
+  transition: background-color var(--transition-base) var(--ease-in-out),
+              border-color var(--transition-base) var(--ease-in-out),
+              color var(--transition-base) var(--ease-in-out) !important; 
+}
+
+.transition-transform { 
+  transition: transform var(--transition-base) var(--ease-out) !important; 
+}
+
+.transition-opacity { 
+  transition: opacity var(--transition-base) var(--ease-in-out) !important; 
+}
+
+/* ==================== Object Fit Utilities ==================== */
+
+.object-contain { object-fit: contain !important; }
+.object-cover { object-fit: cover !important; }
+.object-fill { object-fit: fill !important; }
+.object-none { object-fit: none !important; }
+
+.object-center { object-position: center !important; }
+.object-top { object-position: top !important; }
+.object-bottom { object-position: bottom !important; }
+
+/* ==================== Aspect Ratio Utilities ==================== */
+
+.aspect-square { aspect-ratio: 1 / 1 !important; }
+.aspect-video { aspect-ratio: 16 / 9 !important; }
+.aspect-auto { aspect-ratio: auto !important; }
+
+/* ==================== Accessibility Utilities ==================== */
+
+.sr-only {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border-width: 0 !important;
+}
+
+.not-sr-only {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important;
+}
+
+.focus-visible:focus-visible {
+  outline: 2px solid var(--color-accent) !important;
+  outline-offset: 2px !important;
+}
+
+/* ==================== List Utilities ==================== */
+
+.list-none { list-style-type: none !important; }
+.list-disc { list-style-type: disc !important; }
+.list-decimal { list-style-type: decimal !important; }
+
+.list-inside { list-style-position: inside !important; }
+.list-outside { list-style-position: outside !important; }
+
+/* ==================== Whitespace Utilities ==================== */
+
+.whitespace-normal { white-space: normal !important; }
+.whitespace-nowrap { white-space: nowrap !important; }
+.whitespace-pre { white-space: pre !important; }
+.whitespace-pre-wrap { white-space: pre-wrap !important; }
+
+.break-normal { word-break: normal !important; overflow-wrap: normal !important; }
+.break-words { overflow-wrap: break-word !important; }
+.break-all { word-break: break-all !important; }
+
+/* ==================== Gradient Utilities ==================== */
+
+.gradient-primary { background: var(--gradient-primary) !important; }
+.gradient-accent { background: var(--gradient-accent) !important; }
+.gradient-dark { background: var(--gradient-dark) !important; }
+.gradient-mesh { background: var(--gradient-mesh) !important; }
+
+/* ==================== Backdrop Utilities ==================== */
+
+.backdrop-blur { backdrop-filter: blur(10px) !important; }
+.backdrop-blur-sm { backdrop-filter: blur(4px) !important; }
+.backdrop-blur-lg { backdrop-filter: blur(16px) !important; }
+
+/* ==================== Filter Utilities ==================== */
+
+.grayscale { filter: grayscale(100%) !important; }
+.grayscale-0 { filter: grayscale(0) !important; }
+.blur { filter: blur(8px) !important; }
+.brightness-50 { filter: brightness(0.5) !important; }
+.brightness-100 { filter: brightness(1) !important; }
+.brightness-125 { filter: brightness(1.25) !important; }
+
+/* ==================== Animation State Utilities ==================== */
+
+.animate-spin {
+  animation: rotate 1s linear infinite !important;
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite !important;
+}
+
+@keyframes ping {
+  75%, 100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite !important;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+/* ==================== Interaction Utilities ==================== */
+
+.no-underline { text-decoration: none !important; }
+.underline { text-decoration: underline !important; }
+.line-through { text-decoration: line-through !important; }
+
+.hover\:underline:hover { text-decoration: underline !important; }
+.hover\:no-underline:hover { text-decoration: none !important; }
+
+.hover\:opacity-80:hover { opacity: 0.8 !important; }
+.hover\:opacity-100:hover { opacity: 1 !important; }
+
+.hover\:scale-105:hover { transform: scale(1.05) !important; }
+.hover\:scale-110:hover { transform: scale(1.1) !important; }
+
+.hover\:bg-secondary:hover { background-color: var(--color-bg-secondary) !important; }
+.hover\:text-accent:hover { color: var(--color-accent) !important; }
+
+.active\:scale-95:active { transform: scale(0.95) !important; }
+
+/* ==================== State Utilities ==================== */
+
+.disabled\:opacity-50:disabled { opacity: 0.5 !important; }
+.disabled\:cursor-not-allowed:disabled { cursor: not-allowed !important; }
+.disabled\:pointer-events-none:disabled { pointer-events: none !important; }
+
+.focus\:outline-none:focus { outline: none !important; }
+.focus\:ring:focus { 
+  box-shadow: 0 0 0 3px rgba(244, 99, 58, 0.1) !important; 
+}
+
+/* ==================== Group Hover Utilities ==================== */
+
+.group:hover .group-hover\:opacity-100 { opacity: 1 !important; }
+.group:hover .group-hover\:opacity-0 { opacity: 0 !important; }
+.group:hover .group-hover\:scale-110 { transform: scale(1.1) !important; }
+.group:hover .group-hover\:translate-x-1 { transform: translateX(0.25rem) !important; }
+
+/* ==================== Container Query Utilities ==================== */
+
+.container-query {
+  container-type: inline-size !important;
+}
+
+/* ==================== Print Utilities ==================== */
+
+@media print {
+  .print\:hidden { display: none !important; }
+  .print\:block { display: block !important; }
+}
+
+/* ==================== Dark Mode Utilities ==================== */
+
+[data-theme="dark"] .dark\:bg-primary { 
+  background-color: var(--color-bg-primary) !important; 
+}
+
+[data-theme="dark"] .dark\:text-primary { 
+  color: var(--color-text-primary) !important; 
+}
+
+[data-theme="dark"] .dark\:border-light { 
+  border-color: var(--color-border-light) !important; 
+}
+
+/* ==================== Custom Layout Utilities ==================== */
+
+.section-padding {
+  padding: var(--spacing-16) 0;
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding: var(--spacing-20) 0;
+  }
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+}
+
+/* ==================== Card Utilities ==================== */
+
+.card {
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: var(--spacing-6);
+  transition: all var(--transition-base) var(--ease-out);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-lg);
+}
+
+.card-interactive {
+  cursor: pointer;
+}
+
+.card-interactive:hover {
+  transform: translateY(-4px);
+}
+
+/* ==================== Loading States ==================== */
+
+.loading {
+  position: relative;
+  pointer-events: none;
+  opacity: 0.6;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==================== Scroll Utilities ==================== */
+
+.scroll-smooth {
+  scroll-behavior: smooth !important;
+}
+
+.snap-y {
+  scroll-snap-type: y mandatory !important;
+}
+
+.snap-start {
+  scroll-snap-align: start !important;
+}
+
+.snap-center {
+  scroll-snap-align: center !important;
+}
+
+/* Custom Scrollbar */
+.scrollbar-thin::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.scrollbar-thin::-webkit-scrollbar-track {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-full);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--color-neutral-400);
+  border-radius: var(--radius-full);
+}
+
+.scrollbar-thin::-webkit-scrollbar-thumb:hover {
+  background: var(--color-neutral-500);
+}
+
+/* Hide Scrollbar */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* ==================== Image Utilities ==================== */
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
+}
+
+.img-cover {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ==================== Text Gradient Utility ==================== */
+
+.text-gradient {
+  background: var(--gradient-accent);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gradient-primary {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ==================== Divider Utilities ==================== */
+
+.divider-horizontal {
+  width: 100%;
+  height: 1px;
+  background: var(--color-border-light);
+}
+
+.divider-vertical {
+  width: 1px;
+  height: 100%;
+  background: var(--color-border-light);
+}
+
+/* ==================== Glow Effect Utility ==================== */
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(244, 99, 58, 0.3);
+}
+
+.glow-primary {
+  box-shadow: 0 0 20px rgba(4, 30, 66, 0.3);
+}
+
+/* ==================== Glass Morphism ==================== */
+
+.glass {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+[data-theme="dark"] .glass {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ==================== Centering Utilities ==================== */
+
+.center-absolute {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.center-flex {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ==================== Aspect Ratio Container ==================== */
+
+.aspect-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 16:9 */
+}
+
+.aspect-container > * {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ==================== Safe Area ==================== */
+
+.safe-top {
+  padding-top: env(safe-area-inset-top);
+}
+
+.safe-bottom {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+.safe-left {
+  padding-left: env(safe-area-inset-left);
+}
+
+.safe-right {
+  padding-right: env(safe-area-inset-right);
+}

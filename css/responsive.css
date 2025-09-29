@@ -1,0 +1,574 @@
+/* /css/responsive.css */
+/* AICO Elektronik - Responsive Styles */
+
+/* ==================== Mobile First Base Styles ==================== */
+
+/* Already defined in main.css and components, this file contains overrides */
+
+/* ==================== Extra Small Devices (< 480px) ==================== */
+
+@media (max-width: 479px) {
+  /* Typography adjustments */
+  :root {
+    --font-size-6xl: 2.5rem;
+    --font-size-5xl: 2rem;
+    --font-size-4xl: 1.75rem;
+  }
+  
+  /* Container */
+  .container {
+    padding: 0 var(--spacing-3);
+  }
+  
+  /* Buttons */
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+  
+  .btn--sm {
+    font-size: var(--font-size-xs);
+  }
+  
+  /* Hero adjustments */
+  .hero__cta {
+    flex-direction: column;
+    width: 100%;
+  }
+  
+  .hero__cta .btn {
+    width: 100%;
+  }
+  
+  /* Stats on mobile */
+  .hero__stats {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-3);
+  }
+  
+  /* Product cards */
+  .product-card__image {
+    height: 180px;
+  }
+  
+  /* Footer */
+  .footer__grid {
+    gap: var(--spacing-6);
+  }
+  
+  .footer__social {
+    justify-content: center;
+  }
+  
+  /* Modals */
+  .cookie-modal__content {
+    margin: var(--spacing-2);
+    max-height: calc(100vh - var(--spacing-4));
+  }
+  
+  /* Forms */
+  .newsletter__input {
+    font-size: var(--font-size-sm);
+  }
+}
+
+/* ==================== Small Devices (480px - 639px) ==================== */
+
+@media (min-width: 480px) and (max-width: 639px) {
+  /* Hero stats - 2 columns */
+  .hero__stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* Products - still 1 column but with better spacing */
+  .products__grid {
+    gap: var(--spacing-6);
+  }
+  
+  /* Calculator CTA */
+  .calculator-cta__buttons {
+    gap: var(--spacing-3);
+  }
+}
+
+/* ==================== Tablets (640px - 767px) ==================== */
+
+@media (min-width: 640px) and (max-width: 767px) {
+  /* Navigation - still mobile menu */
+  .header__menu {
+    padding: calc(70px + var(--spacing-4)) var(--spacing-6) var(--spacing-4);
+  }
+  
+  /* Hero layout */
+  .hero__content {
+    gap: var(--spacing-10);
+  }
+  
+  /* Products - 2 columns */
+  .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-6);
+  }
+  
+  /* Services timeline */
+  .service-item {
+    gap: var(--spacing-6);
+  }
+  
+  /* Footer - 2 columns */
+  .footer__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-8);
+  }
+  
+  .footer__column--wide {
+    grid-column: span 2;
+  }
+}
+
+/* ==================== Medium Tablets (768px - 1023px) ==================== */
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  /* Header navigation - still mobile but bigger */
+  .header__menu {
+    padding: calc(80px + var(--spacing-6)) var(--spacing-8) var(--spacing-6);
+  }
+  
+  .nav-menu {
+    gap: var(--spacing-3);
+  }
+  
+  /* Hero */
+  .hero {
+    min-height: 80vh;
+  }
+  
+  .hero__content {
+    padding: var(--spacing-16) 0;
+  }
+  
+  /* Stats - 3 columns on tablet landscape */
+  .hero__stats {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Products - 2 columns */
+  .products__grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-8);
+  }
+  
+  /* Services - show timeline */
+  .services__timeline::before {
+    display: block;
+  }
+  
+  /* Calculator CTA */
+  .calculator-cta__buttons {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-6);
+  }
+  
+  /* Testimonials - 2 columns */
+  .testimonials__slider {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-6);
+  }
+  
+  /* Footer - 3 columns */
+  .footer__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .footer__column--wide {
+    grid-column: span 3;
+  }
+  
+  /* Newsletter */
+  .newsletter__form {
+    max-width: 600px;
+  }
+}
+
+/* ==================== Desktop (1024px - 1279px) ==================== */
+
+@media (min-width: 1024px) and (max-width: 1279px) {
+  /* Header - desktop navigation */
+  .header__nav-content {
+    padding: var(--spacing-4) 0;
+  }
+  
+  /* Hero - side by side */
+  .hero__content {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-12);
+    align-items: center;
+  }
+  
+  /* Products - 3 columns */
+  .products__grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Services - full timeline effect */
+  .service-item {
+    gap: var(--spacing-12);
+  }
+  
+  /* Testimonials - 3 columns */
+  .testimonials__slider {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  /* Footer - 5 columns */
+  .footer__grid {
+    grid-template-columns: 1.5fr repeat(4, 1fr);
+  }
+  
+  .footer__column--wide {
+    grid-column: span 1;
+  }
+}
+
+/* ==================== Large Desktop (1280px - 1535px) ==================== */
+
+@media (min-width: 1280px) and (max-width: 1535px) {
+  /* Increased spacing */
+  .section-header {
+    margin-bottom: var(--spacing-16);
+  }
+  
+  /* Hero with more breathing room */
+  .hero__content {
+    gap: var(--spacing-16);
+    padding: var(--spacing-24) 0;
+  }
+  
+  /* Products - maintain 3 columns with better spacing */
+  .products__grid {
+    gap: var(--spacing-10);
+  }
+  
+  /* Footer - full 5 column layout */
+  .footer__grid {
+    grid-template-columns: 2fr repeat(4, 1fr);
+    gap: var(--spacing-12);
+  }
+}
+
+/* ==================== Extra Large Desktop (≥ 1536px) ==================== */
+
+@media (min-width: 1536px) {
+  /* Maximum container width */
+  .container {
+    max-width: var(--container-2xl);
+  }
+  
+  /* Hero - optimal proportions */
+  .hero__content {
+    grid-template-columns: 1.2fr 1fr;
+    gap: var(--spacing-20);
+  }
+  
+  /* Larger typography on huge screens */
+  .hero__title {
+    font-size: var(--font-size-7xl);
+  }
+  
+  /* Products could go to 4 columns on very large screens */
+  @media (min-width: 1800px) {
+    .products__grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+}
+
+/* ==================== Landscape Orientation ==================== */
+
+@media (orientation: landscape) and (max-height: 600px) {
+  /* Reduce vertical spacing on short landscape screens */
+  .hero {
+    min-height: auto;
+    padding: var(--spacing-12) 0;
+  }
+  
+  .hero__content {
+    padding: var(--spacing-12) 0;
+  }
+  
+  .hero__scroll-indicator {
+    display: none;
+  }
+  
+  section {
+    padding: var(--spacing-12) 0;
+  }
+}
+
+/* ==================== Print Styles ==================== */
+
+@media print {
+  /* Hide interactive elements */
+  .header__top,
+  .header__menu-toggle,
+  .nav-menu__item--has-dropdown .nav-dropdown,
+  .back-to-top,
+  .whatsapp-button,
+  .cookie-consent,
+  .newsletter,
+  .footer__social,
+  button,
+  .btn {
+    display: none !important;
+  }
+  
+  /* Reset backgrounds */
+  body {
+    background: white;
+    color: black;
+  }
+  
+  /* Optimize for print */
+  .container {
+    max-width: 100%;
+    padding: 0;
+  }
+  
+  /* Show links */
+  a[href]:after {
+    content: " (" attr(href) ")";
+    font-size: 80%;
+  }
+  
+  /* Break pages appropriately */
+  .product-card,
+  .service-item,
+  .testimonial-card {
+    page-break-inside: avoid;
+  }
+  
+  section {
+    page-break-after: always;
+  }
+}
+
+/* ==================== Touch Device Optimizations ==================== */
+
+@media (hover: none) and (pointer: coarse) {
+  /* Larger touch targets */
+  button,
+  .btn,
+  a {
+    min-height: 44px;
+    min-width: 44px;
+  }
+  
+  /* Remove hover effects */
+  .hover-lift:hover,
+  .hover-scale:hover {
+    transform: none;
+  }
+  
+  /* Adjust dropdowns for touch */
+  .nav-dropdown,
+  .dropdown__menu {
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: auto;
+    bottom: 0;
+    max-height: 70vh;
+    overflow-y: auto;
+    border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+  }
+}
+
+/* ==================== Reduced Motion ==================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  
+  /* Disable parallax */
+  .hero__parallax,
+  .parallax-layer {
+    transform: none !important;
+  }
+}
+
+/* ==================== High Contrast Mode ==================== */
+
+@media (prefers-contrast: high) {
+  /* Increase contrast */
+  :root {
+    --color-text-primary: #000000;
+    --color-text-secondary: #333333;
+    --color-bg-primary: #FFFFFF;
+  }
+  
+  [data-theme="dark"] {
+    --color-text-primary: #FFFFFF;
+    --color-text-secondary: #CCCCCC;
+    --color-bg-primary: #000000;
+  }
+  
+  /* Stronger borders */
+  button,
+  input,
+  .card {
+    border-width: 2px;
+  }
+}
+
+/* ==================== Container Queries (Future-proof) ==================== */
+
+/* When container queries are fully supported, these will activate */
+@supports (container-type: inline-size) {
+  .responsive-container {
+    container-type: inline-size;
+  }
+  
+  @container (min-width: 400px) {
+    .card {
+      display: grid;
+      grid-template-columns: auto 1fr;
+    }
+  }
+  
+  @container (min-width: 600px) {
+    .card {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+}
+
+/* ==================== Specific Component Breakpoints ==================== */
+
+/* Navigation Breakpoint */
+@media (min-width: 1024px) {
+  .header__menu-toggle {
+    display: none;
+  }
+  
+  .header__menu {
+    display: flex !important;
+  }
+}
+
+/* Stats Layout Breakpoints */
+@media (max-width: 479px) {
+  .stat-card {
+    padding: var(--spacing-3);
+  }
+  
+  .stat-card__number {
+    font-size: var(--font-size-2xl);
+  }
+}
+
+/* Service Timeline Breakpoints */
+@media (max-width: 767px) {
+  .service-item__dot {
+    display: none;
+  }
+  
+  .services__timeline::before {
+    display: none;
+  }
+}
+
+/* Calculator Cards Breakpoints */
+@media (max-width: 639px) {
+  .calculator-card {
+    padding: var(--spacing-5);
+  }
+  
+  .calculator-card__icon {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+/* Footer Breakpoints - Progressive Enhancement */
+@media (max-width: 639px) {
+  .footer__certifications {
+    justify-content: center;
+  }
+  
+  .footer__legal {
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+}
+
+/* Modal Breakpoints */
+@media (max-width: 639px) {
+  .cookie-modal__content {
+    border-radius: var(--radius-xl);
+  }
+  
+  .cookie-modal__header,
+  .cookie-modal__body,
+  .cookie-modal__footer {
+    padding: var(--spacing-4);
+  }
+}
+
+/* ==================== Accessibility - Focus Visible ==================== */
+
+@media (prefers-reduced-motion: no-preference) {
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 4px;
+    transition: outline-offset var(--transition-fast) var(--ease-out);
+  }
+}
+
+/* ==================== Safari Specific Fixes ==================== */
+
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari bottom padding fix */
+  .header__menu {
+    padding-bottom: calc(var(--spacing-4) + env(safe-area-inset-bottom));
+  }
+  
+  .whatsapp-button {
+    bottom: calc(var(--spacing-8) + env(safe-area-inset-bottom));
+  }
+  
+  .cookie-consent {
+    padding-bottom: calc(var(--spacing-4) + env(safe-area-inset-bottom));
+  }
+}
+
+/* ==================== Firefox Specific Fixes ==================== */
+
+@-moz-document url-prefix() {
+  /* Firefox scrollbar styling */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-neutral-400) var(--color-neutral-200);
+  }
+}
+
+/* ==================== Edge/IE Specific (Legacy Support) ==================== */
+
+@supports (-ms-ime-align: auto) {
+  /* Grid fallback for older Edge */
+  .products__grid,
+  .footer__grid {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .products__grid > *,
+  .footer__grid > * {
+    flex: 1 1 300px;
+  }
+}
