@@ -4,9 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PCB Fiyat Hesaplama | AICO Elektronik</title>
-    <meta name="description" content="PCB üretim maliyetinizi anında hesaplayın. Katman sayısı, boyut, malzeme ve miktar seçenekleriyle detaylı fiyat teklifi alın.">
+    <meta name="description" content="Online PCB fiyat hesaplayıcı. Anında fiyat öğrenin, Gerber dosyası yükleyin, özel teklif alın.">
     
-    <!-- CSS -->
     <link rel="stylesheet" href="/css/reset.css">
     <link rel="stylesheet" href="/css/variables.css">
     <link rel="stylesheet" href="/css/typography.css">
@@ -16,13 +15,381 @@
     <link rel="stylesheet" href="/css/components/header.css">
     <link rel="stylesheet" href="/css/components/footer.css">
     <link rel="stylesheet" href="/css/main.css">
-    <link rel="stylesheet" href="/css/pages/calculator.css">
     <link rel="stylesheet" href="/css/responsive.css">
     <link rel="stylesheet" href="/css/dark-mode.css">
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* Calculator Specific Styles */
+        .calculator-hero {
+            background: linear-gradient(135deg, var(--navy) 0%, var(--deep-blue) 100%);
+            padding: var(--spacing-3xl) 0 var(--spacing-2xl);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calculator-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 30% 50%, rgba(244, 99, 58, 0.12) 0%, transparent 50%);
+        }
+        
+        .calculator-hero .container {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .calculator-hero__title {
+            font-size: clamp(2rem, 4vw, 2.5rem);
+            font-weight: 700;
+            color: var(--white);
+            text-align: center;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .calculator-hero__subtitle {
+            font-size: var(--font-lg);
+            color: rgba(255, 255, 255, 0.9);
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .calculator-container {
+            padding: var(--spacing-3xl) 0;
+        }
+        
+        .calculator-layout {
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: var(--spacing-3xl);
+            align-items: start;
+        }
+        
+        .calculator-form {
+            background: var(--surface);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .form-section {
+            margin-bottom: var(--spacing-2xl);
+            padding-bottom: var(--spacing-2xl);
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .form-section:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+        
+        .section-title {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .section-number {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--accent);
+            color: var(--white);
+            border-radius: 50%;
+            font-size: var(--font-sm);
+            font-weight: 700;
+        }
+        
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+        }
+        
+        .form-group-full {
+            grid-column: 1 / -1;
+        }
+        
+        .input-with-unit {
+            position: relative;
+        }
+        
+        .input-unit {
+            position: absolute;
+            right: var(--spacing-md);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-secondary);
+            font-size: var(--font-sm);
+            pointer-events: none;
+        }
+        
+        .radio-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: var(--spacing-md);
+        }
+        
+        .radio-card {
+            position: relative;
+        }
+        
+        .radio-card input[type="radio"] {
+            position: absolute;
+            opacity: 0;
+        }
+        
+        .radio-card label {
+            display: block;
+            padding: var(--spacing-md);
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-normal);
+            font-weight: 600;
+            color: var(--text-secondary);
+        }
+        
+        .radio-card input[type="radio"]:checked + label {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--white);
+        }
+        
+        .radio-card:hover label {
+            border-color: var(--accent);
+        }
+        
+        .quantity-input {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-sm);
+        }
+        
+        .quantity-btn {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--bg-primary);
+            border: 2px solid var(--border-color);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            font-size: var(--font-lg);
+            font-weight: 700;
+        }
+        
+        .quantity-btn:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--white);
+        }
+        
+        .quantity-value {
+            flex: 1;
+            text-align: center;
+            font-size: var(--font-xl);
+            font-weight: 700;
+            padding: var(--spacing-md);
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+        }
+        
+        .file-upload-area {
+            border: 2px dashed var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--spacing-3xl);
+            text-align: center;
+            background: var(--bg-primary);
+            cursor: pointer;
+            transition: all var(--transition-normal);
+        }
+        
+        .file-upload-area:hover {
+            border-color: var(--accent);
+            background: rgba(244, 99, 58, 0.05);
+        }
+        
+        .file-upload-area.dragover {
+            border-color: var(--accent);
+            background: rgba(244, 99, 58, 0.1);
+        }
+        
+        .upload-icon {
+            font-size: 3rem;
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .upload-text {
+            font-size: var(--font-base);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .upload-formats {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+        }
+        
+        .uploaded-file {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--spacing-md);
+            background: var(--bg-primary);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-md);
+        }
+        
+        .file-info {
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-md);
+        }
+        
+        .file-icon {
+            font-size: 1.5rem;
+        }
+        
+        .file-remove {
+            color: var(--error);
+            cursor: pointer;
+            padding: var(--spacing-sm);
+        }
+        
+        /* Price Summary Sidebar */
+        .price-summary {
+            position: sticky;
+            top: var(--spacing-xl);
+            background: var(--surface);
+            padding: var(--spacing-2xl);
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-color);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .summary-title {
+            font-size: var(--font-xl);
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: var(--spacing-xl);
+            padding-bottom: var(--spacing-md);
+            border-bottom: 2px solid var(--border-color);
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--spacing-md) 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        .summary-item:last-of-type {
+            border-bottom: none;
+        }
+        
+        .summary-label {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+        }
+        
+        .summary-value {
+            font-size: var(--font-base);
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+        
+        .summary-total {
+            margin-top: var(--spacing-xl);
+            padding-top: var(--spacing-xl);
+            border-top: 2px solid var(--border-color);
+        }
+        
+        .total-label {
+            font-size: var(--font-lg);
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+        
+        .total-price {
+            font-size: var(--font-3xl);
+            font-weight: 800;
+            color: var(--accent);
+            margin-top: var(--spacing-sm);
+        }
+        
+        .price-note {
+            font-size: var(--font-xs);
+            color: var(--text-secondary);
+            text-align: center;
+            margin-top: var(--spacing-md);
+        }
+        
+        .delivery-info {
+            background: var(--bg-primary);
+            padding: var(--spacing-md);
+            border-radius: var(--radius-md);
+            margin-top: var(--spacing-lg);
+            text-align: center;
+        }
+        
+        .delivery-time {
+            font-size: var(--font-sm);
+            color: var(--text-secondary);
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        .delivery-date {
+            font-size: var(--font-base);
+            font-weight: 700;
+            color: var(--success);
+        }
+        
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+        
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .calculator-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .price-summary {
+                position: static;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calculator-form {
+                padding: var(--spacing-xl);
+            }
+        }
+    </style>
 </head>
 <body>
     <a href="#main-content" class="skip-link">İçeriğe Geç</a>
@@ -37,126 +404,116 @@
     <div id="header-container"></div>
     
     <main id="main-content">
-        <!-- Breadcrumb -->
-        <div class="container">
-            <nav class="breadcrumb" aria-label="Breadcrumb">
-                <div class="breadcrumb__item">
-                    <a href="/">Ana Sayfa</a>
-                </div>
-                <span class="breadcrumb__separator">/</span>
-                <div class="breadcrumb__item">
-                    <a href="/pages/hesaplama/">Hesaplama</a>
-                </div>
-                <span class="breadcrumb__separator">/</span>
-                <div class="breadcrumb__item breadcrumb__item--active">
-                    PCB Fiyat Hesaplama
-                </div>
-            </nav>
-        </div>
-
-        <!-- Calculator Section -->
-        <section class="calculator-section">
+        <!-- Hero -->
+        <section class="calculator-hero">
             <div class="container">
-                <div class="calculator-header">
-                    <h1 class="calculator-title">PCB Fiyat Hesaplama</h1>
-                    <p class="calculator-subtitle">
-                        Teknik özelliklerinizi girin, anında fiyat teklifi alın
-                    </p>
-                </div>
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <div class="breadcrumb__item">
+                        <a href="/">Ana Sayfa</a>
+                    </div>
+                    <span class="breadcrumb__separator">/</span>
+                    <div class="breadcrumb__item breadcrumb__item--active">
+                        PCB Fiyat Hesaplama
+                    </div>
+                </nav>
 
+                <h1 class="calculator-hero__title">
+                    ⚡ PCB Fiyat Hesaplayıcı
+                </h1>
+                <p class="calculator-hero__subtitle">
+                    Anında fiyat öğrenin veya Gerber dosyanızı yükleyerek detaylı teklif alın
+                </p>
+            </div>
+        </section>
+
+        <!-- Calculator -->
+        <section class="calculator-container">
+            <div class="container">
                 <div class="calculator-layout">
-                    <!-- Calculator Form -->
+                    <!-- Form -->
                     <div class="calculator-form">
-                        <form id="pcb-calculator-form">
-                            <!-- Basic Specifications -->
-                            <div class="form-section">
-                                <h3 class="form-section__title">Temel Özellikler</h3>
+                        <!-- Section 1: Dimensions -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">1</span>
+                                Kart Boyutları
+                            </h2>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="width" class="form-label">Genişlik</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="width" class="form-input" value="100" min="10" max="500">
+                                        <span class="input-unit">mm</span>
+                                    </div>
+                                </div>
                                 
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="layers" class="form-label">
-                                            Katman Sayısı
-                                            <span class="tooltip">
-                                                <svg class="icon icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <circle cx="12" cy="12" r="10"/>
-                                                    <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
-                                                    <line x1="12" y1="17" x2="12.01" y2="17"/>
-                                                </svg>
-                                                <span class="tooltip__content">PCB'nizin toplam katman sayısı</span>
-                                            </span>
-                                        </label>
-                                        <select id="layers" class="form-select" required>
-                                            <option value="1">1 Katman</option>
-                                            <option value="2" selected>2 Katman</option>
-                                            <option value="4">4 Katman</option>
-                                            <option value="6">6 Katman</option>
-                                            <option value="8">8 Katman</option>
-                                            <option value="10">10 Katman</option>
-                                            <option value="12">12 Katman</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="quantity" class="form-label">Miktar (Adet)</label>
-                                        <input type="number" id="quantity" class="form-input" min="1" max="10000" value="10" required>
-                                        <div class="form-hint">Minimum 1, Maximum 10.000 adet</div>
-                                    </div>
-                                </div>
-
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="width" class="form-label">Genişlik (mm)</label>
-                                        <input type="number" id="width" class="form-input" min="10" max="500" value="100" step="0.1" required>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="height" class="form-label">Yükseklik (mm)</label>
-                                        <input type="number" id="height" class="form-input" min="10" max="500" value="100" step="0.1" required>
-                                    </div>
-                                </div>
-
-                                <div class="dimension-preview">
-                                    <div class="dimension-box" id="dimension-box">
-                                        <span class="dimension-label">100 x 100 mm</span>
+                                <div class="form-group">
+                                    <label for="height" class="form-label">Yükseklik</label>
+                                    <div class="input-with-unit">
+                                        <input type="number" id="height" class="form-input" value="100" min="10" max="500">
+                                        <span class="input-unit">mm</span>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Material & Thickness -->
-                            <div class="form-section">
-                                <h3 class="form-section__title">Malzeme ve Kalınlık</h3>
+                        <!-- Section 2: Layers -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">2</span>
+                                Katman Sayısı
+                            </h2>
+                            
+                            <div class="radio-group">
+                                <div class="radio-card">
+                                    <input type="radio" id="layer-1" name="layers" value="1">
+                                    <label for="layer-1">1 Katman</label>
+                                </div>
+                                <div class="radio-card">
+                                    <input type="radio" id="layer-2" name="layers" value="2" checked>
+                                    <label for="layer-2">2 Katman</label>
+                                </div>
+                                <div class="radio-card">
+                                    <input type="radio" id="layer-4" name="layers" value="4">
+                                    <label for="layer-4">4 Katman</label>
+                                </div>
+                                <div class="radio-card">
+                                    <input type="radio" id="layer-6" name="layers" value="6">
+                                    <label for="layer-6">6 Katman</label>
+                                </div>
+                                <div class="radio-card">
+                                    <input type="radio" id="layer-8" name="layers" value="8">
+                                    <label for="layer-8">8 Katman</label>
+                                </div>
+                                <div class="radio-card">
+                                    <input type="radio" id="layer-more" name="layers" value="10">
+                                    <label for="layer-more">10+ Katman</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Section 3: Material & Thickness -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">3</span>
+                                Malzeme ve Kalınlık
+                            </h2>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="material" class="form-label">Malzeme</label>
+                                    <select id="material" class="form-select">
+                                        <option value="fr4">FR-4 (Standart)</option>
+                                        <option value="aluminum">Alüminyum (LED)</option>
+                                        <option value="rogers">Rogers (RF)</option>
+                                        <option value="polyimide">Polyimide (Flex)</option>
+                                    </select>
+                                </div>
                                 
                                 <div class="form-group">
-                                    <label for="material" class="form-label">PCB Malzemesi</label>
-                                    <div class="radio-group">
-                                        <label class="radio-card">
-                                            <input type="radio" name="material" value="fr4" checked>
-                                            <div class="radio-card__content">
-                                                <div class="radio-card__title">FR-4</div>
-                                                <div class="radio-card__desc">Standart, ekonomik</div>
-                                            </div>
-                                        </label>
-                                        <label class="radio-card">
-                                            <input type="radio" name="material" value="aluminum">
-                                            <div class="radio-card__content">
-                                                <div class="radio-card__title">Alüminyum</div>
-                                                <div class="radio-card__desc">Isı dağılımı</div>
-                                            </div>
-                                        </label>
-                                        <label class="radio-card">
-                                            <input type="radio" name="material" value="rogers">
-                                            <div class="radio-card__content">
-                                                <div class="radio-card__title">Rogers</div>
-                                                <div class="radio-card__desc">Yüksek frekans</div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="thickness" class="form-label">PCB Kalınlığı</label>
+                                    <label for="thickness" class="form-label">Kalınlık</label>
                                     <select id="thickness" class="form-select">
-                                        <option value="0.4">0.4 mm</option>
                                         <option value="0.6">0.6 mm</option>
                                         <option value="0.8">0.8 mm</option>
                                         <option value="1.0">1.0 mm</option>
@@ -166,225 +523,375 @@
                                     </select>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Surface Finish -->
-                            <div class="form-section">
-                                <h3 class="form-section__title">Yüzey Kaplama</h3>
+                        <!-- Section 4: Color & Surface -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">4</span>
+                                Renk ve Yüzey
+                            </h2>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="color" class="form-label">Solder Mask Rengi</label>
+                                    <select id="color" class="form-select">
+                                        <option value="green" selected>Yeşil</option>
+                                        <option value="red">Kırmızı</option>
+                                        <option value="blue">Mavi</option>
+                                        <option value="black">Siyah</option>
+                                        <option value="white">Beyaz</option>
+                                        <option value="yellow">Sarı</option>
+                                    </select>
+                                </div>
                                 
                                 <div class="form-group">
-                                    <label class="form-label">Yüzey İşlemi</label>
-                                    <div class="checkbox-group">
-                                        <label class="checkbox">
-                                            <input type="radio" name="surface" value="hasl" checked>
-                                            <span class="checkbox__label">HASL (Kalay-Kurşun)</span>
-                                        </label>
-                                        <label class="checkbox">
-                                            <input type="radio" name="surface" value="hasl-lf">
-                                            <span class="checkbox__label">HASL Kurşunsuz</span>
-                                        </label>
-                                        <label class="checkbox">
-                                            <input type="radio" name="surface" value="enig">
-                                            <span class="checkbox__label">ENIG (Altın)</span>
-                                        </label>
-                                        <label class="checkbox">
-                                            <input type="radio" name="surface" value="osp">
-                                            <span class="checkbox__label">OSP</span>
-                                        </label>
-                                    </div>
+                                    <label for="surface" class="form-label">Yüzey Kaplama</label>
+                                    <select id="surface" class="form-select">
+                                        <option value="hasl" selected>HASL (Kalay-Kurşun)</option>
+                                        <option value="lead-free">Lead-Free HASL</option>
+                                        <option value="enig">ENIG (Altın)</option>
+                                        <option value="osp">OSP</option>
+                                    </select>
                                 </div>
                             </div>
+                        </div>
 
-                            <!-- Solder Mask & Silkscreen -->
-                            <div class="form-section">
-                                <h3 class="form-section__title">Solder Mask ve Silkscreen</h3>
-                                
-                                <div class="form-row">
-                                    <div class="form-group">
-                                        <label for="soldermask-color" class="form-label">Solder Mask Rengi</label>
-                                        <select id="soldermask-color" class="form-select">
-                                            <option value="green" selected>Yeşil</option>
-                                            <option value="red">Kırmızı</option>
-                                            <option value="blue">Mavi</option>
-                                            <option value="black">Siyah</option>
-                                            <option value="white">Beyaz</option>
-                                            <option value="yellow">Sarı</option>
-                                        </select>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label for="silkscreen-color" class="form-label">Silkscreen Rengi</label>
-                                        <select id="silkscreen-color" class="form-select">
-                                            <option value="white" selected>Beyaz</option>
-                                            <option value="black">Siyah</option>
-                                            <option value="yellow">Sarı</option>
-                                        </select>
-                                    </div>
-                                </div>
+                        <!-- Section 5: Quantity -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">5</span>
+                                Adet
+                            </h2>
+                            
+                            <div class="quantity-input">
+                                <button type="button" class="quantity-btn" id="decreaseQty">−</button>
+                                <div class="quantity-value" id="quantityValue">10</div>
+                                <button type="button" class="quantity-btn" id="increaseQty">+</button>
                             </div>
-
-                            <!-- Production Time -->
-                            <div class="form-section">
-                                <h3 class="form-section__title">Üretim Süresi</h3>
-                                
-                                <div class="form-group">
-                                    <div class="radio-group radio-group--horizontal">
-                                        <label class="radio-card radio-card--compact">
-                                            <input type="radio" name="production-time" value="standard" checked>
-                                            <div class="radio-card__content">
-                                                <div class="radio-card__title">Standart</div>
-                                                <div class="radio-card__desc">7-10 iş günü</div>
-                                                <div class="radio-card__price">Temel fiyat</div>
-                                            </div>
-                                        </label>
-                                        <label class="radio-card radio-card--compact">
-                                            <input type="radio" name="production-time" value="express">
-                                            <div class="radio-card__content">
-                                                <div class="radio-card__title">Hızlı</div>
-                                                <div class="radio-card__desc">3-5 iş günü</div>
-                                                <div class="radio-card__price">+%30</div>
-                                            </div>
-                                        </label>
-                                        <label class="radio-card radio-card--compact">
-                                            <input type="radio" name="production-time" value="urgent">
-                                            <div class="radio-card__content">
-                                                <div class="radio-card__title">Acil</div>
-                                                <div class="radio-card__desc">24-48 saat</div>
-                                                <div class="radio-card__price">+%60</div>
-                                            </div>
-                                        </label>
-                                    </div>
-                                </div>
+                            
+                            <div style="margin-top: var(--spacing-md);">
+                                <input type="range" id="quantityRange" class="form-range" min="1" max="1000" value="10" step="1">
                             </div>
+                        </div>
 
-                            <button type="submit" class="btn btn--primary btn--large btn--full">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <rect x="4" y="2" width="16" height="20" rx="2"/>
-                                    <rect x="8" y="6" width="8" height="4"/>
-                                </svg>
-                                <span>Fiyat Hesapla</span>
-                            </button>
-                        </form>
+                        <!-- Section 6: File Upload (Optional) -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">6</span>
+                                Gerber Dosyası (Opsiyonel)
+                            </h2>
+                            
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <div class="upload-icon">📁</div>
+                                <div class="upload-text">
+                                    <strong>Gerber dosyanızı buraya sürükleyin</strong><br>
+                                    veya tıklayarak seçin
+                                </div>
+                                <div class="upload-formats">
+                                    Desteklenen formatlar: ZIP, RAR, GBR (Max 50MB)
+                                </div>
+                                <input type="file" id="fileInput" accept=".zip,.rar,.gbr" style="display:none">
+                            </div>
+                            
+                            <div id="uploadedFiles"></div>
+                        </div>
                     </div>
 
                     <!-- Price Summary -->
-                    <div class="calculator-summary" id="price-summary">
-                        <div class="summary-card">
-                            <h3 class="summary-title">Fiyat Özeti</h3>
-                            
-                            <div class="summary-specs">
-                                <div class="summary-spec">
-                                    <span class="summary-spec__label">Katman:</span>
-                                    <span class="summary-spec__value" id="summary-layers">2</span>
-                                </div>
-                                <div class="summary-spec">
-                                    <span class="summary-spec__label">Boyut:</span>
-                                    <span class="summary-spec__value" id="summary-dimensions">100 x 100 mm</span>
-                                </div>
-                                <div class="summary-spec">
-                                    <span class="summary-spec__label">Miktar:</span>
-                                    <span class="summary-spec__value" id="summary-quantity">10 adet</span>
-                                </div>
-                                <div class="summary-spec">
-                                    <span class="summary-spec__label">Malzeme:</span>
-                                    <span class="summary-spec__value" id="summary-material">FR-4</span>
-                                </div>
-                            </div>
-
-                            <div class="summary-divider"></div>
-
-                            <div class="summary-breakdown">
-                                <div class="summary-line">
-                                    <span>PCB Üretim</span>
-                                    <span id="price-base">-</span>
-                                </div>
-                                <div class="summary-line">
-                                    <span>Yüzey İşlemi</span>
-                                    <span id="price-surface">-</span>
-                                </div>
-                                <div class="summary-line summary-line--discount">
-                                    <span>Miktar İndirimi</span>
-                                    <span id="price-discount">-</span>
-                                </div>
-                            </div>
-
-                            <div class="summary-divider"></div>
-
-                            <div class="summary-total">
-                                <span>Toplam Tutar</span>
-                                <div class="summary-total__price" id="total-price">
-                                    <span class="currency">₺</span>
-                                    <span class="amount">-</span>
-                                </div>
-                            </div>
-
-                            <div class="summary-note">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <circle cx="12" cy="12" r="10"/>
-                                    <path d="M12 16v-4M12 8h.01"/>
-                                </svg>
-                                <span>Fiyatlara KDV dahil değildir</span>
-                            </div>
-
-                            <div class="summary-actions">
-                                <button type="button" class="btn btn--primary btn--full" id="request-quote">
-                                    Teklif İste
-                                </button>
-                                <button type="button" class="btn btn--ghost btn--full" id="save-calculation">
-                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
-                                        <polyline points="17 21 17 13 7 13 7 21"/>
-                                        <polyline points="7 3 7 8 15 8"/>
-                                    </svg>
-                                    Hesaplamayı Kaydet
-                                </button>
-                            </div>
+                    <div class="price-summary">
+                        <h3 class="summary-title">Fiyat Özeti</h3>
+                        
+                        <div class="summary-item">
+                            <span class="summary-label">Alan</span>
+                            <span class="summary-value" id="summaryArea">100 x 100 mm</span>
                         </div>
-
-                        <!-- Additional Info -->
-                        <div class="info-card">
-                            <h4 class="info-card__title">
-                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                        
+                        <div class="summary-item">
+                            <span class="summary-label">Katman</span>
+                            <span class="summary-value" id="summaryLayers">2 Katman</span>
+                        </div>
+                        
+                        <div class="summary-item">
+                            <span class="summary-label">Malzeme</span>
+                            <span class="summary-value" id="summaryMaterial">FR-4</span>
+                        </div>
+                        
+                        <div class="summary-item">
+                            <span class="summary-label">Adet</span>
+                            <span class="summary-value" id="summaryQuantity">10 adet</span>
+                        </div>
+                        
+                        <div class="summary-item">
+                            <span class="summary-label">Birim Fiyat</span>
+                            <span class="summary-value" id="summaryUnitPrice">45.00 TL</span>
+                        </div>
+                        
+                        <div class="summary-total">
+                            <div class="total-label">Toplam Tutar</div>
+                            <div class="total-price" id="totalPrice">450.00 TL</div>
+                            <div class="price-note">*KDV Dahil</div>
+                        </div>
+                        
+                        <div class="delivery-info">
+                            <div class="delivery-time">Tahmini Teslimat</div>
+                            <div class="delivery-date" id="deliveryDate">5-7 İş Günü</div>
+                        </div>
+                        
+                        <div class="action-buttons">
+                            <button type="button" class="btn btn-primary btn-large" id="getQuoteBtn">
+                                <span>Teklif Al</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                                 </svg>
-                                <span>Hizmet Kapsamı</span>
-                            </h4>
-                            <ul class="info-list">
-                                <li>PCB üretim</li>
-                                <li>Elektriksel test</li>
-                                <li>Kalite kontrol</li>
-                                <li>Paketleme</li>
-                            </ul>
+                            </button>
+                            
+                            <button type="button" class="btn btn-outline" id="resetBtn">
+                                Sıfırla
+                            </button>
                         </div>
                     </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- FAQ Section -->
-        <section class="faq-section">
-            <div class="container">
-                <h2 class="section-title">Sıkça Sorulan Sorular</h2>
-                <div class="accordion" id="calculator-faq">
-                    <!-- FAQ items will be loaded dynamically -->
                 </div>
             </div>
         </section>
     </main>
-    
+
     <div id="footer-container"></div>
-    <button id="back-to-top" class="back-to-top" aria-label="Yukarı Çık">
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 19V5m-7 7l7-7 7 7"/>
-        </svg>
-    </button>
-    <div id="whatsapp-button-container"></div>
-    
+
     <script src="/js/config.js"></script>
     <script src="/js/utils.js"></script>
-    <script src="/js/api-client.js"></script>
-    <script src="/js/modules/dark-mode.js"></script>
-    <script src="/js/calculators/pcb-calculator.js"></script>
-    <script src="/js/main.js"></script>
+    <script src="/js/theme-toggle.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await utils.loadComponent('header-container', '/components/header.html');
+            await utils.loadComponent('footer-container', '/components/footer.html');
+            
+            // Calculator Logic
+            const calculator = {
+                width: 100,
+                height: 100,
+                layers: 2,
+                material: 'fr4',
+                thickness: 1.6,
+                color: 'green',
+                surface: 'hasl',
+                quantity: 10,
+                
+                basePrices: {
+                    1: 2.5,
+                    2: 4.5,
+                    4: 8.5,
+                    6: 15.0,
+                    8: 25.0,
+                    10: 40.0
+                },
+                
+                materialMultipliers: {
+                    'fr4': 1.0,
+                    'aluminum': 1.3,
+                    'rogers': 2.5,
+                    'polyimide': 2.0
+                },
+                
+                surfaceMultipliers: {
+                    'hasl': 1.0,
+                    'lead-free': 1.1,
+                    'enig': 1.5,
+                    'osp': 0.9
+                },
+                
+                calculate() {
+                    const area = (this.width * this.height) / 10000; // cm²
+                    const basePrice = this.basePrices[this.layers] || 50;
+                    const materialMult = this.materialMultipliers[this.material];
+                    const surfaceMult = this.surfaceMultipliers[this.surface];
+                    
+                    let unitPrice = basePrice * area * materialMult * surfaceMult;
+                    
+                    // Quantity discount
+                    if (this.quantity >= 100) unitPrice *= 0.7;
+                    else if (this.quantity >= 50) unitPrice *= 0.8;
+                    else if (this.quantity >= 20) unitPrice *= 0.9;
+                    
+                    const totalPrice = unitPrice * this.quantity;
+                    
+                    return {
+                        unitPrice: unitPrice.toFixed(2),
+                        totalPrice: totalPrice.toFixed(2)
+                    };
+                },
+                
+                updateSummary() {
+                    const prices = this.calculate();
+                    
+                    document.getElementById('summaryArea').textContent = `${this.width} x ${this.height} mm`;
+                    document.getElementById('summaryLayers').textContent = `${this.layers} Katman`;
+                    document.getElementById('summaryMaterial').textContent = 
+                        document.getElementById('material').selectedOptions[0].text;
+                    document.getElementById('summaryQuantity').textContent = `${this.quantity} adet`;
+                    document.getElementById('summaryUnitPrice').textContent = `${prices.unitPrice} TL`;
+                    document.getElementById('totalPrice').textContent = `${prices.totalPrice} TL`;
+                    
+                    // Delivery time based on quantity
+                    let deliveryText = '5-7 İş Günü';
+                    if (this.quantity >= 100) deliveryText = '10-12 İş Günü';
+                    else if (this.quantity >= 50) deliveryText = '7-10 İş Günü';
+                    
+                    document.getElementById('deliveryDate').textContent = deliveryText;
+                }
+            };
+            
+            // Event Listeners
+            document.getElementById('width').addEventListener('input', (e) => {
+                calculator.width = parseFloat(e.target.value) || 10;
+                calculator.updateSummary();
+            });
+            
+            document.getElementById('height').addEventListener('input', (e) => {
+                calculator.height = parseFloat(e.target.value) || 10;
+                calculator.updateSummary();
+            });
+            
+            document.querySelectorAll('input[name="layers"]').forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    calculator.layers = parseInt(e.target.value);
+                    calculator.updateSummary();
+                });
+            });
+            
+            document.getElementById('material').addEventListener('change', (e) => {
+                calculator.material = e.target.value;
+                calculator.updateSummary();
+            });
+            
+            document.getElementById('surface').addEventListener('change', (e) => {
+                calculator.surface = e.target.value;
+                calculator.updateSummary();
+            });
+            
+            // Quantity controls
+            const updateQuantity = (value) => {
+                calculator.quantity = Math.max(1, Math.min(1000, value));
+                document.getElementById('quantityValue').textContent = calculator.quantity;
+                document.getElementById('quantityRange').value = calculator.quantity;
+                calculator.updateSummary();
+            };
+            
+            document.getElementById('decreaseQty').addEventListener('click', () => {
+                updateQuantity(calculator.quantity - 1);
+            });
+            
+            document.getElementById('increaseQty').addEventListener('click', () => {
+                updateQuantity(calculator.quantity + 1);
+            });
+            
+            document.getElementById('quantityRange').addEventListener('input', (e) => {
+                updateQuantity(parseInt(e.target.value));
+            });
+            
+            // File Upload
+            const fileUploadArea = document.getElementById('fileUploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const uploadedFilesDiv = document.getElementById('uploadedFiles');
+            
+            fileUploadArea.addEventListener('click', () => fileInput.click());
+            
+            fileUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                fileUploadArea.classList.add('dragover');
+            });
+            
+            fileUploadArea.addEventListener('dragleave', () => {
+                fileUploadArea.classList.remove('dragover');
+            });
+            
+            fileUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileUploadArea.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+            
+            function handleFiles(files) {
+                Array.from(files).forEach(file => {
+                    if (file.size > 50 * 1024 * 1024) {
+                        utils.notify('Dosya boyutu 50MB\'dan küçük olmalıdır', 'error');
+                        return;
+                    }
+                    
+                    const fileDiv = document.createElement('div');
+                    fileDiv.className = 'uploaded-file';
+                    fileDiv.innerHTML = `
+                        <div class="file-info">
+                            <span class="file-icon">📎</span>
+                            <div>
+                                <div style="font-weight: 600;">${file.name}</div>
+                                <div style="font-size: var(--font-xs); color: var(--text-secondary);">
+                                    ${(file.size / 1024 / 1024).toFixed(2)} MB
+                                </div>
+                            </div>
+                        </div>
+                        <span class="file-remove" onclick="this.parentElement.remove()">✕</span>
+                    `;
+                    uploadedFilesDiv.appendChild(fileDiv);
+                    
+                    utils.notify('Dosya başarıyla yüklendi', 'success');
+                });
+            }
+            
+            // Get Quote Button
+            document.getElementById('getQuoteBtn').addEventListener('click', () => {
+                const prices = calculator.calculate();
+                
+                utils.notify('Teklifiniz hazırlanıyor...', 'info', 2000);
+                
+                setTimeout(() => {
+                    alert(`
+Teklif Özeti:
+-----------------
+Boyut: ${calculator.width} x ${calculator.height} mm
+Katman: ${calculator.layers}
+Adet: ${calculator.quantity}
+Birim Fiyat: ${prices.unitPrice} TL
+Toplam: ${prices.totalPrice} TL
+
+Bu fiyat tahminidir. Detaylı teklif için lütfen iletişime geçin.
+                    `);
+                }, 2000);
+            });
+            
+            // Reset Button
+            document.getElementById('resetBtn').addEventListener('click', () => {
+                document.getElementById('width').value = 100;
+                document.getElementById('height').value = 100;
+                document.getElementById('layer-2').checked = true;
+                document.getElementById('material').value = 'fr4';
+                document.getElementById('thickness').value = '1.6';
+                document.getElementById('color').value = 'green';
+                document.getElementById('surface').value = 'hasl';
+                updateQuantity(10);
+                uploadedFilesDiv.innerHTML = '';
+                
+                calculator.width = 100;
+                calculator.height = 100;
+                calculator.layers = 2;
+                calculator.material = 'fr4';
+                calculator.thickness = 1.6;
+                calculator.color = 'green';
+                calculator.surface = 'hasl';
+                calculator.quantity = 10;
+                
+                calculator.updateSummary();
+                utils.notify('Hesaplayıcı sıfırlandı', 'info');
+            });
+            
+            // Initial calculation
+            calculator.updateSummary();
+        });
+    </script>
 </body>
 </html>

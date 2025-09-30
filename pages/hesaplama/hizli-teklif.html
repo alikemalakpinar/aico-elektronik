@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hızlı Teklif | AICO Elektronik</title>
+    <meta name="description" content="24 saat içinde detaylı fiyat teklifi alın. Gerber dosyanızı yükleyin, projenizi tanımlayın.">
+    
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/utilities.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">İçeriğe Geç</a>
+    
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
+    <div id="header-container"></div>
+    
+    <main id="main-content">
+        <!-- Hero -->
+        <section class="calculator-hero">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <div class="breadcrumb__item">
+                        <a href="/">Ana Sayfa</a>
+                    </div>
+                    <span class="breadcrumb__separator">/</span>
+                    <div class="breadcrumb__item breadcrumb__item--active">
+                        Hızlı Teklif
+                    </div>
+                </nav>
+
+                <h1 class="calculator-hero__title">
+                    🚀 Hızlı Teklif Alın
+                </h1>
+                <p class="calculator-hero__subtitle">
+                    Gerber dosyanızı yükleyin, 24 saat içinde detaylı teklif alalım
+                </p>
+            </div>
+        </section>
+
+        <!-- Quote Form -->
+        <section class="calculator-container">
+            <div class="container">
+                <div style="max-width: 800px; margin: 0 auto;">
+                    <form id="quoteForm" class="calculator-form">
+                        <!-- Personal Info -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">1</span>
+                                İletişim Bilgileri
+                            </h2>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="fullName" class="form-label">Ad Soyad *</label>
+                                    <input type="text" id="fullName" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="company" class="form-label">Firma Adı</label>
+                                    <input type="text" id="company" class="form-input">
+                                </div>
+                            </div>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="email" class="form-label">E-posta *</label>
+                                    <input type="email" id="email" class="form-input" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="phone" class="form-label">Telefon *</label>
+                                    <input type="tel" id="phone" class="form-input" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Type -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">2</span>
+                                Proje Tipi
+                            </h2>
+                            
+                            <div class="radio-group">
+                                <div class="radio-card">
+                                    <input type="radio" id="type-pcb" name="projectType" value="pcb" checked>
+                                    <label for="type-pcb">Sadece PCB</label>
+                                </div>
+                                <div class="radio-card">
+                                    <input type="radio" id="type-assembly" name="projectType" value="assembly">
+                                    <label for="type-assembly">PCB + Montaj</label>
+                                </div>
+                                <div class="radio-card">
+                                    <input type="radio" id="type-design" name="projectType" value="design">
+                                    <label for="type-design">Tasarım + Üretim</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quantity & Delivery -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">3</span>
+                                Adet ve Teslimat
+                            </h2>
+                            
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="quantity" class="form-label">Adet *</label>
+                                    <input type="number" id="quantity" class="form-input" value="10" min="1" required>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="urgency" class="form-label">Aciliyet</label>
+                                    <select id="urgency" class="form-select">
+                                        <option value="standard">Standart (5-7 gün)</option>
+                                        <option value="fast">Hızlı (3-5 gün)</option>
+                                        <option value="express">Express (24-72 saat)</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- File Upload -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">4</span>
+                                Dosyalar
+                            </h2>
+                            
+                            <div class="file-upload-area" id="fileUploadArea">
+                                <div class="upload-icon">📁</div>
+                                <div class="upload-text">
+                                    <strong>Gerber, BOM, Şematik dosyalarınızı yükleyin</strong><br>
+                                    Sürükle-bırak veya tıkla
+                                </div>
+                                <div class="upload-formats">
+                                    ZIP, RAR, PDF, Excel, Gerber (Max 100MB)
+                                </div>
+                                <input type="file" id="fileInput" multiple accept=".zip,.rar,.pdf,.xls,.xlsx,.gbr" style="display:none">
+                            </div>
+                            
+                            <div id="uploadedFiles"></div>
+                        </div>
+
+                        <!-- Additional Notes -->
+                        <div class="form-section">
+                            <h2 class="section-title">
+                                <span class="section-number">5</span>
+                                Ek Bilgiler
+                            </h2>
+                            
+                            <div class="form-group form-group-full">
+                                <label for="notes" class="form-label">Proje Detayları ve Özel İstekler</label>
+                                <textarea id="notes" class="form-textarea" rows="5" placeholder="Projeniz hakkında bilgi verin..."></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Submit -->
+                        <div class="form-section">
+                            <div class="form-group">
+                                <label class="form-checkbox">
+                                    <input type="checkbox" required>
+                                    <span class="checkbox-text">
+                                        <a href="/pages/kvkk.html" target="_blank">KVKK Aydınlatma Metni</a>'ni okudum, kabul ediyorum. *
+                                    </span>
+                                </label>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary btn-large" style="width: 100%;">
+                                <span>Teklif Talebimi Gönder</span>
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                    <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </button>
+                            
+                            <p style="text-align: center; margin-top: var(--spacing-md); font-size: var(--font-sm); color: var(--text-secondary);">
+                                ⚡ 24 saat içinde size dönüş yapacağız
+                            </p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/theme-toggle.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script src="/js/modules/form-validation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await utils.loadComponent('header-container', '/components/header.html');
+            await utils.loadComponent('footer-container', '/components/footer.html');
+            
+            // File Upload
+            const fileUploadArea = document.getElementById('fileUploadArea');
+            const fileInput = document.getElementById('fileInput');
+            const uploadedFilesDiv = document.getElementById('uploadedFiles');
+            
+            fileUploadArea.addEventListener('click', () => fileInput.click());
+            
+            fileUploadArea.addEventListener('dragover', (e) => {
+                e.preventDefault();
+                fileUploadArea.classList.add('dragover');
+            });
+            
+            fileUploadArea.addEventListener('dragleave', () => {
+                fileUploadArea.classList.remove('dragover');
+            });
+            
+            fileUploadArea.addEventListener('drop', (e) => {
+                e.preventDefault();
+                fileUploadArea.classList.remove('dragover');
+                handleFiles(e.dataTransfer.files);
+            });
+            
+            fileInput.addEventListener('change', (e) => {
+                handleFiles(e.target.files);
+            });
+            
+            function handleFiles(files) {
+                Array.from(files).forEach(file => {
+                    if (file.size > 100 * 1024 * 1024) {
+                        utils.notify('Dosya boyutu 100MB\'dan küçük olmalıdır', 'error');
+                        return;
+                    }
+                    
+                    const fileDiv = document.createElement('div');
+                    fileDiv.className = 'uploaded-file';
+                    fileDiv.innerHTML = `
+                        <div class="file-info">
+                            <span class="file-icon">📎</span>
+                            <div>
+                                <div style="font-weight: 600;">${file.name}</div>
+                                <div style="font-size: var(--font-xs); color: var(--text-secondary);">
+                                    ${(file.size / 1024 / 1024).toFixed(2)} MB
+                                </div>
+                            </div>
+                        </div>
+                        <span class="file-remove" onclick="this.parentElement.remove()">✕</span>
+                    `;
+                    uploadedFilesDiv.appendChild(fileDiv);
+                });
+            }
+            
+            // Form Submit
+            document.getElementById('quoteForm').addEventListener('submit', async (e) => {
+                e.preventDefault();
+                
+                const formData = {
+                    fullName: document.getElementById('fullName').value,
+                    company: document.getElementById('company').value,
+                    email: document.getElementById('email').value,
+                    phone: document.getElementById('phone').value,
+                    projectType: document.querySelector('input[name="projectType"]:checked').value,
+                    quantity: document.getElementById('quantity').value,
+                    urgency: document.getElementById('urgency').value,
+                    notes: document.getElementById('notes').value
+                };
+                
+                // Show loading
+                const submitBtn = e.target.querySelector('button[type="submit"]');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span>Gönderiliyor...</span>';
+                
+                // Simulate API call
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                
+                utils.notify('Teklifiniz başarıyla gönderildi! 24 saat içinde size dönüş yapacağız.', 'success', 5000);
+                
+                // Reset form
+                e.target.reset();
+                uploadedFilesDiv.innerHTML = '';
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = originalText;
+            });
+        });
+    </script>
+</body>
+</html>

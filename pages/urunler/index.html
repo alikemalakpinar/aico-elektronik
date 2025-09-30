@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürünlerimiz | AICO Elektronik</title>
+    <meta name="description" content="Yangın algılama, maden güvenliği, IoT, otomasyon ve endüstriyel kontrol kartları. AICO Elektronik'in geniş ürün yelpazesini keşfedin.">
+    
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/utilities.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/products.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">İçeriğe Geç</a>
+    
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
+    <div id="header-container"></div>
+    
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="products-hero">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <div class="breadcrumb__item">
+                        <a href="/">Ana Sayfa</a>
+                    </div>
+                    <span class="breadcrumb__separator">/</span>
+                    <div class="breadcrumb__item breadcrumb__item--active">
+                        Ürünler
+                    </div>
+                </nav>
+
+                <div class="products-hero__content">
+                    <h1 class="products-hero__title">
+                        Endüstriyel <span class="text-gradient">Elektronik Çözümler</span>
+                    </h1>
+                    <p class="products-hero__subtitle">
+                        Yangın güvenliğinden madenciliğe, otomasyondan IoT'ye kadar geniş ürün yelpazemizle 
+                        işletmenizin ihtiyaçlarına özel çözümler sunuyoruz.
+                    </p>
+                </div>
+
+                <!-- Search & Filter -->
+                <div class="products-filter">
+                    <div class="filter-search">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                            <circle cx="11" cy="11" r="8" stroke="currentColor" stroke-width="2"/>
+                            <path d="M21 21L16.65 16.65" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        <input type="text" id="productSearch" placeholder="Ürün ara..." />
+                    </div>
+                    
+                    <div class="filter-categories">
+                        <button class="filter-btn active" data-category="all">Tümü</button>
+                        <button class="filter-btn" data-category="fire">Yangın</button>
+                        <button class="filter-btn" data-category="mining">Maden</button>
+                        <button class="filter-btn" data-category="iot">IoT</button>
+                        <button class="filter-btn" data-category="automation">Otomasyon</button>
+                        <button class="filter-btn" data-category="audio">Ses Analiz</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Products -->
+        <section class="featured-products section-padding">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Öne Çıkan Ürünler</h2>
+                    <p class="section-subtitle">En popüler ve tercih edilen ürünlerimiz</p>
+                </div>
+
+                <div class="featured-grid">
+                    <!-- Featured Product 1 -->
+                    <div class="featured-card" data-category="fire">
+                        <div class="featured-badge">Çok Satan</div>
+                        <div class="featured-image">
+                            <img src="/images/products/fire-detection.jpg" alt="Adresli Yangın Algılama Sistemi" loading="lazy">
+                            <div class="featured-overlay">
+                                <a href="/pages/urunler/yangin/adresli-yangin-algilama.html" class="btn btn-primary">
+                                    Detayları İncele
+                                </a>
+                            </div>
+                        </div>
+                        <div class="featured-content">
+                            <div class="featured-category">Yangın Güvenliği</div>
+                            <h3 class="featured-title">Adresli Yangın Algılama Sistemi</h3>
+                            <p class="featured-description">
+                                256 adresli, çoklu protokol desteği, gerçek zamanlı izleme. 
+                                EN54-2 ve EN54-4 sertifikalı.
+                            </p>
+                            <ul class="featured-specs">
+                                <li>✓ 256 Cihaz Kapasitesi</li>
+                                <li>✓ RS-485 İletişim</li>
+                                <li>✓ LCD Ekran</li>
+                                <li>✓ Uzaktan İzleme</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Featured Product 2 -->
+                    <div class="featured-card" data-category="mining">
+                        <div class="featured-badge featured-badge--new">Yeni</div>
+                        <div class="featured-image">
+                            <img src="/images/products/mining-safety.jpg" alt="Maden Güvenlik Kartları" loading="lazy">
+                            <div class="featured-overlay">
+                                <a href="/pages/urunler/maden-kartlari.html" class="btn btn-primary">
+                                    Detayları İncele
+                                </a>
+                            </div>
+                        </div>
+                        <div class="featured-content">
+                            <div class="featured-category">Maden Güvenliği</div>
+                            <h3 class="featured-title">Maden Güvenlik ve İzleme Kartları</h3>
+                            <p class="featured-description">
+                                Gaz algılama, konumlandırma, acil durum iletişimi. 
+                                ATEX sertifikalı, patlamaya dayanıklı tasarım.
+                            </p>
+                            <ul class="featured-specs">
+                                <li>✓ ATEX Sertifikalı</li>
+                                <li>✓ IP67 Koruma</li>
+                                <li>✓ Gaz Sensörleri</li>
+                                <li>✓ GPS Tracking</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Featured Product 3 -->
+                    <div class="featured-card" data-category="iot">
+                        <div class="featured-image">
+                            <img src="/images/products/iot-solutions.jpg" alt="IoT Kontrol Kartları" loading="lazy">
+                            <div class="featured-overlay">
+                                <a href="/pages/urunler/iot-kartlari.html" class="btn btn-primary">
+                                    Detayları İncele
+                                </a>
+                            </div>
+                        </div>
+                        <div class="featured-content">
+                            <div class="featured-category">IoT Çözümleri</div>
+                            <h3 class="featured-title">IoT Kontrol ve İletişim Kartları</h3>
+                            <p class="featured-description">
+                                WiFi, Bluetooth, LoRa, NB-IoT desteği. Bulut entegrasyonu, 
+                                uzaktan yönetim ve güncelleme.
+                            </p>
+                            <ul class="featured-specs">
+                                <li>✓ Multi-Protocol</li>
+                                <li>✓ Cloud Ready</li>
+                                <li>✓ OTA Update</li>
+                                <li>✓ Düşük Güç</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Product Categories -->
+        <section class="product-categories section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Ürün Kategorileri</h2>
+                    <p class="section-subtitle">İhtiyacınıza uygun kategoriyi seçin</p>
+                </div>
+
+                <div class="categories-grid" id="categoriesGrid">
+                    <!-- Category 1 -->
+                    <a href="/pages/urunler/yangin-kartlari.html" class="category-card" data-category="fire">
+                        <div class="category-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M8.5 14.5C8.5 14.5 9 13.5 9 12C9 10.5 8 9.5 8 9.5C8 9.5 8 11 7 12C6 13 5.5 14.5 5.5 14.5C5.5 16.433 7.067 18 9 18C10.933 18 12.5 16.433 12.5 14.5C12.5 14.5 12 13.5 12 12C12 10.5 13 9.5 13 9.5C13 9.5 13 11 14 12C15 13 15.5 14.5 15.5 14.5C15.5 16.433 13.933 18 12 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="category-title">Yangın Algılama Kartları</h3>
+                        <p class="category-description">
+                            Adresli ve konvansiyonel sistemler, duman dedektörleri, gaz algılama
+                        </p>
+                        <div class="category-count">12 Ürün</div>
+                    </a>
+
+                    <!-- Category 2 -->
+                    <a href="/pages/urunler/maden-kartlari.html" class="category-card" data-category="mining">
+                        <div class="category-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M4 7L12 3L20 7M4 7L12 11M4 7V17L12 21M20 7L12 11M20 7V17L12 21M12 11V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="category-title">Maden Güvenlik Kartları</h3>
+                        <p class="category-description">
+                            ATEX sertifikalı, gaz algılama, konumlandırma, acil durum sistemleri
+                        </p>
+                        <div class="category-count">8 Ürün</div>
+                    </a>
+
+                    <!-- Category 3 -->
+                    <a href="/pages/urunler/iot-kartlari.html" class="category-card" data-category="iot">
+                        <div class="category-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" stroke-dasharray="2 2"/>
+                                <circle cx="12" cy="12" r="11" stroke="currentColor" stroke-width="2" stroke-dasharray="2 3"/>
+                            </svg>
+                        </div>
+                        <h3 class="category-title">IoT Kontrol Kartları</h3>
+                        <p class="category-description">
+                            WiFi, Bluetooth, LoRa, NB-IoT, bulut entegrasyonu
+                        </p>
+                        <div class="category-count">15 Ürün</div>
+                    </a>
+
+                    <!-- Category 4 -->
+                    <a href="/pages/urunler/kahve-makinasi-kartlari.html" class="category-card" data-category="automation">
+                        <div class="category-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M17 8H18C19.1046 8 20 8.89543 20 10V11C20 12.1046 19.1046 13 18 13H17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M6 8H16V15C16 17.2091 14.2091 19 12 19H10C7.79086 19 6 17.2091 6 15V8Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 5V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M14 5V8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="category-title">Kahve Makinası Kartları</h3>
+                        <p class="category-description">
+                            Ticari kahve makinaları, akıllı kontrol, ödeme sistemleri
+                        </p>
+                        <div class="category-count">6 Ürün</div>
+                    </a>
+
+                    <!-- Category 5 -->
+                    <a href="/pages/urunler/otomasyon-kartlari.html" class="category-card" data-category="automation">
+                        <div class="category-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="category-title">Otomasyon Kartları</h3>
+                        <p class="category-description">
+                            PLC, SCADA entegrasyonu, motor kontrol, proses otomasyonu
+                        </p>
+                        <div class="category-count">10 Ürün</div>
+                    </a>
+
+                    <!-- Category 6 -->
+                    <a href="/pages/urunler/ses-analiz-kartlari.html" class="category-card" data-category="audio">
+                        <div class="category-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2V22" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M8 6V18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M16 6V18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M4 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <path d="M20 10V14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="category-title">Ses Analiz Kartları</h3>
+                        <p class="category-description">
+                            FFT analiz, spektrum analizi, gürültü filtreleme, ses tanıma
+                        </p>
+                        <div class="category-count">5 Ürün</div>
+                    </a>
+
+                    <!-- Category 7 -->
+                    <a href="/pages/urunler/endustriyel-kontrol.html" class="category-card" data-category="automation">
+                        <div class="category-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 16V12" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                                <circle cx="12" cy="8" r="0.5" fill="currentColor" stroke="currentColor"/>
+                            </svg>
+                        </div>
+                        <h3 class="category-title">Endüstriyel Kontrol</h3>
+                        <p class="category-description">
+                            HMI paneller, sürücü kontrol, enerji yönetimi
+                        </p>
+                        <div class="category-count">9 Ürün</div>
+                    </a>
+
+                    <!-- Category 8 -->
+                    <a href="/pages/urunler/guvenlik-sistemleri.html" class="category-card" data-category="security">
+                        <div class="category-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22C12 22 20 18 20 12V5L12 2L4 5V12C4 18 12 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="category-title">Güvenlik Sistemleri</h3>
+                        <p class="category-description">
+                            Erişim kontrol, alarm sistemleri, video analiz entegrasyonu
+                        </p>
+                        <div class="category-count">7 Ürün</div>   
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+    <div id="footer-container"></div>
+    <script src="/js/header.js" defer></script>
+    <script src="/js/footer.js" defer></script>
+    <script src="/js/products.js" defer></script>
+</body>
+</html>

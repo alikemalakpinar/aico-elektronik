@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hizmetlerimiz | AICO Elektronik</title>
+    <meta name="description" content="PCB tasarım, prototipleme, kart dizgi, seri üretim ve AR-GE hizmetleri. AICO Elektronik ile projenizi gerçeğe dönüştürün.">
+    
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/utilities.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/services.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">İçeriğe Geç</a>
+    
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
+    <div id="header-container"></div>
+    
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="services-hero">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <div class="breadcrumb__item">
+                        <a href="/">Ana Sayfa</a>
+                    </div>
+                    <span class="breadcrumb__separator">/</span>
+                    <div class="breadcrumb__item breadcrumb__item--active">
+                        Hizmetler
+                    </div>
+                </nav>
+
+                <div class="services-hero__content">
+                    <h1 class="services-hero__title">
+                        Fikrinizden <span class="text-gradient">Ürüne</span> Tüm Süreç
+                    </h1>
+                    <p class="services-hero__subtitle">
+                        PCB tasarımdan seri üretime, prototiplemeden test ve kalite kontrole kadar 
+                        kapsamlı elektronik çözümler sunuyoruz.
+                    </p>
+                </div>
+
+                <div class="services-overview">
+                    <div class="overview-item">
+                        <div class="overview-number">15+</div>
+                        <div class="overview-label">Yıllık Deneyim</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-number">500+</div>
+                        <div class="overview-label">Tamamlanan Proje</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-number">24/7</div>
+                        <div class="overview-label">Teknik Destek</div>
+                    </div>
+                    <div class="overview-item">
+                        <div class="overview-number">%98</div>
+                        <div class="overview-label">Müşteri Memnuniyeti</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Services -->
+        <section class="core-services section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Temel Hizmetlerimiz</h2>
+                    <p class="section-subtitle">Her aşamada profesyonel destek</p>
+                </div>
+
+                <div class="services-grid">
+                    <!-- Service 1 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M3 9H21" stroke="currentColor" stroke-width="2"/>
+                                <path d="M9 21V9" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">PCB Tasarım</h3>
+                        <p class="service-description">
+                            Profesyonel mühendislerimizle özel ihtiyaçlarınıza uygun PCB tasarımı. 
+                            1-32 katman arası tüm kompleksite seviyeleri.
+                        </p>
+                        <ul class="service-features">
+                            <li>Şematik çizim ve optimizasyon</li>
+                            <li>Layout tasarım ve DFM analizi</li>
+                            <li>Sinyal bütünlüğü analizi</li>
+                            <li>Termal ve EMC analizi</li>
+                        </ul>
+                        <a href="/pages/hizmetler/pcb-tasarim.html" class="service-link">
+                            <span>Detaylı Bilgi</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Service 2 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M14 2H6C5.46957 2 4.96086 2.21071 4.58579 2.58579C4.21071 2.96086 4 3.46957 4 4V20C4 20.5304 4.21071 21.0391 4.58579 21.4142C4.96086 21.7893 5.46957 22 6 22H18C18.5304 22 19.0391 21.7893 19.4142 21.4142C19.7893 21.0391 20 20.5304 20 20V8L14 2Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M14 2V8H20" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Proje Çizim</h3>
+                        <p class="service-description">
+                            Fikrinizi gerçeğe dönüştürün. Kavram tasarımdan üretim dosyalarına 
+                            tüm çizim hizmetleri.
+                        </p>
+                        <ul class="service-features">
+                            <li>Konsept geliştirme</li>
+                            <li>3D modelleme</li>
+                            <li>Mekanik entegrasyon</li>
+                            <li>Üretim dokümanları</li>
+                        </ul>
+                        <a href="/pages/hizmetler/proje-cizim.html" class="service-link">
+                            <span>Detaylı Bilgi</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Service 3 -->
+                    <div class="service-card service-card--featured">
+                        <div class="featured-badge">Popüler</div>
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Prototipleme</h3>
+                        <p class="service-description">
+                            Hızlı prototip üretimi ile fikirlerinizi test edin. 24-72 saat içinde 
+                            teslim garantisi.
+                        </p>
+                        <ul class="service-features">
+                            <li>Express üretim (24-72 saat)</li>
+                            <li>1-50 adet prototip</li>
+                            <li>Fonksiyonel test</li>
+                            <li>Revizyon desteği</li>
+                        </ul>
+                        <a href="/pages/hizmetler/prototipleme.html" class="service-link">
+                            <span>Detaylı Bilgi</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Service 4 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <rect x="2" y="7" width="20" height="14" rx="2" stroke="currentColor" stroke-width="2"/>
+                                <path d="M16 7V4C16 3.46957 15.7893 2.96086 15.4142 2.58579C15.0391 2.21071 14.5304 2 14 2H10C9.46957 2 8.96086 2.21071 8.58579 2.58579C8.21071 2.96086 8 3.46957 8 4V7" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Kart Dizgi (PCBA)</h3>
+                        <p class="service-description">
+                            SMT ve THT teknolojileriyle profesyonel komponent montajı. 
+                            Otomatik ve manuel dizgi seçenekleri.
+                        </p>
+                        <ul class="service-features">
+                            <li>SMT montaj (0201 - BGA)</li>
+                            <li>THT montaj</li>
+                            <li>Selektif lehimleme</li>
+                            <li>AOI ve X-Ray kontrol</li>
+                        </ul>
+                        <a href="/pages/hizmetler/kart-dizgi.html" class="service-link">
+                            <span>Detaylı Bilgi</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Service 5 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Seri Üretim</h3>
+                        <p class="service-description">
+                            Yüksek hacimli üretim kapasitesi. 100'den 100.000'e kadar 
+                            tüm adetlerde kaliteli üretim.
+                        </p>
+                        <ul class="service-features">
+                            <li>Yüksek kapasite üretim</li>
+                            <li>Kalite kontrol sistemi</li>
+                            <li>Tedarik zinciri yönetimi</li>
+                            <li>Just-in-time teslimat</li>
+                        </ul>
+                        <a href="/pages/hizmetler/seri-uretim.html" class="service-link">
+                            <span>Detaylı Bilgi</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+
+                    <!-- Service 6 -->
+                    <div class="service-card">
+                        <div class="service-icon">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none">
+                                <path d="M9 11L12 14L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M21 12V19C21 19.5304 20.7893 20.0391 20.4142 20.4142C20.0391 20.7893 19.5304 21 19 21H5C4.46957 21 3.96086 20.7893 3.58579 20.4142C3.21071 20.0391 3 19.5304 3 19V5C3 4.46957 3.21071 3.96086 3.58579 3.58579C3.96086 3.21071 4.46957 3 5 3H16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="service-title">Test ve Kalite Kontrol</h3>
+                        <p class="service-description">
+                            Kapsamlı test süreçleri ile %100 kalite garantisi. 
+                            ICT, FCT ve çevresel testler.
+                        </p>
+                        <ul class="service-features">
+                            <li>In-Circuit Test (ICT)</li>
+                            <li>Functional Test (FCT)</li>
+                            <li>Çevresel testler</li>
+                            <li>Kalite raporlama</li>
+                        </ul>
+                        <a href="/pages/hizmetler/test-ve-kalite.html" class="service-link">
+                            <span>Detaylı Bilgi</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Service Process -->
+        <section class="service-process section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Çalışma Sürecimiz</h2>
+                    <p class="section-subtitle">Fikirden ürüne 6 adımda</p>
+                </div>
+
+                <div class="process-timeline">
+                    <div class="process-step">
+                        <div class="step-number">01</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Danışma ve Analiz</h3>
+                            <p class="step-description">
+                                Projenizi dinliyor, teknik gereksinimlerinizi analiz ediyor ve 
+                                en uygun çözümü öneriyoruz.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">02</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Teklif ve Planlama</h3>
+                            <p class="step-description">
+                                Detaylı fiyat teklifi ve proje zaman planı sunuyoruz. 
+                                Onayınız sonrası işe başlıyoruz.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">03</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Tasarım ve Geliştirme</h3>
+                            <p class="step-description">
+                                Uzman ekibimiz tasarımı gerçekleştiriyor. Her aşamada sizinle 
+                                iletişim halindeyiz.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">04</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Prototip Üretim</h3>
+                            <p class="step-description">
+                                Hızlı prototip üretimi ile tasarımı test ediyoruz. 
+                                Gerekli revizyonlar yapılıyor.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">05</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Test ve Doğrulama</h3>
+                            <p class="step-description">
+                                Kapsamlı testlerle ürünün tüm özellikleri doğrulanıyor. 
+                                Kalite standartları kontrol ediliyor.
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="process-step">
+                        <div class="step-number">06</div>
+                        <div class="step-content">
+                            <h3 class="step-title">Üretim ve Teslimat</h3>
+                            <p class="step-description">
+                                Seri üretim başlıyor. Belirlenen sürede güvenli teslimat 
+                                gerçekleştiriliyor.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Additional Services -->
+        <section class="additional-services section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Ek Hizmetlerimiz</h2>
+                    <p class="section-subtitle">Projenizi destekleyen özel hizmetler</p>
+                </div>
+
+                <div class="additional-grid">
+                    <div class="additional-card">
+                        <div class="additional-icon">🔬</div>
+                        <h3 class="additional-title">AR-GE Danışmanlığı</h3>
+                        <p class="additional-description">
+                            Yenilikçi projeleriniz için araştırma ve geliştirme desteği
+                        </p>
+                        <a href="/pages/hizmetler/ar-ge.html" class="additional-link">Keşfet →</a>
+                    </div>
+
+                    <div class="additional-card">
+                        <div class="additional-icon">📋</div>
+                        <h3 class="additional-title">Sertifikasyon Desteği</h3>
+                        <p class="additional-description">
+                            CE, FCC, UL gibi sertifikasyon süreçlerinde danışmanlık
+                        </p>
+                        <a href="/pages/hizmetler/danismanlik.html" class="additional-link">Keşfet →</a>
+                    </div>
+
+                    <div class="additional-card">
+                        <div class="additional-icon">🎓</div>
+                        <h3 class="additional-title">Teknik Eğitim</h3>
+                        <p class="additional-description">
+                            Ekipleriniz için PCB tasarım ve üretim eğitimleri
+                        </p>
+                        <a href="/pages/destek/video-egitimler.html" class="additional-link">Keşfet →</a>
+                    </div>
+
+                    <div class="additional-card">
+                        <div class="additional-icon">🔧</div>
+                        <h3 class="additional-title">Bakım ve Onarım</h3>
+                        <p class="additional-description">
+                            Elektronik kartlarınız için profesyonel bakım ve onarım hizmeti
+                        </p>
+                        <a href="/pages/iletisim.html" class="additional-link">Keşfet →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing CTA -->
+        <section class="pricing-cta section-padding bg-gradient">
+            <div class="container">
+                <div class="pricing-content">
+                    <h2 class="pricing-title">Hızlı Fiyat Teklifi Alın</h2>
+                    <p class="pricing-description">
+                        Online hesaplayıcılarımızla anında fiyat öğrenin veya 
+                        özel projeniz için detaylı teklif alın
+                    </p>
+                    <div class="pricing-buttons">
+                        <a href="/pages/hesaplama/pcb-fiyat-hesaplama.html" class="btn btn-primary btn-large">
+                            <span>PCB Fiyat Hesapla</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="/pages/hesaplama/dizgi-fiyat-hesaplama.html" class="btn btn-outline-white btn-large">
+                            <span>Dizgi Fiyat Hesapla</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="pricing-note">
+                        💡 Gerber dosyanızı yükleyerek otomatik hesaplama yapabilirsiniz
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Choose Us -->
+        <section class="why-choose section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Neden AICO Elektronik?</h2>
+                    <p class="section-subtitle">Bizi tercih etmeniz için 6 neden</p>
+                </div>
+
+                <div class="reasons-grid">
+                    <div class="reason-card">
+                        <div class="reason-icon">⚡</div>
+                        <h3 class="reason-title">Hızlı Teslimat</h3>
+                        <p class="reason-description">
+                            Express seçenekleriyle 24-72 saat içinde prototip teslimi
+                        </p>
+                    </div>
+
+                    <div class="reason-card">
+                        <div class="reason-icon">🏆</div>
+                        <h3 class="reason-title">Yüksek Kalite</h3>
+                        <p class="reason-description">
+                            ISO 9001:2015 sertifikalı kalite yönetim sistemi
+                        </p>
+                    </div>
+
+                    <div class="reason-card">
+                        <div class="reason-icon">💰</div>
+                        <h3 class="reason-title">Rekabetçi Fiyat</h3>
+                        <p class="reason-description">
+                            Kaliteden ödün vermeden uygun fiyat garantisi
+                        </p>
+                    </div>
+
+                    <div class="reason-card">
+                        <div class="reason-icon">🤝</div>
+                        <h3 class="reason-title">Uzman Ekip</h3>
+                        <p class="reason-description">
+                            15+ yıl deneyimli mühendis kadrosu ile profesyonel destek
+                        </p>
+                    </div>
+
+                    <div class="reason-card">
+                        <div class="reason-icon">🔒</div>
+                        <h3 class="reason-title">Gizlilik</h3>
+                        <p class="reason-description">
+                            Tüm projeleriniz için NDA ve tam gizlilik garantisi
+                        </p>
+                    </div>
+
+                    <div class="reason-card">
+                        <div class="reason-icon">📞</div>
+                        <h3 class="reason-title">7/24 Destek</h3>
+                        <p class="reason-description">
+                            Her zaman ulaşılabilir teknik destek ve müşteri hizmetleri
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="services-faq section-padding bg-light">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Sık Sorulan Sorular</h2>
+                    <p class="section-subtitle">Hizmetlerimiz hakkında merak edilenler</p>
+                </div>
+
+                <div class="faq-container">
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Minimum sipariş miktarı nedir?</span>
+                            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Prototip üretim için minimum 1 adet, seri üretim için minimum 10 adet sipariş alıyoruz. Ancak her proje özeldir ve ihtiyaçlarınıza göre esnek çözümler sunabiliriz.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Teslimat süreleri ne kadar?</span>
+                            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Standart üretim 5-7 iş günü, express üretim 24-72 saat içinde teslim edilir. Seri üretim süreleri sipariş miktarına göre değişkenlik gösterir ve teklif aşamasında netleştirilir.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Hangi dosya formatlarını kabul ediyorsunuz?</span>
+                            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Gerber (RS-274X), ODB++, Altium, Eagle, KiCAD formatlarında dosya kabul ediyoruz. Ayrıca PDF şematik ve BOM dosyalarınızı da yükleyebilirsiniz.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Komponent tedarik hizmeti veriyor musunuz?</span>
+                            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Evet, BOM listenizdeki tüm komponentleri tedarik edebiliriz. Alternatif olarak kendi komponentlerinizi de gönderebilirsiniz. Her iki durumda da destek sağlıyoruz.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" aria-expanded="false">
+                            <span>Revizyon desteği var mı?</span>
+                            <svg class="faq-icon" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19 9L12 16L5 9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Prototip aşamasında ücretsiz revizyon hakkı sunuyoruz. Tasarım hataları bizden kaynaklanıyorsa yeniden üretim tamamen ücretsizdir. Müşteri kaynaklı revizyonlar için indirimli fiyatlandırma yapıyoruz.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="faq-cta">
+                    <p>Başka sorularınız mı var?</p>
+                    <a href="/pages/sss.html" class="btn btn-outline">Tüm SSS'leri Görüntüle</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="/js/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/theme-toggle.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script>
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', async () => {
+            await utils.loadComponent('header-container', '/components/header.html');
+            await utils.loadComponent('footer-container', '/components/footer.html');
+            
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                const answer = item.querySelector('.faq-answer');
+                
+                question.addEventListener('click', () => {
+                    const isOpen = question.getAttribute('aria-expanded') === 'true';
+                    
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.querySelector('.faq-question').setAttribute('aria-expanded', 'false');
+                            otherItem.querySelector('.faq-answer').style.maxHeight = null;
+                        }
+                    });
+                    
+                    // Toggle current item
+                    question.setAttribute('aria-expanded', !isOpen);
+                    
+                    if (!isOpen) {
+                        answer.style.maxHeight = answer.scrollHeight + 'px';
+                    } else {
+                        answer.style.maxHeight = null;
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>

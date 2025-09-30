@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IoT Kontrol Kartları | AICO Elektronik</title>
+    <meta name="description" content="WiFi, Bluetooth, LoRa, NB-IoT desteği. Bulut entegrasyonu, uzaktan yönetim ve OTA güncelleme özellikli IoT kartları.">
+    
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/utilities.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/products.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">İçeriğe Geç</a>
+    
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
+    <div id="header-container"></div>
+    
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="product-detail-hero">
+            <div class="container">
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <div class="breadcrumb__item">
+                        <a href="/">Ana Sayfa</a>
+                    </div>
+                    <span class="breadcrumb__separator">/</span>
+                    <div class="breadcrumb__item">
+                        <a href="/pages/urunler/index.html">Ürünler</a>
+                    </div>
+                    <span class="breadcrumb__separator">/</span>
+                    <div class="breadcrumb__item breadcrumb__item--active">
+                        IoT Kartları
+                    </div>
+                </nav>
+
+                <div class="product-hero-content">
+                    <div class="product-hero-badge">
+                        <span class="badge badge-success">Cloud Ready</span>
+                        <span class="badge badge-primary">Multi-Protocol</span>
+                    </div>
+                    <h1 class="product-hero-title">
+                        IoT Kontrol ve <span class="text-gradient">İletişim Kartları</span>
+                    </h1>
+                    <p class="product-hero-subtitle">
+                        WiFi, Bluetooth, LoRa, NB-IoT desteği ile tam donanımlı IoT çözümleri. 
+                        AWS, Azure, Google Cloud entegrasyonu, OTA güncelleme ve edge computing yetenekleri.
+                    </p>
+                    
+                    <div class="product-hero-actions">
+                        <a href="/pages/hesaplama/hizli-teklif.html" class="btn btn-primary btn-large">
+                            <span>Demo Talep Et</span>
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
+                                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </a>
+                        <a href="#connectivity" class="btn btn-outline btn-large">
+                            Bağlantı Seçenekleri
+                        </a>
+                    </div>
+                </div>
+
+                <div class="product-hero-image">
+                    <img src="/images/products/iot-main.jpg" alt="IoT Kontrol Kartları" loading="eager">
+                    <div class="image-badge">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                            <circle cx="12" cy="12" r="3" stroke="currentColor" stroke-width="2"/>
+                            <circle cx="12" cy="12" r="8" stroke="currentColor" stroke-width="2" stroke-dasharray="2 2"/>
+                        </svg>
+                        <span>Kablosuz Bağlantı</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Features -->
+        <section class="key-features section-padding">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M20 7h-4V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M8 21v-6a2 2 0 012-2h4a2 2 0 012 2v6" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Multi-Protocol</h3>
+                        <p class="feature-description">WiFi, BLE, LoRa, NB-IoT tek kartta</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M3 15v4c0 1.1.9 2 2 2h14a2 2 0 002-2v-4M17 9l-5 5-5-5M12 14V3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">OTA Update</h3>
+                        <p class="feature-description">Havadan firmware güncelleme</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 2a10 10 0 100 20 10 10 0 000-20z" stroke="currentColor" stroke-width="2"/>
+                                <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Düşük Güç</h3>
+                        <p class="feature-description">Batarya ile 5+ yıl çalışma</p>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">
+                            <svg width="32" height="32" viewBox="0 0 24 24" fill="none">
+                                <path d="M12 22s-8-4.5-8-11.8A8 8 0 0112 2a8 8 0 018 8.2c0 7.3-8 11.8-8 11.8z" stroke="currentColor" stroke-width="2"/>
+                                <circle cx="12" cy="10" r="3" stroke="currentColor" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3 class="feature-title">Edge Computing</h3>
+                        <p class="feature-description">Yerinde veri işleme kapasitesi</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Connectivity Options -->
+        <section class="connectivity section-padding bg-light" id="connectivity">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Bağlantı Teknolojileri</h2>
+                    <p class="section-subtitle">İhtiyacınıza göre seçin</p>
+                </div>
+
+                <div class="connectivity-grid">
+                    <!-- WiFi -->
+                    <div class="connectivity-card">
+                        <div class="connectivity-header">
+                            <div class="connectivity-icon">📶</div>
+                            <h3>WiFi 6 (802.11ax)</h3>
+                        </div>
+                        <div class="connectivity-content">
+                            <div class="conn-specs">
+                                <div class="conn-spec">
+                                    <span class="conn-label">Frekans:</span>
+                                    <span class="conn-value">2.4 / 5 GHz</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Hız:</span>
+                                    <span class="conn-value">600 Mbps</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Menzil:</span>
+                                    <span class="conn-value">~100m</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Güç:</span>
+                                    <span class="conn-value">Orta</span>
+                                </div>
+                            </div>
+                            <div class="conn-use-cases">
+                                <h4>Kullanım Alanları:</h4>
+                                <ul>
+                                    <li>Akıllı ev sistemleri</li>
+                                    <li>Video streaming</li>
+                                    <li>Endüstriyel otomasyon</li>
+                                    <li>Veri toplama</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Bluetooth -->
+                    <div class="connectivity-card">
+                        <div class="connectivity-header">
+                            <div class="connectivity-icon">📡</div>
+                            <h3>Bluetooth 5.3 LE</h3>
+                        </div>
+                        <div class="connectivity-content">
+                            <div class="conn-specs">
+                                <div class="conn-spec">
+                                    <span class="conn-label">Frekans:</span>
+                                    <span class="conn-value">2.4 GHz</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Hız:</span>
+                                    <span class="conn-value">2 Mbps</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Menzil:</span>
+                                    <span class="conn-value">~50m</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Güç:</span>
+                                    <span class="conn-value">Çok Düşük</span>
+                                </div>
+                            </div>
+                            <div class="conn-use-cases">
+                                <h4>Kullanım Alanları:</h4>
+                                <ul>
+                                    <li>Wearable cihazlar</li>
+                                    <li>Beacon sistemleri</li>
+                                    <li>Sensör ağları</li>
+                                    <li>Mobil kontrol</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LoRa -->
+                    <div class="connectivity-card">
+                        <div class="connectivity-header">
+                            <div class="connectivity-icon">🌐</div>
+                            <h3>LoRaWAN 1.0.4</h3>
+                        </div>
+                        <div class="connectivity-content">
+                            <div class="conn-specs">
+                                <div class="conn-spec">
+                                    <span class="conn-label">Frekans:</span>
+                                    <span class="conn-value">868 MHz</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Hız:</span>
+                                    <span class="conn-value">50 kbps</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Menzil:</span>
+                                    <span class="conn-value">~15 km</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Güç:</span>
+                                    <span class="conn-value">Çok Düşük</span>
+                                </div>
+                            </div>
+                            <div class="conn-use-cases">
+                                <h4>Kullanım Alanları:</h4>
+                                <ul>
+                                    <li>Akıllı tarım</li>
+                                    <li>Akıllı şehir</li>
+                                    <li>Uzak izleme</li>
+                                    <li>Sayaç okuma</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- NB-IoT -->
+                    <div class="connectivity-card">
+                        <div class="connectivity-header">
+                            <div class="connectivity-icon">📱</div>
+                            <h3>NB-IoT / LTE-M</h3>
+                        </div>
+                        <div class="connectivity-content">
+                            <div class="conn-specs">
+                                <div class="conn-spec">
+                                    <span class="conn-label">Frekans:</span>
+                                    <span class="conn-value">Cellular</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Hız:</span>
+                                    <span class="conn-value">200 kbps</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Kapsama:</span>
+                                    <span class="conn-value">Küresel</span>
+                                </div>
+                                <div class="conn-spec">
+                                    <span class="conn-label">Güç:</span>
+                                    <span class="conn-value">Düşük</span>
+                                </div>
+                            </div>
+                            <div class="conn-use-cases">
+                                <h4>Kullanım Alanları:</h4>
+                                <ul>
+                                    <li>Araç takip</li>
+                                    <li>Varlık izleme</li>
+                                    <li>Akıllı enerji</li>
+                                    <li>Lojistik</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Cloud Integration -->
+        <section class="cloud-integration section-padding">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Bulut Platformları Entegrasyonu</h2>
+                    <p class="section-subtitle">Tüm büyük cloud sağlayıcıları ile hazır entegrasyon</p>
+                </div>
+
+                <div class="cloud-platforms">
+                    <div class="platform-card">
+                        <img src="/images/cloud/aws-iot.png" alt="AWS IoT Core" loading="lazy">
+                        <h3>AWS IoT Core</h3>
+                        <ul>
+                            <li>✓ MQTT / HTTPS</li>
+                            <li>✓ Device Shadow</li>
+                            <li>✓ Fleet Provisioning</li>
+                            <li>✓ Greengrass Edge</li>
+                        </ul>
+                        <a href="#" class="platform-link">Entegrasyon Dökümanı →</a>
+                    </div>
+
+                    <div class="platform-card">
+                        <img src="/images/cloud/azure-iot.png" alt="Azure IoT Hub" loading="lazy">
+                        <h3>Azure IoT Hub</h3>
+                        <ul>
+                            <li>✓ Device Twins</li>
+                            <li>✓ Direct Methods</li>
+                            <li>✓ IoT Edge</li>
+                            <li>✓ DPS Support</li>
+                        </ul>
+                        <a href="#" class="platform-link">Entegrasyon Dökümanı →</a>
+                    </div>
+
+                    <div class="platform-card">
+                        <img src="/images/cloud/google-iot.png" alt="Google Cloud IoT" loading="lazy">
+                        <h3>Google Cloud IoT</h3>
+                        <ul>
+                            <li>✓ Cloud IoT Core</li>
+                            <li>✓ Pub/Sub Integration</li>
+                            <li>✓ Dataflow Processing</li>
+                            <li>✓ BigQuery Analytics</li>
+                        </ul>
+                        <a href="#" class="platform-link">Entegrasyon Dökümanı →</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Technical Specs -->
+        <section class="technical-specs section-padding bg-light" id="technical-specs">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2 class="section-title">Teknik Özellikler</h2>
+                    <p class="section-subtitle">Detaylı donanım spesifikasyonları</p>
+                </div>
+
+                <div class="specs-tabs">
+                    <button class="specs-tab active" data-tab="hardware">Donanım</button>
+                    <button class="specs-tab" data-tab="software">Yazılım</button>
+                    <button class="specs-tab" data-tab="power">Güç & Batarya</button>
+                    <button class="specs-tab" data-tab="security">Güvenlik</button>
+                </div>
+
+                <div class="specs-tab-content active" id="hardware">
+                    <div class="specs-table-wrapper">
+                        <table class="specs-table">
+                            <tr>
+                                <td>İşlemci</td>
+                                <td>ESP32-S3 Dual Core @ 240MHz</td>
+                            </tr>
+                            <tr>
+                                <td>RAM</td>
+                                <td>512 KB SRAM</td>
+                            </tr>
+                            <tr>
+                                <td>Flash</td>
+                                <td>8 MB</td>
+                            </tr>
+                            <tr>
+                                <td>GPIO</td>
+                                <td>30 pin (ADC, PWM, I2C, SPI, UART)</td>
+                            </tr>
+                            <tr>
+                                <td>ADC</td>
+                                <td>12-bit, 20 kanal</td>
+                            </tr>
+                            <tr>
+                                <td>DAC</td>
+                                <td>8-bit, 2 kanal</td>
+                            </tr>
+                            <tr>
+                                <td>Boyut</td>
+                                <td>45 x 25 x 8 mm</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="specs-tab-content" id="software">
+                    <div class="specs-table-wrapper">
+                        <table class="specs-table">
+                            <tr>
+                                <td>SDK</td>
+                                <td>ESP-IDF, Arduino, MicroPython</td>
+                            </tr>
+                            <tr>
+                                <td>RTOS</td>
+                                <td>FreeRTOS 10.4</td>
+                            </tr>
+                            <tr>
+                                <td>Protokoller</td>
+                                <td>MQTT, HTTP/S, WebSocket, CoAP</td>
+                            </tr>
+                            <tr>
+                                <td>OTA</td>
+                                <td>Secure Boot + Encrypted Firmware</td>
+                            </tr>
+                            <tr>
+                                <td>File System</td>
+                                <td>SPIFFS, LittleFS, FAT</td>
+                            </tr>
+                            <tr>
+                                <td>Geliştirme</td>
+                                <td>VS Code, PlatformIO, Arduino IDE</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="specs-tab-content" id="power">
+                    <div class="specs-table-wrapper">
+                        <table class="specs-table">
+                            <tr>
+                                <td>Çalışma Gerilimi</td>
+                                <td>3.0 - 3.6V DC</td>
+                            </tr>
+                            <tr>
+                                <td>Aktif Mod</td>
+                                <td>~160 mA (WiFi TX)</td>
+                            </tr>
+                            <tr>
+                                <td>Light Sleep</td>
+                                <td>~2 mA</td>
+                            </tr>
+                            <tr>
+                                <td>Deep Sleep</td>
+                                <td>~10 µA</td>
+                            </tr>
+                            <tr>
+                                <td>Batarya Ömrü</td>
+                                <td>5+ yıl (2000mAh, 1 paket/saat)</td>
+                            </tr>
+                            <tr>
+                                <td>Şarj</td>
+                                <td>USB-C, Solar Panel desteği</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="specs-tab-content" id="security">
+                    <div class="specs-table-wrapper">
+                        <table class="specs-table">
+                            <tr>
+                                <td>Şifreleme</td>
+                                <td>AES-128/256, RSA, ECC</td>
+                            </tr>
+                            <tr>
+                                <td>Secure Boot</td>
+                                <td>✓ RSA-3072 imza doğrulama</td>
+                            </tr>
+                            <tr>
+                                <td>Flash Encryption</td>
+                                <td>✓ AES-256-XTS</td>
+                            </tr>
+                            <tr>
+                                <td>TLS/SSL</td>
+                                <td>✓ v1.2, v1.3</td>
+                            </tr>
+                            <tr>
+                                <td>Sertifika Depolama</td>
+                                <td>eFuse güvenli alanı</td>
+                            </tr>
+                            <tr>
+                                <td>Güvenlik Standartları</td>
+                                <td>CE, FCC, ETSI EN 303 645</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="product-cta section-padding bg-gradient">
+            <div class="container">
+                <div class="cta-content-center">
+                    <h2 class="cta-title">IoT Projenizi Hayata Geçirin</h2>
+                    <p class="cta-description">
+                        Endüstriyel IoT çözümlerimizle dijital dönüşüm yolculuğunuzda 
+                        yanınızdayız. Prototipten seri üretime tam destek.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="/pages/iletisim.html" class="btn btn-primary btn-large">
+                            Ücretsiz Danışmanlık
+                        </a>
+                        <a href="/pages/hesaplama/hizli-teklif.html" class="btn btn-outline-white btn-large">
+                            Dev Kit Sipariş Et
+                        </a>
+                    </div>
+                    <p style="margin-top: var(--spacing-xl); color: rgba(255,255,255,0.8); font-size: var(--font-sm);">
+                        💡 İlk 10 müşteriye özel %20 indirim!
+                    </p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="footer-container"></div>
+
+    <script src="/js/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/theme-toggle.js"></script>
+    <script src="/js/navigation.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            await utils.loadComponent('header-container', '/components/header.html');
+            await utils.loadComponent('footer-container', '/components/footer.html');
+            
+            // Specs tabs
+            const specsTabs = document.querySelectorAll('.specs-tab');
+            const specsContents = document.querySelectorAll('.specs-tab-content');
+            
+            specsTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    const tabId = tab.dataset.tab;
+                    
+                    specsTabs.forEach(t => t.classList.remove('active'));
+                    specsContents.forEach(c => c.classList.remove('active'));
+                    
+                    tab.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
