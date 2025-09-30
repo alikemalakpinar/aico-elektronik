@@ -4,434 +4,422 @@
 (function() {
   'use strict';
 
-  const config = window.AICO_CONFIG;
-  const utils = window.AICO_UTILS;
-  const api = window.AICO_API;
-
-  // ==================== Pricing Configuration ====================
-  
-  const PRICING = {
-    // Base prices per square cm
-    basePricePerSqCm: {
-      1: 0.15,
-      2: 0.25,
-      4: 0.45,
-      6: 0.70,
-      8: 1.00,
-      10: 1.40,
-      12: 1.80
+  const pcbCalculator = {
+    // Price tables (example values - adjust as needed)
+    pricing: {
+      basePrices: {
+        1: 50, 2: 80, 4: 150, 6: 250, 8: 350, 10: 450, 12: 550
+      },
+      materialMultipliers: {
+        'FR-4': 1.0,
+        'Aluminum': 1.3,
+        'Rogers': 2.5,
+        'Polyimide': 2.0
+      },
+      thicknessMultipliers: {
+        0.4: 1.2, 0.6: 1.1, 0.8: 1.0, 1.0: 1.0, 
+        1.2: 1.05, 1.6: 1.1, 2.0: 1.15
+      },
+      colorMultipliers: {
+        'Green': 1.0, 'Red': 1.05, 'Blue': 1.05,
+        'Black': 1.1, 'White': 1.1, 'Yellow': 1.05
+      },
+      quantityDiscounts: [
+        { min: 1, max: 4, discount: 0 },
+        { min: 5, max: 9, discount: 0.05 },
+        { min: 10, max: 49, discount: 0.10 },
+        { min: 50, max: 99, discount: 0.15 },
+        { min: 100, max: 499, discount: 0.20 },
+        { min: 500, max: 999, discount: 0.25 },
+        { min: 1000, max: Infinity, discount: 0.30 }
+      ]
     },
 
-    // Material multipliers
-    materials: {
-      fr4: 1.0,
-      aluminum: 1.5,
-      rogers: 2.5,
-      polyimide: 2.0
+    state: {
+      width: 100,
+      height: 100,
+      quantity: 10,
+      layers: 2,
+      material: 'FR-4',
+      thickness: 1.6,
+      color: 'Green',
+      surfaceFinish: 'HASL',
+      copperThickness: '1oz'
     },
 
-    // Surface finish costs (per board)
-    surfaceFinish: {
-      hasl: 2.0,
-      'hasl-lf': 2.5,
-      enig: 8.0,
-      osp: 1.5
-    },
-
-    // Production time multipliers
-    productionTime: {
-      standard: 1.0,
-      express: 1.3,
-      urgent: 1.6
-    },
-
-    // Quantity discounts
-    quantityDiscounts: [
-      { min: 1, max: 9, discount: 0 },
-      { min: 10, max: 49, discount: 0.05 },
-      { min: 50, max: 99, discount: 0.10 },
-      { min: 100, max: 499, discount: 0.15 },
-      { min: 500, max: 999, discount: 0.20 },
-      { min: 1000, max: Infinity, discount: 0.25 }
-    ],
-
-    // Setup fee
-    setupFee: 150,
-    
-    // Minimum order value
-    minimumOrder: 200
-  };
-
-  // ==================== Calculator Class ====================
-  
-  class PCBCalculator {
-    constructor() {
-      this.form = document.getElementById('pcb-calculator-form');
-      this.priceData = {
-        layers: 2,
-        quantity: 10,
-        width: 100,
-        height: 100,
-        material: 'fr4',
-        thickness: 1.6,
-        surface: 'hasl',
-        soldermaskColor: 'green',
-        silkscreenColor: 'white',
-        productionTime: 'standard'
-      };
-      
-      this.init();
-    }
-
+    /**
+     * Initialize calculator
+     */
     init() {
-      if (!this.form) return;
-
-      // Bind form inputs
-      this.bindFormInputs();
-      
-      // Initial calculation
+      this.cacheElements();
+      this.bindEvents();
+      this.loadSavedData();
       this.calculate();
       
-      // Load FAQ
-      this.loadFAQ();
-      
-      // Bind action buttons
-      this.bindActions();
-    }
+      console.log('[PCB Calculator] Initialized');
+    },
 
-    bindFormInputs() {
-      // Get all form inputs
-      const inputs = this.form.querySelectorAll('input, select');
-      
-      inputs.forEach(input => {
-        input.addEventListener('change', () => this.handleInputChange(input));
-        input.addEventListener('input', () => {
-          if (input.type === 'number' || input.type === 'text') {
-            utils.debounce(() => this.handleInputChange(input), 300)();
+    /**
+     * Cache DOM elements
+     */
+    cacheElements() {
+      this.elements = {
+        // Inputs
+        width: document.getElementById('pcb-width'),
+        height: document.getElementById('pcb-height'),
+        quantity: document.getElementById('pcb-quantity'),
+        layers: document.getElementById('pcb-layers'),
+        material: document.getElementById('pcb-material'),
+        thickness: document.getElementById('pcb-thickness'),
+        color: document.getElementById('pcb-color'),
+        surfaceFinish: document.getElementById('pcb-surface-finish'),
+        copperThickness: document.getElementById('pcb-copper-thickness'),
+
+        // Outputs
+        area: document.getElementById('output-area'),
+        unitPrice: document.getElementById('output-unit-price'),
+        totalPrice: document.getElementById('output-total-price'),
+        discount: document.getElementById('output-discount'),
+        finalPrice: document.getElementById('output-final-price'),
+        deliveryTime: document.getElementById('output-delivery'),
+
+        // Buttons
+        calculateBtn: document.getElementById('calculate-btn'),
+        resetBtn: document.getElementById('reset-btn'),
+        quoteBtn: document.getElementById('request-quote-btn'),
+
+        // Preview
+        previewCard: document.getElementById('pcb-preview-card')
+      };
+    },
+
+    /**
+     * Bind events
+     */
+    bindEvents() {
+      // Input changes
+      Object.keys(this.elements).forEach(key => {
+        const element = this.elements[key];
+        if (element && element.tagName && (element.tagName === 'INPUT' || element.tagName === 'SELECT')) {
+          element.addEventListener('change', () => this.handleInputChange());
+          element.addEventListener('input', () => this.handleInputChange());
+        }
+      });
+
+      // Buttons
+      if (this.elements.calculateBtn) {
+        this.elements.calculateBtn.addEventListener('click', () => this.calculate());
+      }
+
+      if (this.elements.resetBtn) {
+        this.elements.resetBtn.addEventListener('click', () => this.reset());
+      }
+
+      if (this.elements.quoteBtn) {
+        this.elements.quoteBtn.addEventListener('click', () => this.requestQuote());
+      }
+
+      // Quantity slider
+      if (this.elements.quantity) {
+        this.elements.quantity.addEventListener('input', (e) => {
+          const valueDisplay = document.getElementById('quantity-value');
+          if (valueDisplay) {
+            valueDisplay.textContent = e.target.value;
           }
         });
-      });
-    }
-
-    handleInputChange(input) {
-      const name = input.name || input.id;
-      let value = input.value;
-
-      // Handle different input types
-      if (input.type === 'number') {
-        value = parseFloat(value);
-      } else if (input.type === 'radio') {
-        if (!input.checked) return;
       }
+    },
 
-      // Update price data
-      switch (name) {
-        case 'layers':
-          this.priceData.layers = parseInt(value);
-          break;
-        case 'quantity':
-          this.priceData.quantity = value;
-          break;
-        case 'width':
-          this.priceData.width = value;
-          this.updateDimensionPreview();
-          break;
-        case 'height':
-          this.priceData.height = value;
-          this.updateDimensionPreview();
-          break;
-        case 'material':
-          this.priceData.material = value;
-          break;
-        case 'thickness':
-          this.priceData.thickness = value;
-          break;
-        case 'surface':
-          this.priceData.surface = value;
-          break;
-        case 'soldermask-color':
-          this.priceData.soldermaskColor = value;
-          break;
-        case 'silkscreen-color':
-          this.priceData.silkscreenColor = value;
-          break;
-        case 'production-time':
-          this.priceData.productionTime = value;
-          break;
-      }
-
-      // Recalculate
+    /**
+     * Handle input changes
+     */
+    handleInputChange() {
+      this.updateState();
       this.calculate();
-    }
+      this.saveData();
+    },
 
+    /**
+     * Update state from inputs
+     */
+    updateState() {
+      this.state.width = parseFloat(this.elements.width?.value) || 100;
+      this.state.height = parseFloat(this.elements.height?.value) || 100;
+      this.state.quantity = parseInt(this.elements.quantity?.value) || 10;
+      this.state.layers = parseInt(this.elements.layers?.value) || 2;
+      this.state.material = this.elements.material?.value || 'FR-4';
+      this.state.thickness = parseFloat(this.elements.thickness?.value) || 1.6;
+      this.state.color = this.elements.color?.value || 'Green';
+      this.state.surfaceFinish = this.elements.surfaceFinish?.value || 'HASL';
+      this.state.copperThickness = this.elements.copperThickness?.value || '1oz';
+    },
+
+    /**
+     * Calculate prices
+     */
     calculate() {
-      // Calculate area in square cm
-      const area = (this.priceData.width * this.priceData.height) / 100;
+      // Calculate area
+      const area = (this.state.width * this.state.height) / 10000; // cm²
       
-      // Base price
-      const basePrice = area * PRICING.basePricePerSqCm[this.priceData.layers];
+      // Base price for layer count
+      const basePrice = this.pricing.basePrices[this.state.layers] || 100;
       
-      // Material multiplier
-      const materialMultiplier = PRICING.materials[this.priceData.material];
+      // Apply multipliers
+      const materialMult = this.pricing.materialMultipliers[this.state.material] || 1.0;
+      const thicknessMult = this.pricing.thicknessMultipliers[this.state.thickness] || 1.0;
+      const colorMult = this.pricing.colorMultipliers[this.state.color] || 1.0;
       
-      // Surface finish cost per board
-      const surfaceCost = PRICING.surfaceFinish[this.priceData.surface];
+      // Area factor (larger boards cost more)
+      const areaFactor = Math.max(1, area / 100);
       
-      // Production time multiplier
-      const timeMultiplier = PRICING.productionTime[this.priceData.productionTime];
-      
-      // Calculate price per board
-      let pricePerBoard = (basePrice * materialMultiplier + surfaceCost) * timeMultiplier;
+      // Calculate unit price
+      const unitPrice = basePrice * materialMult * thicknessMult * colorMult * areaFactor;
       
       // Total before discount
-      let totalBeforeDiscount = pricePerBoard * this.priceData.quantity;
-      
-      // Add setup fee for small quantities
-      if (this.priceData.quantity < 50) {
-        totalBeforeDiscount += PRICING.setupFee;
-      }
+      const totalBeforeDiscount = unitPrice * this.state.quantity;
       
       // Apply quantity discount
-      const discountRate = this.getQuantityDiscount(this.priceData.quantity);
+      const discountRate = this.getQuantityDiscount(this.state.quantity);
       const discountAmount = totalBeforeDiscount * discountRate;
+      const finalPrice = totalBeforeDiscount - discountAmount;
       
-      // Final total
-      let finalTotal = totalBeforeDiscount - discountAmount;
-      
-      // Apply minimum order
-      if (finalTotal < PRICING.minimumOrder) {
-        finalTotal = PRICING.minimumOrder;
-      }
+      // Delivery time estimation
+      const deliveryDays = this.estimateDelivery();
       
       // Update UI
-      this.updatePriceSummary({
-        basePrice: pricePerBoard * this.priceData.quantity,
-        surfaceFinish: surfaceCost * this.priceData.quantity,
-        discount: discountAmount,
-        total: finalTotal,
-        pricePerBoard: pricePerBoard
+      this.updateOutputs({
+        area: area.toFixed(2),
+        unitPrice: unitPrice.toFixed(2),
+        totalPrice: totalBeforeDiscount.toFixed(2),
+        discount: (discountRate * 100).toFixed(0),
+        discountAmount: discountAmount.toFixed(2),
+        finalPrice: finalPrice.toFixed(2),
+        deliveryTime: deliveryDays
       });
-    }
+      
+      this.updatePreview();
+    },
 
+    /**
+     * Get quantity discount rate
+     */
     getQuantityDiscount(quantity) {
-      const discount = PRICING.quantityDiscounts.find(d => 
-        quantity >= d.min && quantity <= d.max
+      const bracket = this.pricing.quantityDiscounts.find(
+        b => quantity >= b.min && quantity <= b.max
       );
-      return discount ? discount.discount : 0;
-    }
+      return bracket ? bracket.discount : 0;
+    },
 
-    updatePriceSummary(prices) {
-      // Update specs
-      document.getElementById('summary-layers').textContent = `${this.priceData.layers} Katman`;
-      document.getElementById('summary-dimensions').textContent = 
-        `${this.priceData.width} x ${this.priceData.height} mm`;
-      document.getElementById('summary-quantity').textContent = `${this.priceData.quantity} adet`;
+    /**
+     * Estimate delivery time
+     */
+    estimateDelivery() {
+      let days = 3; // Base delivery
       
-      const materialNames = {
-        fr4: 'FR-4',
-        aluminum: 'Alüminyum',
-        rogers: 'Rogers',
-        polyimide: 'Polyimide'
-      };
-      document.getElementById('summary-material').textContent = materialNames[this.priceData.material];
+      if (this.state.layers > 4) days += 2;
+      if (this.state.layers > 8) days += 3;
+      if (this.state.material !== 'FR-4') days += 2;
+      if (this.state.quantity > 100) days += 2;
+      if (this.state.quantity > 500) days += 3;
       
-      // Update prices
-      document.getElementById('price-base').textContent = utils.formatCurrency(prices.basePrice);
-      document.getElementById('price-surface').textContent = utils.formatCurrency(prices.surfaceFinish);
-      document.getElementById('price-discount').textContent = 
-        prices.discount > 0 ? `-${utils.formatCurrency(prices.discount)}` : utils.formatCurrency(0);
-      
-      // Update total
-      const totalElement = document.querySelector('#total-price .amount');
-      if (totalElement) {
-        totalElement.textContent = utils.formatNumber(prices.total, 2);
+      return days;
+    },
+
+    /**
+     * Update output displays
+     */
+    updateOutputs(data) {
+      if (this.elements.area) {
+        this.elements.area.textContent = `${data.area} cm²`;
       }
       
-      // Save prices for later use
-      this.currentPrices = prices;
-    }
-
-    updateDimensionPreview() {
-      const box = document.getElementById('dimension-box');
-      if (!box) return;
-
-      const maxSize = 200; // px
-      const width = this.priceData.width;
-      const height = this.priceData.height;
-      
-      // Calculate scale
-      const scale = Math.min(maxSize / width, maxSize / height);
-      
-      // Update box size
-      box.style.width = `${width * scale}px`;
-      box.style.height = `${height * scale}px`;
-      
-      // Update label
-      const label = box.querySelector('.dimension-label');
-      if (label) {
-        label.textContent = `${width} x ${height} mm`;
-      }
-    }
-
-    bindActions() {
-      // Request quote button
-      const quoteBtn = document.getElementById('request-quote');
-      if (quoteBtn) {
-        quoteBtn.addEventListener('click', () => this.requestQuote());
-      }
-
-      // Save calculation button
-      const saveBtn = document.getElementById('save-calculation');
-      if (saveBtn) {
-        saveBtn.addEventListener('click', () => this.saveCalculation());
-      }
-
-      // Form submit
-      this.form.addEventListener('submit', (e) => {
-        e.preventDefault();
-        this.calculate();
-      });
-    }
-
-    async requestQuote() {
-      if (!this.currentPrices) {
-        utils.notify('Lütfen önce hesaplama yapın', 'warning');
-        return;
-      }
-
-      // Prepare quote data
-      const quoteData = {
-        type: 'pcb',
-        specifications: this.priceData,
-        pricing: this.currentPrices,
-        date: new Date().toISOString()
-      };
-
-      try {
-        // Save to localStorage for quote page
-        utils.storage.set('pending-quote', quoteData);
-        
-        // Redirect to quote page
-        window.location.href = '/pages/hesaplama/hizli-teklif.html';
-      } catch (error) {
-        console.error('Quote request failed:', error);
-        utils.notify('Teklif isteği gönderilemedi', 'error');
-      }
-    }
-
-    saveCalculation() {
-      if (!this.currentPrices) {
-        utils.notify('Lütfen önce hesaplama yapın', 'warning');
-        return;
-      }
-
-      const calculation = {
-        type: 'pcb',
-        specifications: this.priceData,
-        pricing: this.currentPrices,
-        date: new Date().toISOString()
-      };
-
-      // Get existing calculations
-      const saved = utils.storage.get('saved-calculations', []);
-      
-      // Add new calculation
-      saved.push(calculation);
-      
-      // Keep only last 10
-      if (saved.length > 10) {
-        saved.shift();
+      if (this.elements.unitPrice) {
+        this.elements.unitPrice.textContent = `₺${data.unitPrice}`;
       }
       
-      // Save
-      utils.storage.set('saved-calculations', saved);
+      if (this.elements.totalPrice) {
+        this.elements.totalPrice.textContent = `₺${data.totalPrice}`;
+      }
       
-      utils.notify('Hesaplama kaydedildi', 'success');
-    }
-
-    loadFAQ() {
-      const faqContainer = document.getElementById('calculator-faq');
-      if (!faqContainer) return;
-
-      const faqItems = [
-        {
-          question: 'Minimum sipariş miktarı nedir?',
-          answer: 'Minimum sipariş miktarımız 1 adettir. Ancak 50 adetin altındaki siparişler için kurulum ücreti uygulanmaktadır.'
-        },
-        {
-          question: 'Teslimat süresi ne kadar?',
-          answer: 'Standart teslimat süresi 7-10 iş günüdür. Hızlı üretim (3-5 gün) ve acil üretim (24-48 saat) seçeneklerimiz de mevcuttur.'
-        },
-        {
-          question: 'Hangi dosya formatlarını kabul ediyorsunuz?',
-          answer: 'Gerber (RS-274X), Eagle, Altium Designer, KiCad ve diğer standart PCB tasarım dosyalarını kabul ediyoruz.'
-        },
-        {
-          question: 'Fiyatlara KDV dahil mi?',
-          answer: 'Hayır, gösterilen fiyatlar KDV hariçtir. Faturada %20 KDV eklenir.'
-        },
-        {
-          question: 'Prototip üretimi yapıyor musunuz?',
-          answer: 'Evet, 1 adetten başlayarak prototip üretimi yapıyoruz. Prototip hizmetimiz hızlı teslimat ve uygun fiyat avantajları sunar.'
+      if (this.elements.discount) {
+        this.elements.discount.textContent = `${data.discount}%`;
+        const discountContainer = this.elements.discount.closest('.summary-row');
+        if (discountContainer) {
+          discountContainer.style.display = data.discount > 0 ? 'flex' : 'none';
         }
-      ];
-
-      const html = faqItems.map((item, index) => `
-        <div class="accordion__item">
-          <button class="accordion__trigger" aria-expanded="false">
-            <span>${item.question}</span>
-            <svg class="accordion__icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M6 9l6 6 6-6"/>
-            </svg>
-          </button>
-          <div class="accordion__content">
-            <div class="accordion__body">
-              ${item.answer}
-            </div>
-          </div>
-        </div>
-      `).join('');
-
-      faqContainer.innerHTML = html;
-
-      // Initialize accordion
-      this.initAccordion(faqContainer);
-    }
-
-    initAccordion(container) {
-      const triggers = container.querySelectorAll('.accordion__trigger');
+      }
       
-      triggers.forEach(trigger => {
-        trigger.addEventListener('click', () => {
-          const item = trigger.parentElement;
-          const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
+      if (this.elements.finalPrice) {
+        this.elements.finalPrice.textContent = `₺${data.finalPrice}`;
+        // Animate price change
+        this.elements.finalPrice.style.transform = 'scale(1.1)';
+        setTimeout(() => {
+          this.elements.finalPrice.style.transform = 'scale(1)';
+        }, 200);
+      }
+      
+      if (this.elements.deliveryTime) {
+        this.elements.deliveryTime.textContent = `${data.deliveryTime} iş günü`;
+      }
+    },
+
+    /**
+     * Update preview card
+     */
+    updatePreview() {
+      if (!this.elements.previewCard) return;
+      
+      const preview = this.elements.previewCard;
+      
+      // Update preview visually
+      preview.style.backgroundColor = this.getColorHex(this.state.color);
+      
+      const specs = preview.querySelector('.preview-specs');
+      if (specs) {
+        specs.innerHTML = `
+          <div class="spec-item">
+            <span class="spec-label">Boyut:</span>
+            <span class="spec-value">${this.state.width}×${this.state.height}mm</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Katman:</span>
+            <span class="spec-value">${this.state.layers}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Malzeme:</span>
+            <span class="spec-value">${this.state.material}</span>
+          </div>
+          <div class="spec-item">
+            <span class="spec-label">Kalınlık:</span>
+            <span class="spec-value">${this.state.thickness}mm</span>
+          </div>
+        `;
+      }
+    },
+
+    /**
+     * Get color hex value
+     */
+    getColorHex(colorName) {
+      const colors = {
+        'Green': '#2d5e2d',
+        'Red': '#8b1a1a',
+        'Blue': '#1a3a8b',
+        'Black': '#1a1a1a',
+        'White': '#f5f5f5',
+        'Yellow': '#ccaa00'
+      };
+      return colors[colorName] || '#2d5e2d';
+    },
+
+    /**
+     * Reset calculator
+     */
+    reset() {
+      this.state = {
+        width: 100,
+        height: 100,
+        quantity: 10,
+        layers: 2,
+        material: 'FR-4',
+        thickness: 1.6,
+        color: 'Green',
+        surfaceFinish: 'HASL',
+        copperThickness: '1oz'
+      };
+      
+      // Reset inputs
+      if (this.elements.width) this.elements.width.value = 100;
+      if (this.elements.height) this.elements.height.value = 100;
+      if (this.elements.quantity) this.elements.quantity.value = 10;
+      if (this.elements.layers) this.elements.layers.value = 2;
+      if (this.elements.material) this.elements.material.value = 'FR-4';
+      if (this.elements.thickness) this.elements.thickness.value = 1.6;
+      if (this.elements.color) this.elements.color.value = 'Green';
+      
+      this.calculate();
+      this.clearSavedData();
+      
+      window.utils?.notify('Hesaplayıcı sıfırlandı', 'info');
+    },
+
+    /**
+     * Request quote
+     */
+    requestQuote() {
+      const quoteData = {
+        type: 'PCB',
+        specifications: this.state,
+        pricing: {
+          unitPrice: this.elements.unitPrice?.textContent,
+          totalPrice: this.elements.totalPrice?.textContent,
+          finalPrice: this.elements.finalPrice?.textContent,
+          deliveryTime: this.elements.deliveryTime?.textContent
+        },
+        timestamp: new Date().toISOString()
+      };
+      
+      // Save to session storage
+      sessionStorage.setItem('quoteRequest', JSON.stringify(quoteData));
+      
+      // Redirect to quote form
+      window.location.href = '/pages/hesaplama/hizli-teklif.html?type=pcb';
+    },
+
+    /**
+     * Save data to localStorage
+     */
+    saveData() {
+      try {
+        localStorage.setItem('pcbCalculatorState', JSON.stringify(this.state));
+      } catch (e) {
+        console.warn('[PCB Calculator] Could not save state:', e);
+      }
+    },
+
+    /**
+     * Load saved data
+     */
+    loadSavedData() {
+      try {
+        const saved = localStorage.getItem('pcbCalculatorState');
+        if (saved) {
+          const data = JSON.parse(saved);
+          this.state = { ...this.state, ...data };
           
-          // Close all others
-          triggers.forEach(t => {
-            t.setAttribute('aria-expanded', 'false');
-            t.parentElement.classList.remove('accordion__item--active');
+          // Restore input values
+          Object.keys(this.state).forEach(key => {
+            const element = this.elements[key];
+            if (element) {
+              element.value = this.state[key];
+            }
           });
-          
-          // Toggle current
-          if (!isExpanded) {
-            trigger.setAttribute('aria-expanded', 'true');
-            item.classList.add('accordion__item--active');
-          }
-        });
-      });
+        }
+      } catch (e) {
+        console.warn('[PCB Calculator] Could not load saved state:', e);
+      }
+    },
+
+    /**
+     * Clear saved data
+     */
+    clearSavedData() {
+      try {
+        localStorage.removeItem('pcbCalculatorState');
+      } catch (e) {
+        console.warn('[PCB Calculator] Could not clear saved state:', e);
+      }
     }
-  }
+  };
 
-  // ==================== Initialize ====================
-
-  function init() {
-    new PCBCalculator();
-  }
-
+  // Initialize when DOM is ready
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
+    document.addEventListener('DOMContentLoaded', () => pcbCalculator.init());
   } else {
-    init();
+    pcbCalculator.init();
   }
+
+  // Export to global
+  window.pcbCalculator = pcbCalculator;
 
 })();

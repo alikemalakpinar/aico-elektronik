@@ -1,598 +1,448 @@
 // /js/main.js
-// AICO Elektronik - Main JavaScript
+// AICO Elektronik - Main Application Entry Point
 
 (function() {
   'use strict';
 
-  // ==================== Utility Functions ====================
-  
-  // Debounce function for performance optimization
-  function debounce(func, wait) {
-    let timeout;
-    return function executedFunction(...args) {
-      const later = () => {
-        clearTimeout(timeout);
-        func(...args);
-      };
-      clearTimeout(timeout);
-      timeout = setTimeout(later, wait);
-    };
-  }
+  const app = {
+    version: '1.0.0',
+    initialized: false,
 
-  // Throttle function for scroll events
-  function throttle(func, limit) {
-    let inThrottle;
-    return function() {
-      const args = arguments;
-      const context = this;
-      if (!inThrottle) {
-        func.apply(context, args);
-        inThrottle = true;
-        setTimeout(() => inThrottle = false, limit);
+    /**
+     * Initialize application
+     */
+    async init() {
+      if (this.initialized) return;
+
+      console.log(`[AICO App] Starting v${this.version}`);
+
+      try {
+        // Load components
+        await this.loadComponents();
+
+        // Initialize core modules
+        this.initializeModules();
+
+        // Setup global event listeners
+        this.setupGlobalListeners();
+
+        // Initialize page-specific features
+        this.initializePageFeatures();
+
+        this.initialized = true;
+        console.log('[AICO App] Initialization complete');
+
+      } catch (error) {
+        console.error('[AICO App] Initialization failed:', error);
       }
-    };
-  }
+    },
 
-  // ==================== Component Loader ====================
-  
-  async function loadComponent(containerId, componentPath) {
-    try {
-      const response = await fetch(componentPath);
-      if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-      
-      const html = await response.text();
-      const container = document.getElementById(containerId);
-      
-      if (container) {
-        container.innerHTML = html;
-        
-        // Execute any inline scripts in the loaded component
-        const scripts = container.getElementsByTagName('script');
-        Array.from(scripts).forEach(script => {
-          const newScript = document.createElement('script');
-          newScript.textContent = script.textContent;
-          document.body.appendChild(newScript);
-          document.body.removeChild(newScript);
-        });
-        
-        // Reinitialize event listeners for the new content
-        initializeComponentEvents(container);
-      }
-    } catch (error) {
-      console.error(`Failed to load component ${componentPath}:`, error);
-    }
-  }
+    /**
+     * Load HTML components (header, footer, etc.)
+     */
+    async loadComponents() {
+      const components = [
+        { id: 'header-container', url: '/components/header.html' },
+        { id: 'footer-container', url: '/components/footer.html' }
+      ];
 
-  // Initialize events for dynamically loaded components
-  function initializeComponentEvents(container) {
-    // Initialize dropdowns
-    const dropdownTriggers = container.querySelectorAll('[aria-expanded]');
-    dropdownTriggers.forEach(trigger => {
-      trigger.addEventListener('click', handleDropdownToggle);
-    });
-    
-    // Initialize other component-specific events
-    if (container.id === 'header-container') {
-      initializeHeader();
-    }
-  }
-
-  // ==================== Header Functionality ====================
-  
-  function initializeHeader() {
-    const header = document.querySelector('.header__nav');
-    const menuToggle = document.getElementById('menu-toggle');
-    const headerMenu = document.getElementById('header-menu');
-    const themeToggle = document.getElementById('theme-toggle');
-    const languageSwitcher = document.querySelector('.language-switcher__toggle');
-    
-    // Sticky header on scroll
-    if (header) {
-      let lastScroll = 0;
-      
-      window.addEventListener('scroll', throttle(() => {
-        const currentScroll = window.pageYOffset;
-        
-        if (currentScroll > 100) {
-          header.classList.add('scrolled');
-          
-          // Hide/show header based on scroll direction
-          if (currentScroll > lastScroll && currentScroll > 300) {
-            header.style.transform = 'translateY(-100%)';
-          } else {
-            header.style.transform = 'translateY(0)';
+      const loadPromises = components.map(async (component) => {
+        const container = document.getElementById(component.id);
+        if (container) {
+          try {
+            const response = await fetch(component.url);
+            if (response.ok) {
+              const html = await response.text();
+              container.innerHTML = html;
+              console.log(`[Components] Loaded: ${component.url}`);
+            }
+          } catch (error) {
+            console.error(`[Components] Failed to load ${component.url}:`, error);
           }
-        } else {
-          header.classList.remove('scrolled');
-          header.style.transform = 'translateY(0)';
         }
-        
-        lastScroll = currentScroll;
-      }, 100));
-    }
-    
-    // Mobile menu toggle
-    if (menuToggle && headerMenu) {
-      menuToggle.addEventListener('click', () => {
-        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
-        menuToggle.setAttribute('aria-expanded', !isExpanded);
-        headerMenu.classList.toggle('show');
-        document.body.classList.toggle('menu-open');
       });
-    }
-    
-    // Theme toggle
-    if (themeToggle) {
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-        
-        document.documentElement.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        
-        // Trigger custom event for theme change
-        window.dispatchEvent(new CustomEvent('themechange', { detail: { theme: newTheme } }));
-      });
-    }
-    
-    // Language switcher
-    if (languageSwitcher) {
-      languageSwitcher.addEventListener('click', (e) => {
-        e.stopPropagation();
-        const isExpanded = languageSwitcher.getAttribute('aria-expanded') === 'true';
-        languageSwitcher.setAttribute('aria-expanded', !isExpanded);
-      });
-      
-      // Close on outside click
-      document.addEventListener('click', () => {
-        languageSwitcher.setAttribute('aria-expanded', 'false');
-      });
-    }
-    
-    // Dropdown menus
-    const dropdownItems = document.querySelectorAll('.nav-menu__item--has-dropdown');
-    
-    dropdownItems.forEach(item => {
-      const trigger = item.querySelector('.nav-menu__link');
-      
-      if (trigger) {
-        // Desktop: hover
-        if (window.innerWidth >= 1024) {
-          item.addEventListener('mouseenter', () => {
-            trigger.setAttribute('aria-expanded', 'true');
-          });
-          
-          item.addEventListener('mouseleave', () => {
-            trigger.setAttribute('aria-expanded', 'false');
-          });
-        } else {
-          // Mobile: click
-          trigger.addEventListener('click', (e) => {
-            e.preventDefault();
-            const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-            
-            // Close other dropdowns
-            document.querySelectorAll('.nav-menu__item--has-dropdown .nav-menu__link').forEach(otherTrigger => {
-              if (otherTrigger !== trigger) {
-                otherTrigger.setAttribute('aria-expanded', 'false');
-              }
-            });
-            
-            trigger.setAttribute('aria-expanded', !isExpanded);
-          });
-        }
+
+      await Promise.all(loadPromises);
+
+      // Re-initialize navigation after header is loaded
+      if (window.navigationModule) {
+        setTimeout(() => window.navigationModule.init(), 100);
       }
-    });
-  }
+    },
 
-  // ==================== Parallax Effect ====================
-  
-  function initializeParallax() {
-    const parallaxElements = document.querySelectorAll('[data-speed]');
-    
-    if (parallaxElements.length === 0) return;
-    
-    // Check for reduced motion preference
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    
-    if (prefersReducedMotion) {
-      parallaxElements.forEach(el => {
-        el.style.transform = 'none';
-      });
-      return;
-    }
-    
-    function updateParallax() {
-      const scrolled = window.pageYOffset;
-      
-      parallaxElements.forEach(el => {
-        const speed = el.dataset.speed || 0.5;
-        const yPos = -(scrolled * speed);
-        el.style.transform = `translateY(${yPos}px)`;
-      });
-    }
-    
-    window.addEventListener('scroll', throttle(updateParallax, 16)); // 60fps
-    updateParallax(); // Initial call
-  }
+    /**
+     * Initialize core modules
+     */
+    initializeModules() {
+      const modules = [
+        'darkModeModule',
+        'lazyLoadModule',
+        'parallaxModule',
+        'morphModule',
+        'microAnimations',
+        'navigationModule'
+      ];
 
-  // ==================== Counter Animation ====================
-  
-  function initializeCounters() {
-    const counters = document.querySelectorAll('[data-count]');
-    
-    if (counters.length === 0) return;
-    
-    const observerOptions = {
-      threshold: 0.5,
-      rootMargin: '0px'
-    };
-    
-    const startCounting = (element) => {
-      const target = parseInt(element.dataset.count);
-      const duration = 2000; // 2 seconds
-      const increment = target / (duration / 16); // 60fps
-      let current = 0;
-      
-      const updateCounter = () => {
-        current += increment;
-        
-        if (current < target) {
-          element.textContent = Math.floor(current);
-          requestAnimationFrame(updateCounter);
-        } else {
-          element.textContent = target;
-        }
-      };
-      
-      updateCounter();
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
-          entry.target.classList.add('counted');
-          startCounting(entry.target);
-          observer.unobserve(entry.target);
+      modules.forEach(moduleName => {
+        if (window[moduleName] && typeof window[moduleName].init === 'function') {
+          try {
+            // Skip if already initialized
+            if (!window[moduleName].initialized) {
+              window[moduleName].init();
+              console.log(`[Modules] Initialized: ${moduleName}`);
+            }
+          } catch (error) {
+            console.error(`[Modules] Failed to initialize ${moduleName}:`, error);
+          }
         }
       });
-    }, observerOptions);
-    
-    counters.forEach(counter => observer.observe(counter));
-  }
+    },
 
-  // ==================== Back to Top Button ====================
-  
-  function initializeBackToTop() {
-    const backToTopBtn = document.getElementById('back-to-top');
-    
-    if (!backToTopBtn) return;
-    
-    // Show/hide button based on scroll position
-    window.addEventListener('scroll', throttle(() => {
-      if (window.pageYOffset > 500) {
-        backToTopBtn.classList.add('show');
-      } else {
-        backToTopBtn.classList.remove('show');
+    /**
+     * Setup global event listeners
+     */
+    setupGlobalListeners() {
+      // Handle external links
+      document.addEventListener('click', (e) => {
+        const link = e.target.closest('a[href^="http"]');
+        if (link && !link.hasAttribute('target')) {
+          link.setAttribute('target', '_blank');
+          link.setAttribute('rel', 'noopener noreferrer');
+        }
+      });
+
+      // Performance monitoring
+      if (window.config?.features?.analytics) {
+        this.monitorPerformance();
       }
-    }, 200));
-    
-    // Scroll to top on click
-    backToTopBtn.addEventListener('click', () => {
-      window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-      });
-    });
-  }
 
-  // ==================== Smooth Scroll for Anchor Links ====================
-  
-  function initializeSmoothScroll() {
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function(e) {
-        const targetId = this.getAttribute('href');
-        
-        if (targetId === '#') return;
-        
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
+      // Service Worker registration
+      if ('serviceWorker' in navigator && window.config?.features?.pwa) {
+        this.registerServiceWorker();
+      }
+
+      // Handle online/offline status
+      window.addEventListener('online', () => {
+        window.utils?.notify('İnternet bağlantısı yeniden kuruldu', 'success');
+      });
+
+      window.addEventListener('offline', () => {
+        window.utils?.notify('İnternet bağlantısı kesildi', 'warning');
+      });
+    },
+
+    /**
+     * Initialize page-specific features
+     */
+    initializePageFeatures() {
+      const path = window.location.pathname;
+
+      // Home page
+      if (path === '/' || path === '/index.html') {
+        this.initHomePage();
+      }
+
+      // Calculator pages
+      if (path.includes('/hesaplama/pcb-hesapla')) {
+        this.initPCBCalculator();
+      }
+
+      if (path.includes('/hesaplama/dizgi-hesapla')) {
+        this.initAssemblyCalculator();
+      }
+
+      if (path.includes('/hesaplama/gerber-yukle')) {
+        this.initFileUpload();
+      }
+
+      // Product pages
+      if (path.includes('/urunler/')) {
+        this.initProductPage();
+      }
+
+      // Contact page
+      if (path.includes('/iletisim')) {
+        this.initContactPage();
+      }
+
+      // Blog pages
+      if (path.includes('/blog/')) {
+        this.initBlogPage();
+      }
+    },
+
+    /**
+     * Initialize home page features
+     */
+    initHomePage() {
+      console.log('[Page] Initializing home page features');
+      
+      // Home page dynamic content is loaded by home.js
+      // Add any additional home page specific logic here
+    },
+
+    /**
+     * Initialize PCB calculator
+     */
+    initPCBCalculator() {
+      console.log('[Page] Initializing PCB calculator');
+      
+      if (window.pcbCalculator) {
+        // Calculator initializes itself
+      }
+    },
+
+    /**
+     * Initialize Assembly calculator
+     */
+    initAssemblyCalculator() {
+      console.log('[Page] Initializing Assembly calculator');
+      
+      if (window.assemblyCalculator) {
+        // Calculator initializes itself
+      }
+    },
+
+    /**
+     * Initialize file upload
+     */
+    initFileUpload() {
+      console.log('[Page] Initializing file upload');
+      
+      if (window.fileUploadModule) {
+        // Module initializes itself
+      }
+    },
+
+    /**
+     * Initialize product page
+     */
+    initProductPage() {
+      console.log('[Page] Initializing product page features');
+      
+      // Product gallery
+      this.initProductGallery();
+      
+      // Product tabs
+      this.initProductTabs();
+    },
+
+    /**
+     * Initialize product gallery
+     */
+    initProductGallery() {
+      const gallery = document.querySelector('.product-gallery');
+      if (!gallery) return;
+
+      const thumbnails = gallery.querySelectorAll('.gallery-thumbnail');
+      const mainImage = gallery.querySelector('.gallery-main img');
+
+      thumbnails.forEach(thumb => {
+        thumb.addEventListener('click', (e) => {
           e.preventDefault();
           
-          const headerHeight = document.querySelector('.header__nav')?.offsetHeight || 0;
-          const targetPosition = targetElement.offsetTop - headerHeight - 20;
+          // Update active state
+          thumbnails.forEach(t => t.classList.remove('active'));
+          thumb.classList.add('active');
           
-          window.scrollTo({
-            top: targetPosition,
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-  }
-
-  // ==================== Lazy Loading ====================
-  
-  function initializeLazyLoading() {
-    const lazyImages = document.querySelectorAll('img[data-src]');
-    
-    if (lazyImages.length === 0) return;
-    
-    const imageObserverOptions = {
-      threshold: 0,
-      rootMargin: '50px'
-    };
-    
-    const imageObserver = new IntersectionObserver((entries, observer) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const img = entry.target;
-          img.src = img.dataset.src;
-          
-          if (img.dataset.srcset) {
-            img.srcset = img.dataset.srcset;
-          }
-          
-          img.classList.add('loaded');
-          observer.unobserve(img);
-        }
-      });
-    }, imageObserverOptions);
-    
-    lazyImages.forEach(img => imageObserver.observe(img));
-  }
-
-  // ==================== Form Validation ====================
-  
-  function initializeFormValidation() {
-    const forms = document.querySelectorAll('form[data-validate]');
-    
-    forms.forEach(form => {
-      form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        
-        let isValid = true;
-        const requiredFields = form.querySelectorAll('[required]');
-        
-        requiredFields.forEach(field => {
-          const errorMsg = field.parentElement.querySelector('.error-message');
-          
-          if (!field.value.trim()) {
-            isValid = false;
-            field.classList.add('error');
-            
-            if (!errorMsg) {
-              const error = document.createElement('span');
-              error.className = 'error-message';
-              error.textContent = 'Bu alan zorunludur';
-              field.parentElement.appendChild(error);
-            }
-          } else {
-            field.classList.remove('error');
-            if (errorMsg) {
-              errorMsg.remove();
-            }
-          }
-          
-          // Email validation
-          if (field.type === 'email' && field.value) {
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!emailRegex.test(field.value)) {
-              isValid = false;
-              field.classList.add('error');
-              
-              if (!errorMsg) {
-                const error = document.createElement('span');
-                error.className = 'error-message';
-                error.textContent = 'Geçerli bir e-posta adresi giriniz';
-                field.parentElement.appendChild(error);
-              }
-            }
-          }
-          
-          // Phone validation
-          if (field.type === 'tel' && field.value) {
-            const phoneRegex = /^[\d\s\-\+\(\)]+$/;
-            if (!phoneRegex.test(field.value) || field.value.length < 10) {
-              isValid = false;
-              field.classList.add('error');
-              
-              if (!errorMsg) {
-                const error = document.createElement('span');
-                error.className = 'error-message';
-                error.textContent = 'Geçerli bir telefon numarası giriniz';
-                field.parentElement.appendChild(error);
-              }
-            }
+          // Update main image
+          if (mainImage) {
+            mainImage.src = thumb.dataset.full || thumb.src;
           }
         });
-        
-        if (isValid) {
-          // Submit form or show success message
-          this.submit();
-        }
       });
+    },
+
+    /**
+     * Initialize product tabs
+     */
+    initProductTabs() {
+      const tabContainers = document.querySelectorAll('.tabs');
       
-      // Clear error on input
-      form.querySelectorAll('input, textarea, select').forEach(field => {
-        field.addEventListener('input', function() {
-          if (this.classList.contains('error')) {
-            this.classList.remove('error');
-            const errorMsg = this.parentElement.querySelector('.error-message');
-            if (errorMsg) {
-              errorMsg.remove();
-            }
-          }
+      tabContainers.forEach(container => {
+        const triggers = container.querySelectorAll('.tabs__trigger');
+        const panels = container.querySelectorAll('.tabs__panel');
+
+        triggers.forEach(trigger => {
+          trigger.addEventListener('click', () => {
+            const targetId = trigger.dataset.tab;
+            
+            // Update triggers
+            triggers.forEach(t => t.classList.remove('tabs__trigger--active'));
+            trigger.classList.add('tabs__trigger--active');
+            
+            // Update panels
+            panels.forEach(panel => {
+              if (panel.id === targetId) {
+                panel.classList.add('tabs__panel--active');
+              } else {
+                panel.classList.remove('tabs__panel--active');
+              }
+            });
+          });
         });
       });
-    });
-  }
+    },
 
-  // ==================== Cookie Consent ====================
-  
-  function initializeCookieConsent() {
-    const cookieConsent = document.querySelector('.cookie-consent');
-    
-    if (!cookieConsent) return;
-    
-    // Check if consent was already given
-    if (localStorage.getItem('cookieConsent') === 'accepted') {
-      cookieConsent.style.display = 'none';
-      return;
-    }
-    
-    // Show cookie consent after delay
-    setTimeout(() => {
-      cookieConsent.classList.add('show');
-    }, 2000);
-    
-    // Handle accept button
-    const acceptBtn = cookieConsent.querySelector('.cookie-consent__accept');
-    if (acceptBtn) {
-      acceptBtn.addEventListener('click', () => {
-        localStorage.setItem('cookieConsent', 'accepted');
-        cookieConsent.classList.remove('show');
-        setTimeout(() => {
-          cookieConsent.style.display = 'none';
-        }, 300);
-      });
-    }
-    
-    // Handle reject button
-    const rejectBtn = cookieConsent.querySelector('.cookie-consent__reject');
-    if (rejectBtn) {
-      rejectBtn.addEventListener('click', () => {
-        localStorage.setItem('cookieConsent', 'rejected');
-        cookieConsent.classList.remove('show');
-        setTimeout(() => {
-          cookieConsent.style.display = 'none';
-        }, 300);
-      });
-    }
-  }
+    /**
+     * Initialize contact page
+     */
+    initContactPage() {
+      console.log('[Page] Initializing contact page');
+      
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', async (e) => {
+          e.preventDefault();
+          await this.handleContactFormSubmit(e.target);
+        });
+      }
+    },
 
-  // ==================== AOS (Animate On Scroll) Alternative ====================
-  
-  function initializeScrollAnimations() {
-    const animatedElements = document.querySelectorAll('[data-aos]');
-    
-    if (animatedElements.length === 0) return;
-    
-    const observerOptions = {
-      threshold: 0.1,
-      rootMargin: '0px 0px -50px 0px'
-    };
-    
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          const element = entry.target;
-          const animation = element.dataset.aos;
-          const delay = element.dataset.aosDelay || 0;
-          
-          setTimeout(() => {
-            element.classList.add('aos-animate', `aos-${animation}`);
-          }, delay);
-          
-          observer.unobserve(element);
+    /**
+     * Handle contact form submission
+     */
+    async handleContactFormSubmit(form) {
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData);
+
+      try {
+        window.utils?.notify('Mesajınız gönderiliyor...', 'info');
+
+        // TODO: Replace with actual API call
+        await new Promise(resolve => setTimeout(resolve, 1500));
+
+        window.utils?.notify('Mesajınız başarıyla gönderildi!', 'success');
+        form.reset();
+
+      } catch (error) {
+        console.error('Form submission error:', error);
+        window.utils?.notify('Mesaj gönderilemedi. Lütfen tekrar deneyin.', 'error');
+      }
+    },
+
+    /**
+     * Initialize blog page
+     */
+    initBlogPage() {
+      console.log('[Page] Initializing blog page');
+      
+      // Blog search
+      const searchInput = document.getElementById('blog-search');
+      if (searchInput) {
+        searchInput.addEventListener('input', (e) => {
+          this.filterBlogPosts(e.target.value);
+        });
+      }
+
+      // Category filters
+      const categoryFilters = document.querySelectorAll('.category-filter');
+      categoryFilters.forEach(filter => {
+        filter.addEventListener('click', (e) => {
+          e.preventDefault();
+          const category = filter.dataset.category;
+          this.filterByCategory(category);
+        });
+      });
+    },
+
+    /**
+     * Filter blog posts by search term
+     */
+    filterBlogPosts(searchTerm) {
+      const posts = document.querySelectorAll('.blog-card');
+      const term = searchTerm.toLowerCase();
+
+      posts.forEach(post => {
+        const title = post.querySelector('.blog-card__title')?.textContent.toLowerCase() || '';
+        const excerpt = post.querySelector('.blog-card__excerpt')?.textContent.toLowerCase() || '';
+        
+        if (title.includes(term) || excerpt.includes(term)) {
+          post.style.display = '';
+        } else {
+          post.style.display = 'none';
         }
       });
-    }, observerOptions);
-    
-    animatedElements.forEach(element => {
-      element.classList.add('aos-init');
-      observer.observe(element);
-    });
-  }
+    },
 
-  // ==================== Handle Dropdown Toggle ====================
-  
-  function handleDropdownToggle(e) {
-    e.preventDefault();
-    e.stopPropagation();
-    
-    const trigger = e.currentTarget;
-    const isExpanded = trigger.getAttribute('aria-expanded') === 'true';
-    
-    // Close other dropdowns
-    document.querySelectorAll('[aria-expanded="true"]').forEach(otherTrigger => {
-      if (otherTrigger !== trigger) {
-        otherTrigger.setAttribute('aria-expanded', 'false');
+    /**
+     * Filter blog posts by category
+     */
+    filterByCategory(category) {
+      const posts = document.querySelectorAll('.blog-card');
+      
+      posts.forEach(post => {
+        const postCategory = post.dataset.category;
+        
+        if (category === 'all' || postCategory === category) {
+          post.style.display = '';
+        } else {
+          post.style.display = 'none';
+        }
+      });
+    },
+
+    /**
+     * Register service worker
+     */
+    async registerServiceWorker() {
+      try {
+        const registration = await navigator.serviceWorker.register('/service-worker.js');
+        console.log('[PWA] Service Worker registered:', registration);
+      } catch (error) {
+        console.error('[PWA] Service Worker registration failed:', error);
       }
-    });
-    
-    trigger.setAttribute('aria-expanded', !isExpanded);
-  }
+    },
 
-  // ==================== Initialize Everything ====================
-  
-  function init() {
-    // Load components
-    const componentsToLoad = [
-      { id: 'header-container', path: '/components/header.html' },
-      { id: 'footer-container', path: '/components/footer.html' },
-      { id: 'newsletter-container', path: '/components/newsletter.html' },
-      { id: 'whatsapp-button-container', path: '/components/whatsapp-button.html' },
-      { id: 'cookie-consent-container', path: '/components/cookie-consent.html' }
-    ];
-    
-    componentsToLoad.forEach(component => {
-      if (document.getElementById(component.id)) {
-        loadComponent(component.id, component.path);
-      }
-    });
-    
-    // Initialize features after components are loaded
-    setTimeout(() => {
-      initializeParallax();
-      initializeCounters();
-      initializeBackToTop();
-      initializeSmoothScroll();
-      initializeLazyLoading();
-      initializeFormValidation();
-      initializeCookieConsent();
-      initializeScrollAnimations();
-    }, 500);
-    
-    // Handle window resize
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(() => {
-        // Reinitialize header for mobile/desktop switch
-        initializeHeader();
-      }, 250);
-    });
-  }
-
-  // ==================== Service Worker Registration ====================
-  
-  if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-      navigator.serviceWorker.register('/service-worker.js')
-        .then(registration => {
-          console.log('ServiceWorker registration successful:', registration.scope);
-        })
-        .catch(err => {
-          console.log('ServiceWorker registration failed:', err);
+    /**
+     * Monitor performance
+     */
+    monitorPerformance() {
+      if (window.performance && window.performance.timing) {
+        window.addEventListener('load', () => {
+          setTimeout(() => {
+            const timing = window.performance.timing;
+            const loadTime = timing.loadEventEnd - timing.navigationStart;
+            console.log(`[Performance] Page load time: ${loadTime}ms`);
+          }, 0);
         });
-    });
-  }
-
-  // ==================== Start the Application ====================
-  
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-
-  // Export functions for global use
-  window.AICO = {
-    loadComponent,
-    debounce,
-    throttle
+      }
+    }
   };
 
+  // Initialize when DOM is ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => app.init());
+  } else {
+    app.init();
+  }
+
+  // Export to global
+  window.app = app;
+
 })();
+
+// ==================== Global Error Handler ====================
+
+window.addEventListener('error', (event) => {
+  console.error('[Global Error]', event.error);
+});
+
+window.addEventListener('unhandledrejection', (event) => {
+  console.error('[Unhandled Promise Rejection]', event.reason);
+});
+
+// ==================== Console Welcome Message ====================
+
+console.log(
+  '%c🎨 AICO Elektronik',
+  'font-size: 24px; font-weight: bold; color: #F4633A;'
+);
+console.log(
+  '%cPCB Tasarım ve Üretim Çözümleri',
+  'font-size: 14px; color: #041E42;'
+);
+console.log(
+  '%cwww.aicoelektronik.com',
+  'font-size: 12px; color: #10069F;'
+);
