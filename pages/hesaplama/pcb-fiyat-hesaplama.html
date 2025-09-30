@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PCB Fiyat Hesaplama | AICO Elektronik</title>
+    <meta name="description" content="PCB üretim maliyetinizi anında hesaplayın. Katman sayısı, boyut, malzeme ve miktar seçenekleriyle detaylı fiyat teklifi alın.">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/utilities.css">
+    <link rel="stylesheet" href="/css/components.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    <link rel="stylesheet" href="/css/components/header.css">
+    <link rel="stylesheet" href="/css/components/footer.css">
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="stylesheet" href="/css/pages/calculator.css">
+    <link rel="stylesheet" href="/css/responsive.css">
+    <link rel="stylesheet" href="/css/dark-mode.css">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">İçeriğe Geç</a>
+    
+    <script>
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+        })();
+    </script>
+    
+    <div id="header-container"></div>
+    
+    <main id="main-content">
+        <!-- Breadcrumb -->
+        <div class="container">
+            <nav class="breadcrumb" aria-label="Breadcrumb">
+                <div class="breadcrumb__item">
+                    <a href="/">Ana Sayfa</a>
+                </div>
+                <span class="breadcrumb__separator">/</span>
+                <div class="breadcrumb__item">
+                    <a href="/pages/hesaplama/">Hesaplama</a>
+                </div>
+                <span class="breadcrumb__separator">/</span>
+                <div class="breadcrumb__item breadcrumb__item--active">
+                    PCB Fiyat Hesaplama
+                </div>
+            </nav>
+        </div>
+
+        <!-- Calculator Section -->
+        <section class="calculator-section">
+            <div class="container">
+                <div class="calculator-header">
+                    <h1 class="calculator-title">PCB Fiyat Hesaplama</h1>
+                    <p class="calculator-subtitle">
+                        Teknik özelliklerinizi girin, anında fiyat teklifi alın
+                    </p>
+                </div>
+
+                <div class="calculator-layout">
+                    <!-- Calculator Form -->
+                    <div class="calculator-form">
+                        <form id="pcb-calculator-form">
+                            <!-- Basic Specifications -->
+                            <div class="form-section">
+                                <h3 class="form-section__title">Temel Özellikler</h3>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="layers" class="form-label">
+                                            Katman Sayısı
+                                            <span class="tooltip">
+                                                <svg class="icon icon--small" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <circle cx="12" cy="12" r="10"/>
+                                                    <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/>
+                                                    <line x1="12" y1="17" x2="12.01" y2="17"/>
+                                                </svg>
+                                                <span class="tooltip__content">PCB'nizin toplam katman sayısı</span>
+                                            </span>
+                                        </label>
+                                        <select id="layers" class="form-select" required>
+                                            <option value="1">1 Katman</option>
+                                            <option value="2" selected>2 Katman</option>
+                                            <option value="4">4 Katman</option>
+                                            <option value="6">6 Katman</option>
+                                            <option value="8">8 Katman</option>
+                                            <option value="10">10 Katman</option>
+                                            <option value="12">12 Katman</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="quantity" class="form-label">Miktar (Adet)</label>
+                                        <input type="number" id="quantity" class="form-input" min="1" max="10000" value="10" required>
+                                        <div class="form-hint">Minimum 1, Maximum 10.000 adet</div>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="width" class="form-label">Genişlik (mm)</label>
+                                        <input type="number" id="width" class="form-input" min="10" max="500" value="100" step="0.1" required>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="height" class="form-label">Yükseklik (mm)</label>
+                                        <input type="number" id="height" class="form-input" min="10" max="500" value="100" step="0.1" required>
+                                    </div>
+                                </div>
+
+                                <div class="dimension-preview">
+                                    <div class="dimension-box" id="dimension-box">
+                                        <span class="dimension-label">100 x 100 mm</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Material & Thickness -->
+                            <div class="form-section">
+                                <h3 class="form-section__title">Malzeme ve Kalınlık</h3>
+                                
+                                <div class="form-group">
+                                    <label for="material" class="form-label">PCB Malzemesi</label>
+                                    <div class="radio-group">
+                                        <label class="radio-card">
+                                            <input type="radio" name="material" value="fr4" checked>
+                                            <div class="radio-card__content">
+                                                <div class="radio-card__title">FR-4</div>
+                                                <div class="radio-card__desc">Standart, ekonomik</div>
+                                            </div>
+                                        </label>
+                                        <label class="radio-card">
+                                            <input type="radio" name="material" value="aluminum">
+                                            <div class="radio-card__content">
+                                                <div class="radio-card__title">Alüminyum</div>
+                                                <div class="radio-card__desc">Isı dağılımı</div>
+                                            </div>
+                                        </label>
+                                        <label class="radio-card">
+                                            <input type="radio" name="material" value="rogers">
+                                            <div class="radio-card__content">
+                                                <div class="radio-card__title">Rogers</div>
+                                                <div class="radio-card__desc">Yüksek frekans</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="thickness" class="form-label">PCB Kalınlığı</label>
+                                    <select id="thickness" class="form-select">
+                                        <option value="0.4">0.4 mm</option>
+                                        <option value="0.6">0.6 mm</option>
+                                        <option value="0.8">0.8 mm</option>
+                                        <option value="1.0">1.0 mm</option>
+                                        <option value="1.2">1.2 mm</option>
+                                        <option value="1.6" selected>1.6 mm (Standart)</option>
+                                        <option value="2.0">2.0 mm</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Surface Finish -->
+                            <div class="form-section">
+                                <h3 class="form-section__title">Yüzey Kaplama</h3>
+                                
+                                <div class="form-group">
+                                    <label class="form-label">Yüzey İşlemi</label>
+                                    <div class="checkbox-group">
+                                        <label class="checkbox">
+                                            <input type="radio" name="surface" value="hasl" checked>
+                                            <span class="checkbox__label">HASL (Kalay-Kurşun)</span>
+                                        </label>
+                                        <label class="checkbox">
+                                            <input type="radio" name="surface" value="hasl-lf">
+                                            <span class="checkbox__label">HASL Kurşunsuz</span>
+                                        </label>
+                                        <label class="checkbox">
+                                            <input type="radio" name="surface" value="enig">
+                                            <span class="checkbox__label">ENIG (Altın)</span>
+                                        </label>
+                                        <label class="checkbox">
+                                            <input type="radio" name="surface" value="osp">
+                                            <span class="checkbox__label">OSP</span>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Solder Mask & Silkscreen -->
+                            <div class="form-section">
+                                <h3 class="form-section__title">Solder Mask ve Silkscreen</h3>
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="soldermask-color" class="form-label">Solder Mask Rengi</label>
+                                        <select id="soldermask-color" class="form-select">
+                                            <option value="green" selected>Yeşil</option>
+                                            <option value="red">Kırmızı</option>
+                                            <option value="blue">Mavi</option>
+                                            <option value="black">Siyah</option>
+                                            <option value="white">Beyaz</option>
+                                            <option value="yellow">Sarı</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="silkscreen-color" class="form-label">Silkscreen Rengi</label>
+                                        <select id="silkscreen-color" class="form-select">
+                                            <option value="white" selected>Beyaz</option>
+                                            <option value="black">Siyah</option>
+                                            <option value="yellow">Sarı</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Production Time -->
+                            <div class="form-section">
+                                <h3 class="form-section__title">Üretim Süresi</h3>
+                                
+                                <div class="form-group">
+                                    <div class="radio-group radio-group--horizontal">
+                                        <label class="radio-card radio-card--compact">
+                                            <input type="radio" name="production-time" value="standard" checked>
+                                            <div class="radio-card__content">
+                                                <div class="radio-card__title">Standart</div>
+                                                <div class="radio-card__desc">7-10 iş günü</div>
+                                                <div class="radio-card__price">Temel fiyat</div>
+                                            </div>
+                                        </label>
+                                        <label class="radio-card radio-card--compact">
+                                            <input type="radio" name="production-time" value="express">
+                                            <div class="radio-card__content">
+                                                <div class="radio-card__title">Hızlı</div>
+                                                <div class="radio-card__desc">3-5 iş günü</div>
+                                                <div class="radio-card__price">+%30</div>
+                                            </div>
+                                        </label>
+                                        <label class="radio-card radio-card--compact">
+                                            <input type="radio" name="production-time" value="urgent">
+                                            <div class="radio-card__content">
+                                                <div class="radio-card__title">Acil</div>
+                                                <div class="radio-card__desc">24-48 saat</div>
+                                                <div class="radio-card__price">+%60</div>
+                                            </div>
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn--primary btn--large btn--full">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="4" y="2" width="16" height="20" rx="2"/>
+                                    <rect x="8" y="6" width="8" height="4"/>
+                                </svg>
+                                <span>Fiyat Hesapla</span>
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Price Summary -->
+                    <div class="calculator-summary" id="price-summary">
+                        <div class="summary-card">
+                            <h3 class="summary-title">Fiyat Özeti</h3>
+                            
+                            <div class="summary-specs">
+                                <div class="summary-spec">
+                                    <span class="summary-spec__label">Katman:</span>
+                                    <span class="summary-spec__value" id="summary-layers">2</span>
+                                </div>
+                                <div class="summary-spec">
+                                    <span class="summary-spec__label">Boyut:</span>
+                                    <span class="summary-spec__value" id="summary-dimensions">100 x 100 mm</span>
+                                </div>
+                                <div class="summary-spec">
+                                    <span class="summary-spec__label">Miktar:</span>
+                                    <span class="summary-spec__value" id="summary-quantity">10 adet</span>
+                                </div>
+                                <div class="summary-spec">
+                                    <span class="summary-spec__label">Malzeme:</span>
+                                    <span class="summary-spec__value" id="summary-material">FR-4</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-divider"></div>
+
+                            <div class="summary-breakdown">
+                                <div class="summary-line">
+                                    <span>PCB Üretim</span>
+                                    <span id="price-base">-</span>
+                                </div>
+                                <div class="summary-line">
+                                    <span>Yüzey İşlemi</span>
+                                    <span id="price-surface">-</span>
+                                </div>
+                                <div class="summary-line summary-line--discount">
+                                    <span>Miktar İndirimi</span>
+                                    <span id="price-discount">-</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-divider"></div>
+
+                            <div class="summary-total">
+                                <span>Toplam Tutar</span>
+                                <div class="summary-total__price" id="total-price">
+                                    <span class="currency">₺</span>
+                                    <span class="amount">-</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-note">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <path d="M12 16v-4M12 8h.01"/>
+                                </svg>
+                                <span>Fiyatlara KDV dahil değildir</span>
+                            </div>
+
+                            <div class="summary-actions">
+                                <button type="button" class="btn btn--primary btn--full" id="request-quote">
+                                    Teklif İste
+                                </button>
+                                <button type="button" class="btn btn--ghost btn--full" id="save-calculation">
+                                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/>
+                                        <polyline points="17 21 17 13 7 13 7 21"/>
+                                        <polyline points="7 3 7 8 15 8"/>
+                                    </svg>
+                                    Hesaplamayı Kaydet
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Additional Info -->
+                        <div class="info-card">
+                            <h4 class="info-card__title">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+                                    <polyline points="22 4 12 14.01 9 11.01"/>
+                                </svg>
+                                <span>Hizmet Kapsamı</span>
+                            </h4>
+                            <ul class="info-list">
+                                <li>PCB üretim</li>
+                                <li>Elektriksel test</li>
+                                <li>Kalite kontrol</li>
+                                <li>Paketleme</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Sıkça Sorulan Sorular</h2>
+                <div class="accordion" id="calculator-faq">
+                    <!-- FAQ items will be loaded dynamically -->
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <div id="footer-container"></div>
+    <button id="back-to-top" class="back-to-top" aria-label="Yukarı Çık">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 19V5m-7 7l7-7 7 7"/>
+        </svg>
+    </button>
+    <div id="whatsapp-button-container"></div>
+    
+    <script src="/js/config.js"></script>
+    <script src="/js/utils.js"></script>
+    <script src="/js/api-client.js"></script>
+    <script src="/js/modules/dark-mode.js"></script>
+    <script src="/js/calculators/pcb-calculator.js"></script>
+    <script src="/js/main.js"></script>
+</body>
+</html>

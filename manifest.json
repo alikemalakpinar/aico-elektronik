@@ -1,0 +1,136 @@
+{
+  "name": "AICO Elektronik - PCB Tasarım ve Üretim",
+  "short_name": "AICO Elektronik",
+  "description": "Endüstriyel PCB tasarım, üretim ve montaj hizmetleri. Yangın, maden, otomasyon kartları ve özel çözümler.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#041E42",
+  "background_color": "#FFFFFF",
+  "lang": "tr",
+  "dir": "ltr",
+  "categories": [
+    "electronics",
+    "manufacturing",
+    "business"
+  ],
+  "icons": [
+    {
+      "src": "/images/icons/icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-152x152.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-384x384.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/images/screenshots/desktop-1.jpg",
+      "sizes": "1920x1080",
+      "type": "image/jpeg",
+      "platform": "wide"
+    },
+    {
+      "src": "/images/screenshots/mobile-1.jpg",
+      "sizes": "750x1334",
+      "type": "image/jpeg",
+      "platform": "narrow"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Hızlı Teklif",
+      "short_name": "Teklif",
+      "description": "Hızlı fiyat teklifi al",
+      "url": "/pages/hesaplama/hizli-teklif.html",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-quote.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "PCB Hesaplayıcı",
+      "short_name": "Hesapla",
+      "description": "PCB fiyatı hesapla",
+      "url": "/pages/hesaplama/pcb-fiyat-hesaplama.html",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-calculator.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    },
+    {
+      "name": "İletişim",
+      "short_name": "İletişim",
+      "description": "Bizimle iletişime geç",
+      "url": "/pages/iletisim.html",
+      "icons": [
+        {
+          "src": "/images/icons/shortcut-contact.png",
+          "sizes": "96x96",
+          "type": "image/png"
+        }
+      ]
+    }
+  ],
+  "related_applications": [],
+  "prefer_related_applications": false,
+  "iarc_rating_id": "",
+  "share_target": {
+    "action": "/pages/hesaplama/hizli-teklif.html",
+    "method": "GET",
+    "enctype": "application/x-www-form-urlencoded",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  }
+}

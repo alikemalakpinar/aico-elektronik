@@ -1,0 +1,41 @@
+# robots.txt for AICO Elektronik
+# https://www.aicoelektronik.com/robots.txt
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /temp/
+Disallow: /backups/
+Disallow: /logs/
+Disallow: /cache/
+Disallow: /security/
+Disallow: /*.json$
+Disallow: /*?*utm_source=
+Disallow: /*?*sessionid=
+
+# Sitemap
+Sitemap: https://www.aicoelektronik.com/sitemap.xml
+
+# Specific bot rules
+User-agent: Googlebot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Bingbot
+Allow: /
+Crawl-delay: 0
+
+User-agent: Slurp
+Allow: /
+Crawl-delay: 1
+
+# Bad bots
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: DotBot
+Disallow: /

@@ -1,0 +1,582 @@
+/* /css/pages/about.css */
+/* AICO Elektronik - About Page Styles */
+
+/* ==================== Hero Section ==================== */
+
+.about-hero {
+  padding: var(--spacing-20) 0 var(--spacing-16);
+  background: var(--gradient-mesh);
+  position: relative;
+  overflow: hidden;
+}
+
+.about-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    rgba(255, 255, 255, 0.02) 10px,
+    rgba(255, 255, 255, 0.02) 20px
+  );
+  pointer-events: none;
+}
+
+.about-hero__content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  margin: var(--spacing-8) auto 0;
+  text-align: center;
+}
+
+.about-hero__title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-inverse);
+  margin-bottom: var(--spacing-6);
+  line-height: 1.1;
+}
+
+.about-hero__subtitle {
+  font-size: var(--font-size-xl);
+  color: rgba(255, 255, 255, 0.9);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ==================== Stats Section ==================== */
+
+.stats-section {
+  padding: var(--spacing-16) 0;
+  background: var(--color-bg-primary);
+  margin-top: calc(var(--spacing-16) * -1);
+  position: relative;
+  z-index: 2;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-6);
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--spacing-8) var(--spacing-6);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-2xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base) var(--ease-out);
+}
+
+.stat-item:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.stat-item__icon {
+  width: 64px;
+  height: 64px;
+  margin: 0 auto var(--spacing-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-accent);
+  border-radius: var(--radius-xl);
+  color: var(--color-text-inverse);
+}
+
+.stat-item__icon svg {
+  width: 32px;
+  height: 32px;
+}
+
+.stat-item__number {
+  font-size: var(--font-size-5xl);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-accent);
+  margin-bottom: var(--spacing-2);
+}
+
+.stat-item__label {
+  font-size: var(--font-size-base);
+  color: var(--color-text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ==================== Story Section ==================== */
+
+.story-section {
+  padding: var(--spacing-20) 0;
+  background: var(--color-bg-secondary);
+}
+
+.story-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-12);
+  align-items: center;
+}
+
+@media (min-width: 1024px) {
+  .story-layout {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.story-content {
+  max-width: 600px;
+}
+
+.story-text p {
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--spacing-6);
+}
+
+.story-text p:last-child {
+  margin-bottom: 0;
+}
+
+.story-image {
+  border-radius: var(--radius-2xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+}
+
+.story-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==================== Mission Vision Section ==================== */
+
+.mission-vision-section {
+  padding: var(--spacing-20) 0;
+  background: var(--color-bg-primary);
+}
+
+.mission-vision-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-8);
+}
+
+@media (min-width: 768px) {
+  .mission-vision-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.mission-card {
+  padding: var(--spacing-8);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-2xl);
+  text-align: center;
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base) var(--ease-out);
+}
+
+.mission-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-xl);
+}
+
+.mission-card__icon {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--gradient-primary);
+  border-radius: var(--radius-full);
+  color: var(--color-text-inverse);
+}
+
+.mission-card__icon svg {
+  width: 40px;
+  height: 40px;
+}
+
+.mission-card__title {
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-4);
+}
+
+.mission-card__text {
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-relaxed);
+  color: var(--color-text-secondary);
+}
+
+/* ==================== Certifications Section ==================== */
+
+.certifications-section {
+  padding: var(--spacing-20) 0;
+  background: var(--color-bg-secondary);
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: var(--spacing-6);
+  margin-top: var(--spacing-12);
+}
+
+.cert-card {
+  padding: var(--spacing-6);
+  background: var(--color-bg-primary);
+  border-radius: var(--radius-xl);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-base) var(--ease-out);
+}
+
+.cert-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.cert-card img {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-4);
+  display: block;
+}
+
+.cert-card h4 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.cert-card p {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* ==================== Timeline Section ==================== */
+
+.timeline-section {
+  padding: var(--spacing-20) 0;
+  background: var(--color-bg-primary);
+}
+
+.timeline {
+  position: relative;
+  max-width: 800px;
+  margin: var(--spacing-12) auto 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--gradient-primary);
+  transform: translateX(-50%);
+}
+
+@media (max-width: 767px) {
+  .timeline::before {
+    left: 20px;
+  }
+}
+
+.timeline__item {
+  position: relative;
+  padding: 0 0 var(--spacing-12) 0;
+  display: grid;
+  grid-template-columns: 1fr 20px 1fr;
+  gap: var(--spacing-8);
+  align-items: center;
+}
+
+@media (max-width: 767px) {
+  .timeline__item {
+    grid-template-columns: 40px 1fr;
+    gap: var(--spacing-4);
+  }
+}
+
+.timeline__item:nth-child(even) .timeline__content {
+  grid-column: 1;
+  text-align: right;
+}
+
+.timeline__item:nth-child(odd) .timeline__content {
+  grid-column: 3;
+}
+
+@media (max-width: 767px) {
+  .timeline__item:nth-child(even) .timeline__content,
+  .timeline__item:nth-child(odd) .timeline__content {
+    grid-column: 2;
+    text-align: left;
+  }
+}
+
+.timeline__marker {
+  grid-column: 2;
+  width: 20px;
+  height: 20px;
+  background: var(--color-accent);
+  border: 4px solid var(--color-bg-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 0 4px var(--color-accent), var(--shadow-md);
+  z-index: 1;
+}
+
+@media (max-width: 767px) {
+  .timeline__marker {
+    grid-column: 1;
+  }
+}
+
+.timeline__content {
+  padding: var(--spacing-6);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  transition: all var(--transition-base) var(--ease-out);
+}
+
+.timeline__content:hover {
+  box-shadow: var(--shadow-lg);
+  transform: scale(1.02);
+}
+
+.timeline__date {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  text-transform: uppercase;
+  letter-spacing: var(--letter-spacing-wide);
+  margin-bottom: var(--spacing-2);
+}
+
+.timeline__title {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-2);
+}
+
+.timeline__description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ==================== CTA Section ==================== */
+
+.cta-section {
+  padding: var(--spacing-20) 0;
+  background: var(--gradient-primary);
+  position: relative;
+  overflow: hidden;
+}
+
+.cta-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    transparent,
+    transparent 20px,
+    rgba(255, 255, 255, 0.02) 20px,
+    rgba(255, 255, 255, 0.02) 40px
+  );
+  pointer-events: none;
+}
+
+.cta-box {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: var(--spacing-12);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: var(--radius-3xl);
+}
+
+.cta-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: var(--font-weight-extrabold);
+  color: var(--color-text-inverse);
+  margin-bottom: var(--spacing-4);
+}
+
+.cta-text {
+  font-size: var(--font-size-xl);
+  color: rgba(255, 255, 255, 0.9);
+  margin-bottom: var(--spacing-8);
+}
+
+.cta-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-4);
+  justify-content: center;
+}
+
+/* ==================== Dark Mode Adjustments ==================== */
+
+[data-theme="dark"] .about-hero {
+  background: var(--gradient-dark);
+}
+
+[data-theme="dark"] .stats-section {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .stat-item {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+}
+
+[data-theme="dark"] .story-section {
+  background: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .mission-vision-section {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .mission-card {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+}
+
+[data-theme="dark"] .certifications-section {
+  background: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .cert-card {
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-light);
+}
+
+[data-theme="dark"] .timeline-section {
+  background: var(--color-bg-secondary);
+}
+
+[data-theme="dark"] .timeline__content {
+  background: var(--color-bg-primary);
+  border: 1px solid var(--color-border-light);
+}
+
+[data-theme="dark"] .timeline__marker {
+  border-color: var(--color-bg-primary);
+}
+
+[data-theme="dark"] .cta-section {
+  background: linear-gradient(135deg, var(--color-neutral-950) 0%, var(--color-neutral-900) 100%);
+}
+
+[data-theme="dark"] .cta-box {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* ==================== Mobile Adjustments ==================== */
+
+@media (max-width: 767px) {
+  .about-hero {
+    padding: var(--spacing-16) 0 var(--spacing-12);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+
+  .stat-item {
+    padding: var(--spacing-6) var(--spacing-4);
+  }
+
+  .stat-item__icon {
+    width: 56px;
+    height: 56px;
+  }
+
+  .stat-item__number {
+    font-size: var(--font-size-4xl);
+  }
+
+  .story-section,
+  .mission-vision-section,
+  .certifications-section,
+  .timeline-section,
+  .cta-section {
+    padding: var(--spacing-12) 0;
+  }
+
+  .mission-vision-grid {
+    gap: var(--spacing-6);
+  }
+
+  .mission-card {
+    padding: var(--spacing-6);
+  }
+
+  .mission-card__icon {
+    width: 64px;
+    height: 64px;
+  }
+
+  .certifications-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-4);
+  }
+
+  .cta-box {
+    padding: var(--spacing-8);
+  }
+
+  .cta-actions {
+    flex-direction: column;
+  }
+
+  .cta-actions .btn {
+    width: 100%;
+  }
+}
+
+/* ==================== Print Styles ==================== */
+
+@media print {
+  .about-hero,
+  .cta-section {
+    background: white;
+    color: black;
+  }
+
+  .stat-item,
+  .mission-card,
+  .cert-card,
+  .timeline__content {
+    break-inside: avoid;
+    box-shadow: none;
+    border: 1px solid #ccc;
+  }
+
+  .timeline::before,
+  .timeline__marker {
+    display: none;
+  }
+}

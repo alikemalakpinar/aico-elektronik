@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Sayfa Bulunamadı | AICO Elektronik</title>
+    <meta name="robots" content="noindex, nofollow">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico">
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="/css/reset.css">
+    <link rel="stylesheet" href="/css/variables.css">
+    <link rel="stylesheet" href="/css/typography.css">
+    <link rel="stylesheet" href="/css/utilities.css">
+    <link rel="stylesheet" href="/css/animations.css">
+    
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #041E42 0%, #10069F 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #FFFFFF;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .error-container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: var(--spacing-8, 2rem);
+            max-width: 600px;
+        }
+
+        .error-code {
+            font-family: 'Outfit', sans-serif;
+            font-size: clamp(6rem, 15vw, 12rem);
+            font-weight: 800;
+            line-height: 1;
+            margin: 0;
+            background: linear-gradient(135deg, #FFFFFF 0%, #F4633A 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { filter: drop-shadow(0 0 20px rgba(244, 99, 58, 0.5)); }
+            50% { filter: drop-shadow(0 0 40px rgba(244, 99, 58, 0.8)); }
+        }
+
+        .error-title {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 700;
+            margin: 2rem 0 1rem;
+            color: #FFFFFF;
+        }
+
+        .error-message {
+            font-size: 1.125rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 3rem;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 2rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .btn-primary {
+            background: #F4633A;
+            color: #FFFFFF;
+            border-color: #F4633A;
+        }
+
+        .btn-primary:hover {
+            background: #E54E24;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(244, 99, 58, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #FFFFFF;
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .error-links {
+            margin-top: 3rem;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .error-links-title {
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 1rem;
+        }
+
+        .quick-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .quick-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s ease;
+        }
+
+        .quick-links a:hover {
+            color: #F4633A;
+        }
+
+        /* PCB Circuit Background Animation */
+        .circuit-bg {
+            position: absolute;
+            inset: 0;
+            opacity: 0.1;
+            overflow: hidden;
+        }
+
+        .circuit-line {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.3);
+            animation: circuitMove 20s linear infinite;
+        }
+
+        .circuit-line:nth-child(1) {
+            width: 2px;
+            height: 100%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circuit-line:nth-child(2) {
+            width: 100%;
+            height: 2px;
+            top: 20%;
+            animation-delay: -5s;
+        }
+
+        .circuit-line:nth-child(3) {
+            width: 2px;
+            height: 100%;
+            left: 60%;
+            animation-delay: -10s;
+        }
+
+        .circuit-line:nth-child(4) {
+            width: 100%;
+            height: 2px;
+            top: 70%;
+            animation-delay: -15s;
+        }
+
+        @keyframes circuitMove {
+            0%, 100% { transform: translateY(0); opacity: 0.1; }
+            50% { transform: translateY(-20px); opacity: 0.3; }
+        }
+
+        .circuit-dot {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: #F4633A;
+            border-radius: 50%;
+            animation: dotPulse 2s ease-in-out infinite;
+        }
+
+        .circuit-dot:nth-child(5) { top: 20%; left: 10%; animation-delay: 0s; }
+        .circuit-dot:nth-child(6) { top: 70%; left: 60%; animation-delay: 0.5s; }
+        .circuit-dot:nth-child(7) { top: 40%; left: 80%; animation-delay: 1s; }
+
+        @keyframes dotPulse {
+            0%, 100% { transform: scale(1); opacity: 0.5; }
+            50% { transform: scale(1.5); opacity: 1; }
+        }
+
+        /* 404 Illustration */
+        .error-illustration {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 2rem;
+            position: relative;
+        }
+
+        .error-illustration svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 640px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-actions {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .quick-links {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Circuit Background -->
+    <div class="circuit-bg">
+        <div class="circuit-line"></div>
+        <div class="circuit-line"></div>
+        <div class="circuit-line"></div>
+        <div class="circuit-line"></div>
+        <div class="circuit-dot"></div>
+        <div class="circuit-dot"></div>
+        <div class="circuit-dot"></div>
+    </div>
+
+    <!-- Error Content -->
+    <div class="error-container">
+        <div class="error-illustration">
+            <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- PCB Icon -->
+                <rect x="40" y="40" width="120" height="120" rx="8" stroke="currentColor" stroke-width="3" opacity="0.3"/>
+                <circle cx="70" cy="70" r="8" fill="#F4633A"/>
+                <circle cx="130" cy="70" r="8" fill="#F4633A"/>
+                <circle cx="70" cy="130" r="8" fill="#F4633A"/>
+                <circle cx="130" cy="130" r="8" fill="#F4633A"/>
+                <path d="M70 70 L130 70 M70 130 L130 130 M100 40 L100 70 M100 130 L100 160" 
+                      stroke="currentColor" stroke-width="2" opacity="0.5"/>
+                <!-- Question Mark -->
+                <text x="100" y="120" text-anchor="middle" font-size="60" font-weight="bold" fill="#F4633A">?</text>
+            </svg>
+        </div>
+
+        <h1 class="error-code">404</h1>
+        <h2 class="error-title">Sayfa Bulunamadı</h2>
+        <p class="error-message">
+            Aradığınız sayfa taşınmış, silinmiş veya hiç var olmamış olabilir. 
+            Ana sayfaya dönebilir veya aşağıdaki bağlantılardan istediğiniz sayfaya ulaşabilirsiniz.
+        </p>
+
+        <div class="error-actions">
+            <a href="/" class="btn btn-primary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                    <polyline points="9 22 9 12 15 12 15 22"/>
+                </svg>
+                Ana Sayfa
+            </a>
+            <button onclick="history.back()" class="btn btn-secondary">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                </svg>
+                Geri Dön
+            </button>
+        </div>
+
+        <div class="error-links">
+            <div class="error-links-title">Popüler Sayfalar</div>
+            <div class="quick-links">
+                <a href="/pages/urunler/index.html">Ürünler</a>
+                <a href="/pages/hizmetler/index.html">Hizmetler</a>
+                <a href="/pages/hesaplama/pcb-fiyat-hesaplama.html">PCB Hesaplama</a>
+                <a href="/pages/iletisim.html">İletişim</a>
+                <a href="/pages/destek/sikca-sorulan-sorular.html">SSS</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Track 404 errors (optional analytics)
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_not_found', {
+                'page_path': window.location.pathname
+            });
+        }
+
+        // Log to console for debugging
+        console.log('404 Error - Page not found:', window.location.pathname);
+    </script>
+</body>
+</html>
