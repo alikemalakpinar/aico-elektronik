@@ -1,76 +1,58 @@
-<!-- /components/newsletter.html -->
 <section class="newsletter" aria-labelledby="newsletter-title">
     <div class="container">
         <div class="newsletter__content">
-            <div class="newsletter__text">
-                <h2 class="newsletter__title" id="newsletter-title">
-                    Yenilikleri Kaçırmayın
-                </h2>
-                <p class="newsletter__description">
-                    Yeni ürünler, teknolojik gelişmeler ve özel fırsatlar hakkında ilk siz haberdar olun.
-                </p>
-            </div>
+            <h2 id="newsletter-title" class="newsletter__title">Haberdar Olun</h2>
+            <p class="newsletter__description">
+                Yeni ürünler, teknolojik gelişmeler ve özel fırsatlardan haberdar olun.
+            </p>
             
             <form class="newsletter__form" id="newsletter-form" novalidate>
-                <div class="newsletter__form-group">
-                    <label for="newsletter-email" class="sr-only">E-posta adresiniz</label>
-                    <div class="newsletter__input-wrapper">
-                        <svg class="newsletter__input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                            <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                <div class="newsletter__input-wrapper">
+                    <label for="newsletter-email" class="visually-hidden">E-posta Adresi</label>
+                    <input 
+                        type="email" 
+                        id="newsletter-email" 
+                        name="email"
+                        class="newsletter__input" 
+                        placeholder="E-posta adresiniz"
+                        aria-describedby="newsletter-error"
+                        required
+                        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                        autocomplete="email"
+                    >
+                    <button type="submit" class="newsletter__button">
+                        <span class="btn-text">Abone Ol</span>
+                        <svg class="btn-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M5 12h14m-7-7l7 7-7 7"/>
                         </svg>
-                        <input 
-                            type="email" 
-                            id="newsletter-email" 
-                            name="email"
-                            class="newsletter__input" 
-                            placeholder="E-posta adresinizi girin" 
-                            required
-                            aria-required="true"
-                            aria-describedby="newsletter-error"
-                        >
-                    </div>
-                    <span class="newsletter__error" id="newsletter-error" role="alert"></span>
+                        <span class="spinner" aria-hidden="true"></span>
+                    </button>
                 </div>
-                
-                <button type="submit" class="newsletter__button" aria-label="Abone Ol">
-                    <span class="newsletter__button-text">Abone Ol</span>
-                    <svg class="newsletter__button-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                        <path d="M5 12h14m-7-7l7 7-7 7"/>
+                <span id="newsletter-error" class="newsletter__error" role="alert" aria-live="polite"></span>
+                <div class="newsletter__success" role="status" aria-live="polite">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                        <polyline points="22 4 12 14.01 9 11.01"/>
                     </svg>
-                    <span class="newsletter__button-loader">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
-                </button>
+                    <span>Teşekkürler! Başarıyla abone oldunuz.</span>
+                </div>
             </form>
             
             <p class="newsletter__privacy">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
-                    <path d="M7 11V7a5 5 0 0110 0v4"/>
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
                 </svg>
-                E-posta adresiniz güvende. Spam göndermiyoruz.
+                Gizliliğiniz bizim için önemli. E-postanız güvende.
             </p>
-            
-            <div class="newsletter__success" id="newsletter-success" role="alert" aria-live="polite">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                    <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
-                    <polyline points="22 4 12 14.01 9 11.01"/>
-                </svg>
-                <div>
-                    <strong>Teşekkürler!</strong>
-                    <p>E-posta adresiniz başarıyla kaydedildi.</p>
-                </div>
-            </div>
         </div>
     </div>
 </section>
 
 <style>
 .newsletter {
-    padding: var(--spacing-16) 0;
-    background: var(--gradient-primary);
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-accent) 100%);
+    padding: var(--spacing-20) 0;
     position: relative;
     overflow: hidden;
 }
@@ -78,293 +60,225 @@
 .newsletter::before {
     content: '';
     position: absolute;
-    inset: 0;
-    background: 
-        repeating-linear-gradient(
-            45deg,
-            transparent,
-            transparent 10px,
-            rgba(255, 255, 255, 0.02) 10px,
-            rgba(255, 255, 255, 0.02) 20px
-        );
-    pointer-events: none;
+    top: -50%;
+    right: -10%;
+    width: 40%;
+    height: 200%;
+    background: rgba(255, 255, 255, 0.05);
+    transform: rotate(-15deg);
 }
 
 .newsletter__content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
     position: relative;
     z-index: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-    gap: var(--spacing-6);
-}
-
-@media (min-width: 768px) {
-    .newsletter__content {
-        gap: var(--spacing-8);
-    }
-}
-
-.newsletter__text {
-    max-width: 600px;
 }
 
 .newsletter__title {
-    font-size: clamp(1.5rem, 4vw, 2.25rem);
-    font-weight: var(--font-weight-extrabold);
-    color: var(--color-text-inverse);
-    margin-bottom: var(--spacing-3);
+    color: var(--color-white);
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-4);
 }
 
 .newsletter__description {
-    font-size: var(--font-size-lg);
     color: rgba(255, 255, 255, 0.9);
-    line-height: var(--line-height-relaxed);
-    margin: 0;
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--spacing-8);
 }
 
 .newsletter__form {
-    width: 100%;
-    max-width: 500px;
-}
-
-.newsletter__form-group {
-    position: relative;
+    margin-bottom: var(--spacing-4);
 }
 
 .newsletter__input-wrapper {
-    position: relative;
     display: flex;
-    align-items: center;
-}
-
-.newsletter__input-icon {
-    position: absolute;
-    left: var(--spacing-4);
-    width: 20px;
-    height: 20px;
-    color: rgba(255, 255, 255, 0.5);
-    pointer-events: none;
-    z-index: 1;
+    gap: var(--spacing-2);
+    margin-bottom: var(--spacing-2);
 }
 
 .newsletter__input {
-    width: 100%;
-    padding: var(--spacing-4) var(--spacing-4) var(--spacing-4) var(--spacing-12);
-    background: rgba(255, 255, 255, 0.15);
-    backdrop-filter: blur(10px);
+    flex: 1;
+    padding: var(--spacing-4);
     border: 2px solid rgba(255, 255, 255, 0.2);
-    border-radius: var(--radius-xl);
-    color: var(--color-text-inverse);
+    border-radius: var(--border-radius-lg);
+    background: rgba(255, 255, 255, 0.95);
     font-size: var(--font-size-base);
-    transition: all var(--transition-fast) var(--ease-in-out);
-}
-
-.newsletter__input::placeholder {
-    color: rgba(255, 255, 255, 0.6);
+    transition: all 0.3s ease;
 }
 
 .newsletter__input:focus {
     outline: none;
-    background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.4);
-    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.1);
+    border-color: var(--color-white);
+    background: var(--color-white);
+    box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.2);
 }
 
 .newsletter__input.error {
-    border-color: var(--color-error);
-    box-shadow: 0 0 0 4px rgba(220, 38, 38, 0.2);
+    border-color: #ff4444;
+    animation: shake 0.3s ease;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-8px); }
+    75% { transform: translateX(8px); }
+}
+
+.newsletter__button {
+    padding: var(--spacing-4) var(--spacing-8);
+    background: var(--color-white);
+    color: var(--color-primary);
+    border: none;
+    border-radius: var(--border-radius-lg);
+    font-weight: var(--font-weight-semibold);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.newsletter__button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.newsletter__button.loading {
+    pointer-events: none;
+}
+
+.newsletter__button.loading .btn-text,
+.newsletter__button.loading .btn-icon {
+    opacity: 0;
+}
+
+.newsletter__button .spinner {
+    display: none;
+    width: 20px;
+    height: 20px;
+    border: 2px solid var(--color-primary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+}
+
+.newsletter__button.loading .spinner {
+    display: block;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }
 
 .newsletter__error {
     display: none;
-    margin-top: var(--spacing-2);
+    color: #ffcccc;
     font-size: var(--font-size-sm);
-    color: #FCA5A5;
+    text-align: left;
+    padding: var(--spacing-2) var(--spacing-4);
+    background: rgba(255, 68, 68, 0.2);
+    border-radius: var(--border-radius-base);
 }
 
 .newsletter__input.error ~ .newsletter__error {
     display: block;
 }
 
-.newsletter__button {
-    margin-top: var(--spacing-4);
-    width: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--spacing-2);
-    padding: var(--spacing-4) var(--spacing-6);
-    background: var(--color-accent);
-    border: 2px solid var(--color-accent);
-    border-radius: var(--radius-xl);
-    color: var(--color-text-inverse);
-    font-size: var(--font-size-base);
-    font-weight: var(--font-weight-semibold);
-    cursor: pointer;
-    transition: all var(--transition-base) var(--ease-out);
-    position: relative;
-    overflow: hidden;
-}
-
-.newsletter__button:hover:not(:disabled) {
-    background: var(--color-accent-dark);
-    border-color: var(--color-accent-dark);
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(244, 99, 58, 0.4);
-}
-
-.newsletter__button:active:not(:disabled) {
-    transform: translateY(0);
-}
-
-.newsletter__button:disabled {
-    opacity: 0.7;
-    cursor: not-allowed;
-}
-
-.newsletter__button-icon {
-    width: 20px;
-    height: 20px;
-    transition: transform var(--transition-fast) var(--ease-out);
-}
-
-.newsletter__button:hover .newsletter__button-icon {
-    transform: translateX(4px);
-}
-
-.newsletter__button-loader {
-    display: none;
-    gap: var(--spacing-1);
-}
-
-.newsletter__button.loading .newsletter__button-text,
-.newsletter__button.loading .newsletter__button-icon {
-    display: none;
-}
-
-.newsletter__button.loading .newsletter__button-loader {
-    display: flex;
-}
-
-.newsletter__button-loader span {
-    width: 6px;
-    height: 6px;
-    background: currentColor;
-    border-radius: 50%;
-    animation: bounce 1.4s ease-in-out infinite;
-}
-
-.newsletter__button-loader span:nth-child(2) {
-    animation-delay: 0.2s;
-}
-
-.newsletter__button-loader span:nth-child(3) {
-    animation-delay: 0.4s;
-}
-
-@keyframes bounce {
-    0%, 80%, 100% {
-        transform: translateY(0);
-    }
-    40% {
-        transform: translateY(-8px);
-    }
-}
-
-.newsletter__privacy {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-2);
-    font-size: var(--font-size-sm);
-    color: rgba(255, 255, 255, 0.8);
-    margin: 0;
-}
-
-.newsletter__privacy svg {
-    width: 16px;
-    height: 16px;
-    flex-shrink: 0;
-}
-
 .newsletter__success {
     display: none;
-    align-items: flex-start;
-    gap: var(--spacing-3);
+    align-items: center;
+    gap: var(--spacing-2);
+    color: var(--color-white);
+    font-size: var(--font-size-lg);
     padding: var(--spacing-4);
-    background: rgba(22, 163, 74, 0.2);
-    border: 1px solid rgba(22, 163, 74, 0.4);
-    border-radius: var(--radius-lg);
-    color: var(--color-text-inverse);
-    text-align: left;
-    animation: slideInUp 0.4s var(--ease-out);
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: var(--border-radius-lg);
+    animation: slideDown 0.3s ease;
 }
 
 .newsletter__success.show {
     display: flex;
 }
 
-.newsletter__success svg {
-    width: 24px;
-    height: 24px;
-    flex-shrink: 0;
-    color: #4ADE80;
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.newsletter__success strong {
-    display: block;
-    font-size: var(--font-size-base);
-    margin-bottom: var(--spacing-1);
-}
-
-.newsletter__success p {
+.newsletter__privacy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    color: rgba(255, 255, 255, 0.8);
     font-size: var(--font-size-sm);
-    margin: 0;
-    opacity: 0.9;
 }
 
-.sr-only {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    padding: 0;
-    margin: -1px;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-    border-width: 0;
+@media (max-width: 768px) {
+    .newsletter__input-wrapper {
+        flex-direction: column;
+    }
+    
+    .newsletter__button {
+        width: 100%;
+        justify-content: center;
+    }
 }
 </style>
 
 <script>
 (function() {
     'use strict';
-    
+
     const form = document.getElementById('newsletter-form');
     const emailInput = document.getElementById('newsletter-email');
-    const errorSpan = document.getElementById('newsletter-error');
     const button = form?.querySelector('.newsletter__button');
-    const successMessage = document.getElementById('newsletter-success');
-    
-    form?.addEventListener('submit', async (e) => {
+    const errorSpan = document.getElementById('newsletter-error');
+    const successMessage = form?.querySelector('.newsletter__success');
+
+    if (!form || !emailInput) return;
+
+    // Real-time validation
+    emailInput.addEventListener('input', () => {
+        emailInput.classList.remove('error');
+        errorSpan.textContent = '';
+        
+        // Show visual feedback for valid email
+        if (emailInput.validity.valid) {
+            emailInput.style.borderColor = 'rgba(76, 175, 80, 0.5)';
+        } else {
+            emailInput.style.borderColor = '';
+        }
+    });
+
+    // Form submission
+    form.addEventListener('submit', async (e) => {
         e.preventDefault();
+        
+        const email = emailInput.value.trim();
         
         // Clear previous errors
         emailInput.classList.remove('error');
         errorSpan.textContent = '';
         
-        // Validate email
-        const email = emailInput.value.trim();
-        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        
+        // Validation
         if (!email) {
             showError('Lütfen e-posta adresinizi girin');
             return;
         }
         
-        if (!emailRegex.test(email)) {
-            showError('Lütfen geçerli bir e-posta adresi girin');
+        if (!emailInput.validity.valid) {
+            showError('Lütfen geçerli bir e-posta adresi girin (örn: isim@domain.com)');
             return;
         }
         
@@ -373,29 +287,32 @@
         button.disabled = true;
         
         try {
-            // Simulate API call
+            // API çağrısı simülasyonu
             await new Promise(resolve => setTimeout(resolve, 1500));
             
-            // In production, replace with actual API call:
-            // const response = await fetch('/api/newsletter', {
+            // Gerçek üretimde API çağrısı:
+            // const response = await fetch('/api/newsletter/subscribe', {
             //     method: 'POST',
             //     headers: { 'Content-Type': 'application/json' },
             //     body: JSON.stringify({ email })
             // });
+            // const data = await response.json();
+            // if (!response.ok) throw new Error(data.message);
             
-            // Show success message
-            form.style.display = 'none';
+            // Success
+            form.querySelector('.newsletter__input-wrapper').style.display = 'none';
             successMessage.classList.add('show');
             
-            // Reset form after delay
+            // Reset after 5 seconds
             setTimeout(() => {
                 form.reset();
-                form.style.display = 'block';
+                form.querySelector('.newsletter__input-wrapper').style.display = 'flex';
                 successMessage.classList.remove('show');
+                emailInput.style.borderColor = '';
             }, 5000);
             
         } catch (error) {
-            showError('Bir hata oluştu. Lütfen tekrar deneyin.');
+            showError('Bir hata oluştu. Lütfen daha sonra tekrar deneyin.');
         } finally {
             button.classList.remove('loading');
             button.disabled = false;
@@ -407,11 +324,5 @@
         errorSpan.textContent = message;
         emailInput.focus();
     }
-    
-    // Clear error on input
-    emailInput?.addEventListener('input', () => {
-        emailInput.classList.remove('error');
-        errorSpan.textContent = '';
-    });
 })();
 </script>

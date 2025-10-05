@@ -240,27 +240,33 @@
     }
 
     showFieldError(field, message) {
-      field.classList.add(this.options.errorClass);
-      field.classList.remove(this.options.successClass);
-      field.setAttribute('aria-invalid', 'true');
+  field.classList.add(this.options.errorClass);
+  field.classList.remove(this.options.successClass);
+  field.setAttribute('aria-invalid', 'true');
 
-      // Create or update error message
-      let errorElement = field.parentElement.querySelector(`.${this.options.errorMessageClass}`);
-      
-      if (!errorElement) {
-        errorElement = document.createElement('span');
-        errorElement.className = this.options.errorMessageClass;
-        errorElement.setAttribute('role', 'alert');
-        field.parentElement.appendChild(errorElement);
-      }
+  // Create or update error message
+  let errorElement = field.parentElement.querySelector(`.${this.options.errorMessageClass}`);
+  
+  if (!errorElement) {
+    errorElement = document.createElement('span');
+    errorElement.className = this.options.errorMessageClass;
+    errorElement.setAttribute('role', 'alert');
+    field.parentElement.appendChild(errorElement);
+  }
 
-      errorElement.textContent = message;
+  errorElement.textContent = message;
 
-      // Link error message to field for screen readers
-      const errorId = `${field.id || field.name}-error`;
-      errorElement.id = errorId;
-      field.setAttribute('aria-describedby', errorId);
-    }
+  // Link error message to field for screen readers - DÜZELTİLDİ
+  const fieldId = field.id || field.name || `field-${Date.now()}`;
+  const errorId = `${fieldId}-error`;
+  
+  errorElement.id = errorId;
+  field.setAttribute('aria-describedby', errorId);
+
+  // Focus error for better UX
+  field.focus();
+}
+
 
     showFieldSuccess(field) {
       field.classList.remove(this.options.errorClass);

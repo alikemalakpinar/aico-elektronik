@@ -59,36 +59,41 @@ self.addEventListener('install', (event) => {
       })
       .catch((error) => {
         console.error('[Service Worker] Installation failed:', error);
+        // Kullanıcıya bildirim göster
+        self.clients.matchAll().then(clients => {
+          clients.forEach(client => {
+            client.postMessage({
+              type: 'SW_ERROR',
+              message: 'Service Worker yüklenemedi'
+            });
+          });
+        });
       })
   );
 });
 
 // ==================== Activate Event ====================
-
 self.addEventListener('activate', (event) => {
   console.log('[Service Worker] Activating...');
   
   event.waitUntil(
-    caches.keys()
-      .then((cacheNames) => {
-        return Promise.all(
-          cacheNames
-            .filter((cacheName) => {
-              return cacheName.startsWith('aico-') && 
-                     cacheName !== CACHE_STATIC &&
-                     cacheName !== CACHE_DYNAMIC &&
-                     cacheName !== CACHE_IMAGES;
-            })
-            .map((cacheName) => {
-              console.log('[Service Worker] Deleting old cache:', cacheName);
-              return caches.delete(cacheName);
-            })
-        );
-      })
-      .then(() => {
-        console.log('[Service Worker] Activation complete');
-        return self.clients.claim();
-      })
+    caches.keys().then((cacheNames) => {
+      return Promise.all(
+        cacheNames
+          .filter(name => name.startsWith('aico-') && name !== CACHE_STATIC)
+          .map(name => {
+            console.log('[Service Worker] Deleting old cache:', name);
+            return caches.delete(name);
+          })
+      );
+    })
+    .then(() => {
+      console.log('[Service Worker] Activation complete');
+      return self.clients.claim();
+    })
+    .catch((error) => {
+      console.error('[Service Worker] Activation failed:', error);
+    })
   );
 });
 
